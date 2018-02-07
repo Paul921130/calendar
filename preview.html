@@ -27,124 +27,88 @@
         </table>
     </div>
     <script src="./module.js"></script>
-    <script>
-   
-    </script>
-  <!--   <script type="text/javascript" src="module.js"></script> -->
-    <script type="text/JavaScript">
-        $(document).ready(function() {
-            $.ajax({
-                dataType: "json",
-                method: 'GET',
-                url: './json/data4.json',
-            }).done(function( dataSource ) {
-                // alert(dataSource[0]);
-                console.log(dataSource);
-                var NumOfJData = dataSource.length;
-                console.log(NumOfJData);
-                var i = 0;
-                 $.each(dataSource, function() {
-                $("#JSON_table").append("<tr>" +
-                                        "<td>" + dataSource[i].date   + "</td>" +
-                                        "<td>" + dataSource[i].price   + "</td>" +
-                                        "<td>" + dataSource[i].status   + "</td>" +
-                                        "<td><p>總人數:" + dataSource[i].totalVacnacy   + "</p></td>" +
-                                        "<td><p>剩餘人數:" + dataSource[i].availableVancancy   + "</p></td>" +
-                                        "</tr>");
-                i++;
-              });
-            });
-            // $("#new_html").load('./json/data4.json');
-            // var eachTable = $(".each-table tbody");
-            // $.each(data, function(index, element) {
-            //     eachTable.append("<tr>" +
-            //                         "<td>" + element.date + "</td>" +
-            //                         "<td>" + element.price + "</td>" +
-            //                     "</tr>");
-            // });
-        });
-    </script>
+    <script type="text/javascript" src="module.js"></script>
     <script type="text/JavaScript">//useage
-        $('.calendars').calendar({
-    dataSource: [  // 資料來源的輸入接口 [ array | string ] 如果是 string的話，請輸入網址
-        {
-            "guaranteed": true, // {boolean}
-            "date": "2016/12/15", // {string} YYYY/MM/DD
-            "price": "234567", // {string|number} XXXXXX | 近期上架
-            "availableVancancy": 0, // {number}
-            "totalVacnacy": 20, // {number}
-            "status": "報名" // {string} 報名(#24a07c) | 後補(#24a07c) | 預定(#24a07c) | 截止(#ff7800) | 額滿(#ff7800) | 關團(#ff7800)
-        },
-        // ...
-    ],
-    // 輸入一開始要在哪一個月份 [string] YYYYMM，若輸入的年月沒有資料，
-    // 就要找相近的年月，若前一個月後一個月都有資料，就顯示資料比數比較多的那一個月
-    initYearMonth: '201705',
-    // 設定各資料的key
-    dataKeySetting: {
-        // 保證出團
-        'guaranteed': 'guaranteed',
-        // 狀態
-        'status': 'status',
-        // 可賣團位
-        'available': 'availableVancancy',
-        // 團位
-        'total': 'totalVacnacy',
-        // 價格
-        'price': 'price'
-    },
-    // 點上一個月時
-    // @param $btn {$object} jquery 物件
-    // @param $data {array} 上一個月的資料
-    // @param module {object} 此模組實例物件
-    onClickPrev: function( $btn, data, module ) {
-        console.log($btn, data, module);
-    },
-    // 點下一個月時
-    onClickNext: function( $btn, data, module ) {
-        console.log($btn, data, module);
-    },
-    // 點日期時
-    onClickDate: function( $date, data ){
-        console.log($date, data);
-    }
-});
-// 下一個有資料的月份
-$('.calendars').calendar('nextMonth', function( data, module ) {
-    console.log(data, module);
-});
-// 上一個有資料的月份
-$('.calendars').calendar('prevMonth', function( data, module ) {
-    console.log(data, module);
-});
-// 切換日曆或列表模式
-$('.calendars').calendar('switch');
-// 加資料時如果有相同日期的資料，以後輸入為主，輸入時如果輸入沒有的月份，模組會加上該月份
-$('.calendars').calendar('inputData', [
-    {
-        "guaranteed": true, // {boolean}
-        "date": "2016/12/15", // {string} YYYY/MM/DD
-        "price": "234567", // {string|number} XXXXXX | 近期上架
-        "availableVancancy": 0, // {number}
-        "totalVacnacy": 20, // {number}
-        "status": "報名" // {string} 報名 | 後補 | 預定 | 截止 | 額滿 | 關團
-    },
-    // ...
-]);
-// 重設資料時，月曆、tab重新產出
-$('.calendars').calendar('resetData', [
-    {
-        "guaranteed": true, // {boolean}
-        "date": "2016/12/15", // {string} YYYY/MM/DD
-        "price": "234567", // {string|number} XXXXXX | 近期上架
-        "availableVancancy": 0, // {number}
-        "totalVacnacy": 20, // {number}
-        "status": "報名" // {string} 報名 | 後補 | 預定 | 截止 | 額滿 | 關團
-    },
-    // ...
-]);
-// destroy calendar，destroy時連class new出來的實例物件也要刪除
-$('.calendars').calendar('destroy');
+        $('.calendar').calendar({
+                dataSource: [  // 資料來源的輸入接口 [ array | string ] 如果是 string的話，請輸入網址
+                    {
+                        "guaranteed": true, // {boolean}
+                        "date": "2016/12/15", // {string} YYYY/MM/DD
+                        "price": "234567", // {string|number} XXXXXX | 近期上架
+                        "availableVancancy": 0, // {number}
+                        "totalVacnacy": 20, // {number}
+                        "status": "報名" // {string} 報名(#24a07c) | 後補(#24a07c) | 預定(#24a07c) | 截止(#ff7800) | 額滿(#ff7800) | 關團(#ff7800)
+                    },
+                    // ...
+                ],
+                // 輸入一開始要在哪一個月份 [string] YYYYMM，若輸入的年月沒有資料，
+                // 就要找相近的年月，若前一個月後一個月都有資料，就顯示資料比數比較多的那一個月
+                initYearMonth: '201705',
+                // 設定各資料的key
+                dataKeySetting: {
+                    // 保證出團
+                    'guaranteed': 'guaranteed',
+                    // 狀態
+                    'status': 'status',
+                    // 可賣團位
+                    'available': 'availableVancancy',
+                    // 團位
+                    'total': 'totalVacnacy',
+                    // 價格
+                    'price': 'price'
+                },
+                // 點上一個月時
+                // @param $btn {$object} jquery 物件
+                // @param $data {array} 上一個月的資料
+                // @param module {object} 此模組實例物件
+                onClickPrev: function( $btn, data, module ) {
+                    console.log($btn, data, module);
+                },
+                // 點下一個月時
+                onClickNext: function( $btn, data, module ) {
+                    console.log($btn, data, module);
+                },
+                // 點日期時
+                onClickDate: function( $date, data ){
+                    console.log($date, data);
+                }
+            });
+            // 下一個有資料的月份
+            $('.calendars').calendar('nextMonth', function( data, module ) {
+                console.log(data, module);
+            });
+            // 上一個有資料的月份
+            $('.calendars').calendar('prevMonth', function( data, module ) {
+                console.log(data, module);
+            });
+            // 切換日曆或列表模式
+            $('.calendars').calendar('switch');
+            // 加資料時如果有相同日期的資料，以後輸入為主，輸入時如果輸入沒有的月份，模組會加上該月份
+            $('.calendars').calendar('inputData', [
+                {
+                    "guaranteed": true, // {boolean}
+                    "date": "2016/12/15", // {string} YYYY/MM/DD
+                    "price": "234567", // {string|number} XXXXXX | 近期上架
+                    "availableVancancy": 0, // {number}
+                    "totalVacnacy": 20, // {number}
+                    "status": "報名" // {string} 報名 | 後補 | 預定 | 截止 | 額滿 | 關團
+                },
+                // ...
+            ]);
+            // 重設資料時，月曆、tab重新產出
+            $('.calendars').calendar('resetData', [
+                {
+                    "guaranteed": true, // {boolean}
+                    "date": "2016/12/15", // {string} YYYY/MM/DD
+                    "price": "234567", // {string|number} XXXXXX | 近期上架
+                    "availableVancancy": 0, // {number}
+                    "totalVacnacy": 20, // {number}
+                    "status": "報名" // {string} 報名 | 後補 | 預定 | 截止 | 額滿 | 關團
+                },
+                // ...
+            ]);
+            // destroy calendar，destroy時連class new出來的實例物件也要刪除
+            $('.calendars').calendar('destroy');
     </script>
 </body>
 
