@@ -23,6 +23,8 @@ $classname: 'calendar';
 //以下範例可以刪除，改為您自已的CSS Code
 
 .#{$classname} {
+	
+	
 	// style on phone device
 	@media screen and (min-width: $screen-tablet) {
 	
