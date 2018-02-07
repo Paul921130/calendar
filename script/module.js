@@ -1,6 +1,7 @@
 const ModuleName = 'calendar';
 const ModuleDefaults = {
-                dataSource: [  // 資料來源的輸入接口 [ array | string ] 如果是 string的話，請輸入網址
+                dataSource: 
+                [  // 資料來源的輸入接口 [ array | string ] 如果是 string的話，請輸入網址
                     {
                         "guaranteed": true, // {boolean}
                         "date": "2016/12/15", // {string} YYYY/MM/DD
@@ -55,10 +56,9 @@ class Module {
         var self = this;
         var $this = this.$ele;
         var opts = this.option;
-
+        console.log(ModuleDefaults.dataSource)
         console.log('moduleIn!!!!');
-        this.creatHtml();
-        this.creatCalendar();    
+        this.creatHtml();  
         this.getAjax();
         
         return this;
@@ -92,62 +92,55 @@ class Module {
                             '</div>'+
                         '</div>'+
                         '<div class="calendars_weeksWrap">'+
-                        '</div>'+
-                        '<ul class="calendars_daysWrap">'+
-                            '<li class="calendars_days disabled">'+'</li>'+
-                            '<li class="calendars_days hasData">'+
-                                '<div class="date">'+
-                                    '<span class="num">'+'1'+'</span>'+
-                                    '<span class="weekday">'+'星期四'+'</span>'+
-                                '</div>'+
-                                '<span class="status">'+'候補'+'</span>'+
-                                '<span class="sell">'+'可賣：0'+'</span>'+
-                                '<span class="group">'+'團位：0'+'</span>'+
-                                '<span class="tip">'+'<i class="ic-ln productreferf">'+'</i>'+'保證出團'+'</span>'+
-                                '<span class="price">'+'$4,999'+'</span>'+
-                            '</li>'+
-                            '<li class="calendars_days hasData">'+
-                                '<div class="date">'+
-                                    '<span class="num">'+'1'+'</span>'+
-                                    '<span class="weekday">'+'星期五'+'</span>'+
-                                '</div>'+
-                                '<span class="status">'+'候補'+'</span>'+
-                                '<span class="sell">'+'可賣：0'+'</span>'+
-                                '<span class="group">'+'團位：0'+'</span>'+
-                                '<span class="tip">'+'<i class="ic-ln productreferf">'+'</i>'+'保證出團'+'</span>'+
-                                '<span class="price">'+'$4,999'+'</span>'+
-                            '</li>'+
-                        '</ul>';
-                     
+                        '</div>';//要記得用"+"連起來呦
+                        // '<ul class="calendars_daysWrap">'+
+                        //     '<li class="calendars_days disabled">'+'</li>'+
+                        //     '<li class="calendars_days hasData">'+
+                        //         '<div class="date">'+
+                        //             '<span class="num">'+'1'+'</span>'+
+                        //             '<span class="weekday">'+'星期四'+'</span>'+
+                        //         '</div>'+
+                        //         '<span class="status">'+'候補'+'</span>'+
+                        //         '<span class="sell">'+'可賣：0'+'</span>'+
+                        //         '<span class="group">'+'團位：0'+'</span>'+
+                        //         '<span class="tip">'+'<i class="ic-ln productreferf">'+'</i>'+'保證出團'+'</span>'+
+                        //         '<span class="price">'+'$4,999'+'</span>'+
+                        //     '</li>'+
+                        //     '<li class="calendars_days hasData">'+
+                        //         '<div class="date">'+
+                        //             '<span class="num">'+'1'+'</span>'+
+                        //             '<span class="weekday">'+'星期五'+'</span>'+
+                        //         '</div>'+
+                        //         '<span class="status">'+'候補'+'</span>'+
+                        //         '<span class="sell">'+'可賣：0'+'</span>'+
+                        //         '<span class="group">'+'團位：0'+'</span>'+
+                        //         '<span class="tip">'+'<i class="ic-ln productreferf">'+'</i>'+'保證出團'+'</span>'+
+                        //         '<span class="price">'+'$4,999'+'</span>'+
+                        //     '</li>'+
+                        // '</ul>';     
         $this.append(calendarHtml);                
         return this;
     }
     getAjax(){
+        var self = this;
+        var $this = this.$ele;//class="calendar"
         $.ajax({
                 dataType: "json",
                 method: 'GET',
                 url: './json/data4.json',
-            }).done(function( dataSource ) {
+            }).done(function(dataSource) {
                 // alert(dataSource[0]);
+                dataSource = dataSource.sort(function (a, b) {
+                 return a.date > b.date ? 1 : -1;
+                });//將dataSource按照日期排序,由前至後(2016年開始);
+                self.creatCalendar(dataSource);
                 console.log(dataSource);
                 var NumOfJData = dataSource.length;
                 console.log(NumOfJData);
-              //   var i = 0;
-              //    $.each(dataSource, function() {
-              //   $("#JSON_table").append("<tr>" +
-              //                           "<td>" + dataSource[i].date   + "</td>" +
-              //                           "<td>" + dataSource[i].price   + "</td>" +
-              //                           "<td>" + dataSource[i].status   + "</td>" +
-              //                           "<td><p>總人數:" + dataSource[i].totalVacnacy   + "</p></td>" +
-              //                           "<td><p>剩餘人數:" + dataSource[i].availableVancancy   + "</p></td>" +
-              //                           "</tr>");
-              //   i++;
-              // });
-
             });
         return this;
     }
-    creatCalendar(){
+    creatCalendar(dataSource){
         var self = this;
         var $this = this.$ele;//class="calendar"
         var calendarHtml='<table class="weekTable">'+
@@ -165,13 +158,13 @@ class Module {
                                 '<tbody>'+
                                     '<tr class="days">'+
                                         '<td class="disabled">'+
-                                        '<div class="day otherMonth">'+'</div>'+
+                                        '<div class="day otherMonth">'+dataSource[0].date+'</div>'+//將Ajax抓的data(dataSource)作為參數傳入
                                         '</td>'+
                                         '<td class="disabled">'+
-                                        '<div class="day otherMonth">'+'</div>'+
+                                        '<div class="day otherMonth">'+dataSource[1].date+'</div>'+
                                         '</td>'+
                                         '<td class="disabled">'+
-                                        '<div class="day otherMonth">'+'</div>'+
+                                        '<div class="day otherMonth">'+dataSource[2].date+'</div>'+
                                         '</td>'+
                                         '<td class="disabled">'+
                                         '<div class="day otherMonth">'+'</div>'+
