@@ -14,10 +14,17 @@
 </head>
 
 <body>  
-    <div class="calendar">
-        <div><p>1.:</p></div>
-        <div><p>2.:</p></div>
-        <div><p>3.:</p></div>
+    <div class="calendar" >
+        <table class="each-table" border="1" id="JSON_table">
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>價錢</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
     <script src="./module.js"></script>
     <script>
@@ -30,15 +37,31 @@
                 dataType: "json",
                 method: 'GET',
                 url: './json/data4.json',
-                success: function(msg){
-                alert( 'Good');
-                },
-                error: function(){
-                alert( "錯誤" );
-                }
-            }).done(function( data ) {
-                console.log(data);
+            }).done(function( dataSource ) {
+                // alert(dataSource[0]);
+                console.log(dataSource);
+                var NumOfJData = dataSource.length;
+                console.log(NumOfJData);
+                var i = 0;
+                 $.each(dataSource, function() {
+                $("#JSON_table").append("<tr>" +
+                                        "<td>" + dataSource[i].date   + "</td>" +
+                                        "<td>" + dataSource[i].price   + "</td>" +
+                                        "<td>" + dataSource[i].status   + "</td>" +
+                                        "<td><p>總人數:" + dataSource[i].totalVacnacy   + "</p></td>" +
+                                        "<td><p>剩餘人數:" + dataSource[i].availableVancancy   + "</p></td>" +
+                                        "</tr>");
+                i++;
+              });
             });
+            // $("#new_html").load('./json/data4.json');
+            // var eachTable = $(".each-table tbody");
+            // $.each(data, function(index, element) {
+            //     eachTable.append("<tr>" +
+            //                         "<td>" + element.date + "</td>" +
+            //                         "<td>" + element.price + "</td>" +
+            //                     "</tr>");
+            // });
         });
     </script>
     <script type="text/JavaScript">//useage
