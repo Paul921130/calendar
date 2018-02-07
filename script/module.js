@@ -133,9 +133,16 @@ class Module {
                 dataSource = dataSource.sort(function (a, b) {
                  return a.date > b.date ? 1 : -1;
                 });//將dataSource按照日期排序,由前至後(2016年開始);
+
+                // var startDate = new Date("2017/01/01");
+                // var endDate = new Date("2018/06/06");
+                // var dataSource=dataSource.filter( startDate > dataSource.date && dataSource.date > endDate);
+
                 self.creatCalendar(dataSource);
-                console.log(dataSource);
                 var NumOfJData = dataSource.length;
+                for (var i = NumOfJData - 1; i >= 0; i--) {
+                    console.log(dataSource[i].date);
+                };  
                 console.log(NumOfJData);
             });
         return this;
@@ -158,13 +165,7 @@ class Module {
                                 '<tbody>'+
                                     '<tr class="days">'+
                                         '<td class="disabled">'+
-                                        '<div class="day otherMonth">'+dataSource[0].date+'</div>'+//將Ajax抓的data(dataSource)作為參數傳入
-                                        '</td>'+
-                                        '<td class="disabled">'+
-                                        '<div class="day otherMonth">'+dataSource[1].date+'</div>'+
-                                        '</td>'+
-                                        '<td class="disabled">'+
-                                        '<div class="day otherMonth">'+dataSource[2].date+'</div>'+
+                                        '<div class="day otherMonth">'+'</div>'+//將Ajax抓的data(dataSource)作為參數傳入
                                         '</td>'+
                                         '<td class="disabled">'+
                                         '<div class="day otherMonth">'+'</div>'+
@@ -175,110 +176,116 @@ class Module {
                                         '<td class="disabled">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
-                                        '<div class="day otherMonth">'+'</div>'+
+                                        '<td class="currentDays">'+
+                                        '<div class="day otherMonth">'+dataSource[0].price+'</div>'+
+                                        '</td>'+
+                                        '<td class="currentDays">'+
+                                        '<div class="day otherMonth">'+dataSource[1].price+'</div>'+
+                                        '</td>'+
+                                        '<td class="currentDays">'+
+                                        '<div class="day otherMonth">'+dataSource[2].price+'</div>'+
                                         '</td>'+
                                     '</tr>'+
                                     '<tr class="days">'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
+                                        '<div class="day otherMonth">'+dataSource[2].price+'</div>'+
+                                        '</td>'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
-                                        '<div class="day otherMonth">'+'</div>'+
-                                        '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
                                     '</tr>'+  
                                     '<tr class="days">'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
                                     '</tr>'+  
                                     '<tr class="days">'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
                                     '</tr>'+
                                     '<tr class="days">'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
                                     '</tr>'+      
                                     '<tr class="days">'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
-                                        '<td class="disabled">'+
+                                        '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
                                         '</td>'+
                                         '<td class="disabled">'+

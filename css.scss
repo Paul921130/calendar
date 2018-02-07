@@ -21,13 +21,16 @@ $classname: 'calendar';
 // 您的CSS Code
 // -------------------------------------
 //以下範例可以刪除，改為您自已的CSS Code
-
+.p_0{
+	padding: 0!important;
+}
 .#{$classname} {
 	li{
 		list-style: none;
 	}
 	.calendars_tabWrap{
 			overflow: hidden;
+			background-color: #ede9dd;
 			.ntb_gpbt>a {
 			    width: 20px;
 			    float: left;
@@ -80,7 +83,7 @@ $classname: 'calendar';
 	    	vertical-align: top;
 		}
 		.ntb_gpbt.yellow .prev.on:before {
-	    border-color: transparent #e10500 transparent transparent;
+	    	border-color: transparent #e10500 transparent transparent;
 		}
 		.ntb_gpbt.yellow .prev:before {
 			    left: -1px;
@@ -122,6 +125,9 @@ $classname: 'calendar';
 		    border-color: transparent transparent transparent #f4f4f4;
 		}
 	}
+	// .calendars_weeksWrap{
+	// 	border: 1px solid #eee;
+	// }
 	.calendars_weeksWrap>table{
 		width: 100%;
 		thead> tr{
@@ -147,10 +153,19 @@ $classname: 'calendar';
     			border-top: 1px solid transparent;
     			border-left: 1px solid transparent;
     			height: 85px;
-    			cursor: pointer;
+    			
 	    	}
 	    }
-
+	}
+	.currentDays:hover{
+		background-color: #fff9e3;
+		cursor: pointer;
+	}
+	.disabled {
+    	// border: 1px solid #f8f8f8!important;
+    	border-right: 1px solid transparent!important;
+    	background-color: #f8f8f8;
+    	cursor: default;
 	}
 	// style on phone device
 	@media screen and (min-width: $screen-tablet) {
