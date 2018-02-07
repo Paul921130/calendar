@@ -33,19 +33,21 @@ class Module {
         var self = this;
         var $this = this.$ele;//class="calendar"
         var calendarHtml='<div class="calendars_tabWrap">'+
-                            '<a href="#" class="prev on">'+'</a>'+
-                            '<ul class="ntb_tab">'+
-                               '<li class="tab">'+
-                                   '<a href="#">'+'<span>'+'2017 7月'+'</span>'+'</a>'+
-                               '</li>'+            
-                               '<li class="tab">'+
-                                   '<a href="#">'+'<span>'+'2017 8月'+'</span>'+'</a>'+
-                               '</li>'+
-                               '<li class="tab">'+
-                                   '<a href="#">'+'<span>'+'2017 9月'+'</span>'+'</a>'+
-                               '</li>'+                                                
-                            '</ul>'+
-                            '<a href="#" class="next on">'+'</a>'+
+                            '<div class="ntb_gpbt yellow">'+
+                                '<a href="#" class="prev on">'+'</a>'+
+                                '<ul class="ntb_tab">'+
+                                   '<li class="tab">'+
+                                       '<a href="#">'+'<span>'+'2017 7月'+'</span>'+'</a>'+
+                                   '</li>'+            
+                                   '<li class="tab">'+
+                                       '<a href="#">'+'<span>'+'2017 8月'+'</span>'+'</a>'+
+                                   '</li>'+
+                                   '<li class="tab">'+
+                                       '<a href="#">'+'<span>'+'2017 9月'+'</span>'+'</a>'+
+                                   '</li>'+                                                
+                                '</ul>'+
+                                '<a href="#" class="next on">'+'</a>'+
+                            '</div>'+
                         '</div>'+
                         '<div class="calendars_weeksWrap">'+
                             '<th>'+'星期日'+'</th>'+
