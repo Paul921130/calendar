@@ -354,7 +354,6 @@ var Module = function () {
             var self = this;
             var $this = this.$ele; //class="calendar"
             var goMonth = 1;
-
             for (var i = 0; i <= 2; i++) {
                 var nextMonthMo = moment().add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
@@ -365,41 +364,101 @@ var Module = function () {
                 self.monthSelect();
                 self.getNowMonth();
             };
+            //小箭頭跳currentMonth
             $('.next').on('click', function () {
-                $this.find('.ntb_tab').empty();
                 $(".tab a").removeClass('currentMonth');
-                for (var i = goMonth; i <= goMonth + 2; i++) {
-                    var nextMonthMo = moment().add(i, 'months').format("YYYY MMM");
-                    console.log(nextMonthMo);
-                    var monthsTitle = '<li class="tab">' + '<a href="#" class="" id="" data-label="' + moment().add(i, 'months').format("YYYYMM") + '">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
-                    $this.find('.ntb_tab').append(monthsTitle);
-                    $(".tab a").attr('id', '');
-                    $(".tab:nth-child(1) a").attr('id', 'currentMonth');
-                    $(".tab:nth-child(1) a").addClass('currentMonth');
-                };
+                $(".tab a").attr('id', '');
+                $(".tab:nth-child(" + (goMonth + 1) + ") a").attr('id', 'currentMonth');
+                $(".tab:nth-child(" + (goMonth + 1) + ") a").addClass('currentMonth');
                 goMonth++;
                 self.monthSelect();
                 self.getNowMonth();
                 self.bornCalendar();
+                ///
+                ///
             }); //顯示下個月的title
-
             $('.prev').on('click', function () {
-                $this.find('.ntb_tab').empty();
                 $(".tab a").removeClass('currentMonth');
-                for (var i = goMonth - 2; i <= goMonth - 2 + 2; i++) {
-                    var nextMonthMo = moment().add(i, 'months').format("YYYY MMM");
-                    console.log(nextMonthMo);
-                    var monthsTitle = '<li class="tab">' + '<a href="#" class="" id="" data-label="' + moment().add(i, 'months').format("YYYYMM") + '">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
-                    $this.find('.ntb_tab').append(monthsTitle);
-                    $(".tab a").attr('id', '');
-                    $(".tab:nth-child(1) a").attr('id', 'currentMonth');
-                    $(".tab:nth-child(1) a").addClass('currentMonth');
-                };
+                $(".tab a").removeClass('currentMonth');
+                $(".tab a").attr('id', '');
+                $(".tab:nth-child(" + (goMonth - 1) + ") a").attr('id', 'currentMonth');
+                $(".tab:nth-child(" + (goMonth - 1) + ") a").addClass('currentMonth');
                 goMonth--;
                 self.monthSelect();
                 self.getNowMonth();
                 self.bornCalendar();
             }); //顯示上個月的title
+
+
+            //小箭頭跳currentMonth
+
+            // $('.on').on('click',function(){
+            //     console.log('hi');
+            //     var ssss= $(".currentMonth").parents(".tab").index();
+            //     console.log("索引是"+ssss);
+            //     if(ssss=2){
+            //         $this.find('.ntb_tab').empty();
+            //         $(".tab a").removeClass('currentMonth');
+            //         for (var i = goMonth ;i <= goMonth+2 ; i++ ){
+            //         var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
+            //         console.log(nextMonthMo);
+            //         var monthsTitle= '<li class="tab">'+
+            //                            '<a href="#" class="" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+            //                          '</li>';
+            //         $this.find('.ntb_tab').append(monthsTitle);
+            //         $(".tab a").attr('id','');
+            //         $(".tab:nth-child(1) a").attr('id','currentMonth');
+            //         $(".tab:nth-child(1) a").addClass('currentMonth');               
+            //     };
+            //     goMonth++; 
+            //     self.monthSelect();
+            //     self.getNowMonth();
+            //     self.bornCalendar();
+            //     }else if(ssss==0){
+            //         return this;
+            //     };
+            //     // if(){}
+            // });
+            // //小箭頭跳頁click
+            // $('.next').on('click', function() { 
+            //     $this.find('.ntb_tab').empty();
+            //     $(".tab a").removeClass('currentMonth');
+            //     for (var i = goMonth ;i <= goMonth+2 ; i++ ){
+            //         var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
+            //         console.log(nextMonthMo);
+            //         var monthsTitle= '<li class="tab">'+
+            //                            '<a href="#" class="" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+            //                          '</li>';
+            //         $this.find('.ntb_tab').append(monthsTitle);
+            //         $(".tab a").attr('id','');
+            //         $(".tab:nth-child(1) a").attr('id','currentMonth');
+            //         $(".tab:nth-child(1) a").addClass('currentMonth');               
+            //     };
+            //     goMonth++; 
+            //     self.monthSelect();
+            //     self.getNowMonth();
+            //     self.bornCalendar();
+            // });//顯示下個月的title
+            // $('.prev').on('click', function() {
+            //     $this.find('.ntb_tab').empty();
+            //     $(".tab a").removeClass('currentMonth');
+            //     for (var i = goMonth-2 ;i <= (goMonth-2) + 2 ; i++ ){
+            //         var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
+            //         console.log(nextMonthMo);
+            //         var monthsTitle='<li class="tab">'+
+            //                            '<a href="#" class="" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+            //                         '</li>';
+            //          $this.find('.ntb_tab').append(monthsTitle);
+            //          $(".tab a").attr('id','');
+            //          $(".tab:nth-child(3) a").attr('id','currentMonth');
+            //          $(".tab:nth-child(3) a").addClass('currentMonth');                 
+            //     };
+            //     goMonth--;
+            //     self.monthSelect();
+            //     self.getNowMonth();
+            //     self.bornCalendar();
+            // });//顯示上個月的title
+            // //小箭頭跳頁click
 
             // var MonthDate=moment().format("YYYY MMM");//現在的月份
             // console.log(MonthDate);
@@ -598,8 +657,8 @@ var Module = function () {
             var today = new Date();
             // var year = today.getFullYear();      //本年
             // var month = today.getMonth() + 1;    //本月
-            var year = parseInt($(".currentMonth").attr('data-label').substring(0, 4)); //本年
-            var month = parseInt($(".currentMonth").attr('data-label').substring(4, 10)); //本月
+            var year = parseInt($(".currentMonth").attr('data-label').substring(0, 4)); //本年 抓取currentMonth所代表的年分
+            var month = parseInt($(".currentMonth").attr('data-label').substring(4, 10)); //本月 抓取currentMonth所代表的月份
             var day = today.getDate(); //本日
             //本月第一天是星期几（距星期日离开的天数）
             var startDay = new Date(year, month - 1, 1).getDay();
@@ -620,10 +679,10 @@ var Module = function () {
                 //為什麼是37啊!!!!!!!!!!!!!!!!!
                 //如果是今天则显示红色
                 if (j == day) {
-                    html += '<td class="currentDays" onclick="' + "alert('" + year + '年' + month + '月' + j + "号');" + '">';
+                    html += '<td class="currentDays" date="' + year + month + j + '" onclick="' + "alert('" + year + '年' + month + '月' + j + "号');" + '">';
                     html += j; //开始加日期
                 } else if (j !== day && j <= nDays) {
-                    html += '<td class="currentDays" onclick="' + "alert('" + year + '年' + month + '月' + j + "号');" + '">';
+                    html += '<td class="currentDays" date="' + year + month + j + '" onclick="' + "alert('" + year + '年' + month + '月' + j + "号');" + '">';
                     html += j; //开始加日期
                 } else {
                     html += '<td class="disabled">';
