@@ -61,8 +61,8 @@ class Module {
         this.creatHtml();
         this.getAjax();
         this.showMonthDate();
-        var nowMonth=document.getElementById("currentMonth").textContent;
-        console.log('現在是'+nowMonth);
+        var nowMonth=$(".currentMonth").attr('data-label');
+        console.log(nowMonth);
         return this;
     }
 
@@ -175,7 +175,7 @@ class Module {
                 var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
                 var monthsTitle= '<li class="tab">'+
-                                   '<a href="#" class="" id="">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                   '<a href="#" class="" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                  '</li>';              
                 $this.find('.ntb_tab').append(monthsTitle);
                 $(".tab:nth-child(1) a").addClass('currentMonth');
@@ -189,7 +189,7 @@ class Module {
                 var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
                 var monthsTitle= '<li class="tab">'+
-                                   '<a href="#" class="" id="">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                   '<a href="#" class="" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                  '</li>';
                 $this.find('.ntb_tab').append(monthsTitle);
                 $(".tab a").attr('id','');
@@ -209,7 +209,7 @@ class Module {
                 var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
                 var monthsTitle= '<li class="tab">'+
-                                   '<a href="#" class="" id="">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                   '<a href="#" class="" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                  '</li>';
                  $this.find('.ntb_tab').append(monthsTitle);
                  $(".tab a").attr('id','');

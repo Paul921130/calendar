@@ -253,8 +253,8 @@ var Module = function () {
             this.creatHtml();
             this.getAjax();
             this.showMonthDate();
-            var nowMonth = document.getElementById("currentMonth").textContent;
-            console.log('現在是' + nowMonth);
+            var nowMonth = $(".currentMonth").attr('data-label');
+            console.log(nowMonth);
             return this;
         }
     }, {
@@ -356,7 +356,7 @@ var Module = function () {
             for (var i = 0; i <= 2; i++) {
                 var nextMonthMo = moment().add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
-                var monthsTitle = '<li class="tab">' + '<a href="#" class="" id="">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
+                var monthsTitle = '<li class="tab">' + '<a href="#" class="" id="" data-label="' + moment().add(i, 'months').format("YYYYMM") + '">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
                 $this.find('.ntb_tab').append(monthsTitle);
                 $(".tab:nth-child(1) a").addClass('currentMonth');
                 $(".tab:nth-child(1) a").attr('id', 'currentMonth');
@@ -368,7 +368,7 @@ var Module = function () {
                 for (var i = goMonth; i <= goMonth + 2; i++) {
                     var nextMonthMo = moment().add(i, 'months').format("YYYY MMM");
                     console.log(nextMonthMo);
-                    var monthsTitle = '<li class="tab">' + '<a href="#" class="" id="">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
+                    var monthsTitle = '<li class="tab">' + '<a href="#" class="" id="" data-label="' + moment().add(i, 'months').format("YYYYMM") + '">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
                     $this.find('.ntb_tab').append(monthsTitle);
                     $(".tab a").attr('id', '');
                     $(".tab:nth-child(1) a").attr('id', 'currentMonth');
@@ -385,7 +385,7 @@ var Module = function () {
                 for (var i = goMonth - 2; i <= goMonth - 2 + 2; i++) {
                     var nextMonthMo = moment().add(i, 'months').format("YYYY MMM");
                     console.log(nextMonthMo);
-                    var monthsTitle = '<li class="tab">' + '<a href="#" class="" id="">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
+                    var monthsTitle = '<li class="tab">' + '<a href="#" class="" id="" data-label="' + moment().add(i, 'months').format("YYYYMM") + '">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
                     $this.find('.ntb_tab').append(monthsTitle);
                     $(".tab a").attr('id', '');
                     $(".tab:nth-child(1) a").attr('id', 'currentMonth');
