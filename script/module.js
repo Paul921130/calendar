@@ -187,13 +187,13 @@ class Module {
                                         '<div class="day otherMonth">'+dataSource[2].price+'</div>'+
                                         '</td>'+
                                         '<td class="currentDays">'+
-                                        '<div class="day otherMonth">'+'</div>'+
+                                        '<div class="day otherMonth">'+dataSource[4].price+'</div>'+
                                         '</td>'+
                                         '<td class="currentDays">'+
-                                        '<div class="day otherMonth">'+'</div>'+
+                                        '<div class="day otherMonth">'+dataSource[5].price+'</div>'+
                                         '</td>'+
                                         '<td class="currentDays">'+
-                                        '<div class="day otherMonth">'+'</div>'+
+                                        '<div class="day otherMonth">'+dataSource[6].price+'</div>'+
                                         '</td>'+
                                         '<td class="currentDays">'+
                                         '<div class="day otherMonth">'+'</div>'+
