@@ -61,6 +61,8 @@ class Module {
         this.creatHtml();
         this.getAjax();
         this.showMonthDate();
+        var nowMonth=document.getElementById("currentMonth").textContent;
+        console.log('現在是'+nowMonth);
         return this;
     }
 
@@ -173,10 +175,11 @@ class Module {
                 var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
                 var monthsTitle= '<li class="tab">'+
-                                   '<a href="#" class="">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                   '<a href="#" class="" id="">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                  '</li>';              
                 $this.find('.ntb_tab').append(monthsTitle);
                 $(".tab:nth-child(1) a").addClass('currentMonth');
+                $(".tab:nth-child(1) a").attr('id','currentMonth');
                 self.monthSelect();
         };
         $('.next').on('click', function() { 
@@ -186,13 +189,17 @@ class Module {
                 var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
                 var monthsTitle= '<li class="tab">'+
-                                   '<a href="#" class="">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                   '<a href="#" class="" id="">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                  '</li>';
                 $this.find('.ntb_tab').append(monthsTitle);
-                $(".tab:nth-child(1) a").addClass('currentMonth');                 
+                $(".tab a").attr('id','');
+                $(".tab:nth-child(1) a").attr('id','currentMonth');
+                $(".tab:nth-child(1) a").addClass('currentMonth');
+                                   
             };
             goMonth++; 
-            self.monthSelect();   
+            self.monthSelect();
+            self.bornCalendar(goMonth);
         });//顯示下個月的title
 
         $('.prev').on('click', function() {
@@ -202,9 +209,11 @@ class Module {
                 var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
                 var monthsTitle= '<li class="tab">'+
-                                   '<a href="#" class="">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                   '<a href="#" class="" id="">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                  '</li>';
                  $this.find('.ntb_tab').append(monthsTitle);
+                 $(".tab a").attr('id','');
+                 $(".tab:nth-child(1) a").attr('id','currentMonth');
                  $(".tab:nth-child(1) a").addClass('currentMonth');                 
             };
             goMonth--;
@@ -232,9 +241,14 @@ class Module {
         var self = this;
         var $this = this.$ele;//class="calendar"
         $this.find('.tab a').on('click', function() {
+            $this.find(".tab a").attr('id','');
+            $(this).attr('id','currentMonth');
             $this.find('.tab a').removeClass('currentMonth');
             $(this).addClass('currentMonth');
+            var nowMonth=document.getElementById("currentMonth").textContent;
+            console.log('現在是'+nowMonth);
         });
+        
         return this; 
     }
 
@@ -384,9 +398,10 @@ class Module {
         $('.weekTable').append(calendarDayHtml);
         console.log(moment().add(1, 'days').format("D"));
         self.bornCalendar();
+     
         return this;
     }
-    bornCalendar(){
+    bornCalendar(nextMonthDay){
         var self = this;
         var $this = this.$ele;//class="calendar"
         var today = new Date();
@@ -394,7 +409,7 @@ class Module {
         var month = today.getMonth() + 1;    //本月
         var day = today.getDate();           //本日
         //本月第一天是星期几（距星期日离开的天数）
-        var startDay = new Date(year, month - 1, 2).getDay();
+        var startDay = new Date(year, month - 1, 1).getDay();
         //本月有多少天(即最后一天的getDate()，但是最后一天不知道，我们可以用“上个月的0来表示本月的最后一天”)
         var nDays = new Date(year, month, 0).getDate();
         //开始画日历
@@ -407,16 +422,15 @@ class Module {
         for (i = 0; i < startDay; i++) {
             html += '<td class="disabled"></td>';
             numRow++;
-        }
-        
+        }     
         for (var j = 1; j < 38 ; j++) {
             //如果是今天则显示红色
             if (j == day) {
-                html += '<td style="color:red" onclick="' + "alert('今天是" + j + "号');" + '">';
+                html += '<td class="currentDays" onclick="' + "alert('今天是" + j + "号');" + '">';
                 html += j;    //开始加日期
             }
             else if( j!==day && j<= nDays) {
-                html += '<td onclick="' + "alert('你点的是" + j + "号');" + '">';
+                html += '<td class="currentDays" onclick="' + "alert('你点的是" + j + "号');" + '">';
                 html += j;    //开始加日期
             }else{
                 html += '<td class="disabled">';
@@ -428,10 +442,6 @@ class Module {
                 html += '</tr><tr>';
             }
         }
-        // for (i = j; i > nDays; i++) {
-        //     html += '<td class="disabled"></td>';
-        //     numRow++;
-        // }
         html += '</tbody></table>';
         document.getElementById("mainCalendar").innerHTML = html;
     }
