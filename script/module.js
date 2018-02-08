@@ -199,7 +199,6 @@ class Module {
         });//顯示下個月的title
         $('.prev').on('click', function() {    
             $(".tab a").removeClass('currentMonth');
-            $(".tab a").removeClass('currentMonth');
             $(".tab a").attr('id','');
             $(".tab:nth-child("+(goMonth-1)+") a").attr('id','currentMonth');
             $(".tab:nth-child("+(goMonth-1)+") a").addClass('currentMonth');               
