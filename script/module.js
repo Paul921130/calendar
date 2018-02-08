@@ -440,14 +440,15 @@ class Module {
             html += '<td class="disabled"></td>';
             numRow++;
         }     
-        for (var j = 1; j < 38 ; j++) {
+        for (var j = 1; j < 37 ; j++) {
+            //為什麼是37啊!!!!!!!!!!!!!!!!!
             //如果是今天则显示红色
             if (j == day) {
-                html += '<td class="currentDays" onclick="' + "alert('今天是" + j + "号');" + '">';
+                html += '<td class="currentDays" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
                 html += j;    //开始加日期
             }
             else if( j!==day && j<= nDays) {
-                html += '<td class="currentDays" onclick="' + "alert('你点的是" + j + "号');" + '">';
+                html += '<td class="currentDays" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
                 html += j;    //开始加日期
             }else{
                 html += '<td class="disabled">';
