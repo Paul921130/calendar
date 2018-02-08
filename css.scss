@@ -64,14 +64,20 @@ $classname: 'calendar';
 	    		text-decoration: none;
 	    		margin: 0 3px;
 	    		padding-top: 6px;
-	    		background: #fff;
+	    		// background: #fff;
 	    		span{
 	    			    display: block;
 					    font-size: 16px;
-					    color: #e10500;
+					    color: #666;
 					    line-height: 1.25;
 	    		}
 	    	}
+		}
+		.currentMonth{
+			background: #fff;
+			span{
+				color: #e10500!important;
+			}
 		}
 		.ntb_gpbt>.ntb_tab>li, .ntb_gpbt>.ntb_tab>li.tab {
 	    	width: 33.3333%;
