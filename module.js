@@ -253,7 +253,9 @@ var Module = function () {
             this.creatHtml();
             this.getAjax();
             this.showMonthDate();
-            var nowMonth = $(".currentMonth").attr('data-label');
+            var nowYear = parseInt($(".currentMonth").attr('data-label').substring(0, 4)); //抓取currentMonth所代表的年分
+            var nowMonth = parseInt($(".currentMonth").attr('data-label').substring(4, 10)); //抓取currentMonth所代表的月份
+            console.log(nowYear);
             console.log(nowMonth);
             return this;
         }
@@ -361,6 +363,7 @@ var Module = function () {
                 $(".tab:nth-child(1) a").addClass('currentMonth');
                 $(".tab:nth-child(1) a").attr('id', 'currentMonth');
                 self.monthSelect();
+                self.getNowMonth();
             };
             $('.next').on('click', function () {
                 $this.find('.ntb_tab').empty();
@@ -376,7 +379,7 @@ var Module = function () {
                 };
                 goMonth++;
                 self.monthSelect();
-                self.bornCalendar(goMonth);
+                self.getNowMonth();
             }); //顯示下個月的title
 
             $('.prev').on('click', function () {
@@ -393,6 +396,7 @@ var Module = function () {
                 };
                 goMonth--;
                 self.monthSelect();
+                self.getNowMonth();
             }); //顯示上個月的title
 
             // var MonthDate=moment().format("YYYY MMM");//現在的月份
@@ -423,9 +427,20 @@ var Module = function () {
                 $(this).addClass('currentMonth');
                 var nowMonth = document.getElementById("currentMonth").textContent;
                 console.log('現在是' + nowMonth);
+                self.getNowMonth();
             });
 
             return this;
+        }
+    }, {
+        key: "getNowMonth",
+        value: function getNowMonth() {
+            var self = this;
+            var $this = this.$ele; //class="calendar"
+            var nowYear = parseInt($(".currentMonth").attr('data-label').substring(0, 4)); //抓取currentMonth所代表的年分
+            var nowMonth = parseInt($(".currentMonth").attr('data-label').substring(4, 10)); //抓取currentMonth所代表的月份
+            console.log(nowYear);
+            console.log(nowMonth);
         }
     }, {
         key: "creatCalendarDay",
