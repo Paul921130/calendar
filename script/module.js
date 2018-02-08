@@ -56,11 +56,11 @@ class Module {
         var self = this;
         var $this = this.$ele;
         var opts = this.option;
-        console.log(ModuleDefaults.dataSource)
+        // console.log(ModuleDefaults.dataSource);
         console.log('moduleIn!!!!');
-        this.creatHtml();  
+        this.creatHtml();
         this.getAjax();
-        
+        this.showMonthDate();
         return this;
     }
 
@@ -78,15 +78,15 @@ class Module {
                             '<div class="ntb_gpbt yellow">'+
                                 '<a href="#" class="prev on">'+'</a>'+
                                 '<ul class="ntb_tab">'+
-                                   '<li class="tab">'+
-                                       '<a href="#">'+'<span>'+'2017 7月'+'</span>'+'</a>'+
-                                   '</li>'+            
-                                   '<li class="tab">'+
-                                       '<a href="#">'+'<span>'+'2017 8月'+'</span>'+'</a>'+
-                                   '</li>'+
-                                   '<li class="tab">'+
-                                       '<a href="#">'+'<span>'+'2017 9月'+'</span>'+'</a>'+
-                                   '</li>'+                                                
+                                   // '<li class="tab">'+
+                                   //     '<a href="#">'+'<span>'+'2017 7月'+'</span>'+'</a>'+
+                                   // '</li>'+            
+                                   // '<li class="tab">'+
+                                   //     '<a href="#">'+'<span>'+'2017 8月'+'</span>'+'</a>'+
+                                   // '</li>'+
+                                   // '<li class="tab">'+
+                                   //     '<a href="#">'+'<span>'+'2017 9月'+'</span>'+'</a>'+
+                                   // '</li>'+                                                
                                 '</ul>'+
                                 '<a href="#" class="next on">'+'</a>'+
                             '</div>'+
@@ -118,7 +118,7 @@ class Module {
                         //         '<span class="price">'+'$4,999'+'</span>'+
                         //     '</li>'+
                         // '</ul>';     
-        $this.append(calendarHtml);                
+        $this.append(calendarHtml);               
         return this;
     }
     getAjax(){
@@ -136,9 +136,9 @@ class Module {
 
                 self.creatCalendar(dataSource);
                 var NumOfJData = dataSource.length;
-                for (var i = 0; i < NumOfJData; i++) {
-                    console.log(dataSource[i].date);
-                };  
+                // for (var i = 0; i < NumOfJData; i++) {
+                //     console.log(dataSource[i].date);
+                // };  //所有資料的日期都跑一次
                 console.log(NumOfJData);
             });
         return this;
@@ -301,6 +301,65 @@ class Module {
                             '</table>';
             $this.find('.calendars_weeksWrap').append(calendarHtml);                
             return this;
+    }
+    showMonthDate(){
+        var self = this;
+        var $this = this.$ele;//class="calendar"
+        var goMonth = 1;
+
+        for (var i = 0 ;i <= 2 ; i++ ){
+                var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
+                console.log(nextMonthMo);
+                var monthsTitle= '<li class="tab">'+
+                                   '<a href="#">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                 '</li>';
+                $this.find('.ntb_tab').append(monthsTitle);                 
+        };
+
+        $('.next').on('click', function() { 
+            $this.find('.ntb_tab').empty();
+            for (var i = goMonth ;i <= goMonth+2 ; i++ ){
+                var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
+                console.log(nextMonthMo);
+                var monthsTitle= '<li class="tab">'+
+                                   '<a href="#">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                 '</li>';
+                 $this.find('.ntb_tab').append(monthsTitle);                 
+            };
+            goMonth++;    
+        });
+
+        $('.prev').on('click', function() {
+            $this.find('.ntb_tab').empty();
+            for (var i = goMonth-2 ;i <= (goMonth-2)+2 ; i++ ){
+                var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
+                console.log(nextMonthMo);
+                var monthsTitle= '<li class="tab">'+
+                                   '<a href="#">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                 '</li>';
+                 $this.find('.ntb_tab').append(monthsTitle);                 
+            };
+            goMonth--;
+        }); 
+
+
+
+
+        // var MonthDate=moment().format("YYYY MMM");//現在的月份
+        // console.log(MonthDate);
+        
+        // for (var i = 0; i <= 2; i++) {
+        //     var prevMonthMo=moment().subtract(i, 'months').format("YYYY MMM");
+        //     console.log(prevMonthMo);
+        //     var monthsTitle= '<li class="tab">'+
+        //                        '<a href="#">'+'<span>'+prevMonthMo+'</span>'+'</a>'+
+        //                      '</li>';
+        //     $this.find('.ntb_tab').append(monthsTitle);
+        // }
+        
+        
+        // $this.find('.ntb_tab').append(monthsTitle);
+        return this;
     }
     // 下一個有資料的月份
     nextMonth(){
