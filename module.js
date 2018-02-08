@@ -314,10 +314,6 @@ var Module = function () {
                     return a.date > b.date ? 1 : -1;
                 }); //將dataSource按照日期排序,由前至後(2016年開始);
 
-                // var startDate = new Date("2017/01/01");
-                // var endDate = new Date("2018/06/06");
-                // var dataSource=dataSource.filter( startDate > dataSource.date && dataSource.date > endDate);
-
                 self.creatCalendar(dataSource);
                 var NumOfJData = dataSource.length;
                 for (var i = 0; i < NumOfJData; i++) {
