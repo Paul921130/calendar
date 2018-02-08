@@ -203,6 +203,7 @@ class Module {
             goMonth++; 
             self.monthSelect();
             self.getNowMonth();
+            self.bornCalendar();
         });//顯示下個月的title
 
         $('.prev').on('click', function() {
@@ -222,6 +223,7 @@ class Module {
             goMonth--;
             self.monthSelect();
             self.getNowMonth();
+            self.bornCalendar();
         });//顯示上個月的title
 
         // var MonthDate=moment().format("YYYY MMM");//現在的月份
@@ -252,6 +254,7 @@ class Module {
             var nowMonth=document.getElementById("currentMonth").textContent;
             console.log('現在是'+nowMonth);
             self.getNowMonth();
+            self.bornCalendar();
         });
         
         return this; 
@@ -413,12 +416,14 @@ class Module {
      
         return this;
     }
-    bornCalendar(nextMonthDay){
+    bornCalendar(){
         var self = this;
         var $this = this.$ele;//class="calendar"
         var today = new Date();
-        var year = today.getFullYear();      //本年
-        var month = today.getMonth() + 1;    //本月
+        // var year = today.getFullYear();      //本年
+        // var month = today.getMonth() + 1;    //本月
+        var year = parseInt($(".currentMonth").attr('data-label').substring(0, 4));      //本年
+        var month =parseInt($(".currentMonth").attr('data-label').substring(4, 10));    //本月
         var day = today.getDate();           //本日
         //本月第一天是星期几（距星期日离开的天数）
         var startDay = new Date(year, month - 1, 1).getDay();
