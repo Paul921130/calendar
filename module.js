@@ -274,42 +274,7 @@ var Module = function () {
         value: function creatHtml() {
             var self = this;
             var $this = this.$ele; //class="calendar"
-            var calendarHtml = '<div class="calendars_tabWrap">' + '<div class="ntb_gpbt yellow">' + '<a href="#" class="prev on">' + '</a>' + '<ul class="ntb_tab">' +
-            // '<li class="tab">'+
-            //     '<a href="#">'+'<span>'+'2017 7月'+'</span>'+'</a>'+
-            // '</li>'+            
-            // '<li class="tab">'+
-            //     '<a href="#">'+'<span>'+'2017 8月'+'</span>'+'</a>'+
-            // '</li>'+
-            // '<li class="tab">'+
-            //     '<a href="#">'+'<span>'+'2017 9月'+'</span>'+'</a>'+
-            // '</li>'+                                                
-            '</ul>' + '<a href="#" class="next on">' + '</a>' + '</div>' + '</div>' + '<div class="calendars_weeksWrap">' + '</div>'; //要記得用"+"連起來呦
-            // '<ul class="calendars_daysWrap">'+
-            //     '<li class="calendars_days disabled">'+'</li>'+
-            //     '<li class="calendars_days hasData">'+
-            //         '<div class="date">'+
-            //             '<span class="num">'+'1'+'</span>'+
-            //             '<span class="weekday">'+'星期四'+'</span>'+
-            //         '</div>'+
-            //         '<span class="status">'+'候補'+'</span>'+
-            //         '<span class="sell">'+'可賣：0'+'</span>'+
-            //         '<span class="group">'+'團位：0'+'</span>'+
-            //         '<span class="tip">'+'<i class="ic-ln productreferf">'+'</i>'+'保證出團'+'</span>'+
-            //         '<span class="price">'+'$4,999'+'</span>'+
-            //     '</li>'+
-            //     '<li class="calendars_days hasData">'+
-            //         '<div class="date">'+
-            //             '<span class="num">'+'1'+'</span>'+
-            //             '<span class="weekday">'+'星期五'+'</span>'+
-            //         '</div>'+
-            //         '<span class="status">'+'候補'+'</span>'+
-            //         '<span class="sell">'+'可賣：0'+'</span>'+
-            //         '<span class="group">'+'團位：0'+'</span>'+
-            //         '<span class="tip">'+'<i class="ic-ln productreferf">'+'</i>'+'保證出團'+'</span>'+
-            //         '<span class="price">'+'$4,999'+'</span>'+
-            //     '</li>'+
-            // '</ul>';     
+            var calendarHtml = '<div class="calendars_tabWrap">' + '<div class="ntb_gpbt yellow">' + '<a href="#" class="prev on">' + '</a>' + '<ul class="ntb_tab">' + '</ul>' + '<a href="#" class="next on">' + '</a>' + '</div>' + '</div>' + '<div class="calendars_weeksWrap">' + '</div>'; //要記得用"+"連起來呦    
             $this.append(calendarHtml);
             return this;
         }
@@ -330,6 +295,8 @@ var Module = function () {
 
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
+                self.bornCalendar(dataSource);
+
                 var NumOfJData = dataSource.length;
                 // for (var i = 0; i < NumOfJData; i++) {
                 //     console.log(dataSource[i].date);
@@ -361,33 +328,41 @@ var Module = function () {
                 $this.find('.ntb_tab').append(monthsTitle);
                 $(".tab:nth-child(1) a").addClass('currentMonth');
                 $(".tab:nth-child(1) a").attr('id', 'currentMonth');
+                // $(".tab:nth-child(1) a").addClass('currentMont
                 self.monthSelect();
-                self.getNowMonth();
+                // self.getNowMonth();
             };
-            //小箭頭跳currentMonth
-            // $('.next').on('click', function() { 
-            //     $(".tab a").removeClass('currentMonth');
-            //     $(".tab a").attr('id','');
-            //     $(".tab:nth-child("+(goMonth+1)+") a").attr('id','currentMonth');
-            //     $(".tab:nth-child("+(goMonth+1)+") a").addClass('currentMonth');
-            //     console.log('gogo!'+goMonth);               
-            //     goMonth++;   
-            //     self.monthSelect();
-            //     self.getNowMonth();
-            //     self.bornCalendar();
+            // //小箭頭跳currentMonth
+            // $('.next').on('click', function() {
+            //     if($(".tab:nth-child(3) a").hasClass('currentMonth')===false){ 
+            //             $(".tab a").removeClass('currentMonth');
+            //             $(".tab a").attr('id','');
+            //             $(".tab:nth-child("+(goMonth+1)+") a").attr('id','currentMonth');
+            //             $(".tab:nth-child("+(goMonth+1)+") a").addClass('currentMonth');
+            //             console.log('gogo!'+(goMonth));             
+            //             goMonth++;
+            //             self.monthSelect();
+            //             self.getNowMonth();
+            //             self.bornCalendar(dataSource);
+            //         }else{
+            //              return this;
+            //         };
             // });//小箭頭跳currentMonth
-            // $('.prev').on('click', function() {    
-            //     $(".tab a").removeClass('currentMonth');
-            //     $(".tab a").attr('id','');
-            //     $(".tab:nth-child("+(goMonth-1)+") a").attr('id','currentMonth');
-            //     $(".tab:nth-child("+(goMonth-1)+") a").addClass('currentMonth');
-            //     console.log('gogo!'+goMonth);                 
-            //     goMonth--;
-            //     self.monthSelect();
-            //     self.getNowMonth();
-            //     self.bornCalendar();
-            // });//小箭頭跳currentMonth
-
+            // $('.prev').on('click', function() {
+            //     if($(".tab:nth-child(1) a").hasClass('currentMonth')!==true){
+            //         $(".tab a").removeClass('currentMonth');
+            //         $(".tab a").attr('id','');
+            //         $(".tab:nth-child("+(goMonth-1)+") a").attr('id','currentMonth');
+            //         $(".tab:nth-child("+(goMonth-1)+") a").addClass('currentMonth');
+            //         console.log('gogo!'+goMonth);                 
+            //         goMonth--;
+            //         self.monthSelect();
+            //          self.getNowMonth();
+            //         self.bornCalendar(dataSource);
+            //     }else{
+            //        return this;
+            //     }
+            // });//小箭頭跳currentMonth        
 
             //小箭頭跳currentMonth
 
@@ -396,7 +371,9 @@ var Module = function () {
             //     var ssss= $(".currentMonth").parents(".tab").index();
             //     console.log("索引是"+ssss);
             // });
-            //小箭頭跳頁click
+
+
+            // 小箭頭跳頁click
             $('.next').on('click', function () {
                 $this.find('.ntb_tab').empty();
                 $(".tab a").removeClass('currentMonth');
@@ -421,7 +398,7 @@ var Module = function () {
                 $(".tab a").removeClass('currentMonth');
                 for (var i = goMonth - 2; i <= goMonth - 2 + 2; i++) {
                     var nextMonthMo = moment().add(i, 'months').format("YYYY MMM");
-                    console.log(nextMonthMo);
+                    // console.log(nextMonthMo);
                     var monthsTitle = '<li class="tab">' + '<a href="#" class="" id="" data-label="' + moment().add(i, 'months').format("YYYYMM") + '">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
                     $this.find('.ntb_tab').append(monthsTitle);
                     $(".tab a").attr('id', '');
@@ -433,23 +410,8 @@ var Module = function () {
                 self.getNowMonth();
                 self.bornCalendar();
             });
-            //顯示上個月的title
-            //小箭頭跳頁click
-
-            // var MonthDate=moment().format("YYYY MMM");//現在的月份
-            // console.log(MonthDate);
-
-            // for (var i = 0; i <= 2; i++) {
-            //     var prevMonthMo=moment().subtract(i, 'months').format("YYYY MMM");
-            //     console.log(prevMonthMo);
-            //     var monthsTitle= '<li class="tab">'+
-            //                        '<a href="#">'+'<span>'+prevMonthMo+'</span>'+'</a>'+
-            //                      '</li>';
-            //     $this.find('.ntb_tab').append(monthsTitle);
-            // }
-
-
-            // $this.find('.ntb_tab').append(monthsTitle);
+            // 顯示上個月的title
+            // 小箭頭跳頁click
             return this;
         }
     }, {
@@ -464,8 +426,8 @@ var Module = function () {
                 $(this).addClass('currentMonth');
                 var nowMonth = document.getElementById("currentMonth").textContent;
                 console.log('現在是' + nowMonth);
-                self.getNowMonth();
-                self.bornCalendar();
+                // self.getNowMonth();
+                self.bornCalendar(dataSource);
             });
 
             return this;
@@ -477,159 +439,35 @@ var Module = function () {
             var $this = this.$ele; //class="calendar"
             var nowYear = parseInt($(".currentMonth").attr('data-label').substring(0, 4)); //抓取currentMonth所代表的年分
             var nowMonth = parseInt($(".currentMonth").attr('data-label').substring(4, 10)); //抓取currentMonth所代表的月份
-            console.log(nowYear);
-            console.log(nowMonth);
+            // console.log(nowYear);
+            // console.log(nowMonth);
         }
     }, {
         key: "creatCalendarDay",
         value: function creatCalendarDay(dataSource) {
             var self = this;
             var $this = this.$ele; //class="calendar"
-            var calendarDayHtml = '<tbody id="mainCalendar">' + '<tr class="days">' + '<td class="disabled">' + '<div class="day otherMonth" >' + dataSource[0].price + '</div>' + //將Ajax抓的data(dataSource)作為參數傳入
-            '</td>' + '<td class="disabled">' + '</td>' +
-            // '<td class="disabled">'+
-            // '<div class="day otherMonth">'+'</div>'+
-            // '</td>'+
-            // '<td class="disabled">'+
-            // '<div class="day otherMonth">'+moment().add(-8, 'days').format("D")+'</div>'+
-            // '</td>'+
-            // '<td class="currentDays">'+
-            // '<div class="day">'+'</div>'+
-            // '</td>'+
-            // '<td class="currentDays">'+
-            // '<div class="day">'+'</div>'+
-            // '</td>'+
-            // '<td class="currentDays">'+
-            // '<div class="day">'+'</div>'+
-            // '</td>'+
-            '</tr>' +
-            // '<tr class="days">'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            // '</tr>'+  
-            // '<tr class="days">'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            // '</tr>'+  
-            // '<tr class="days">'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            // '</tr>'+
-            // '<tr class="days">'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            // '</tr>'+      
-            // '<tr class="days">'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="currentDays">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="disabled">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="disabled">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="disabled">'+
-            //     '<div class="day">'+'</div>'+
-            //     '</td>'+
-            //     '<td class="disabled">'+
-            //     '<div class="day" ">'+'</div>'+
-            //     '</td>'+
-            // '</tr>'+            
-            '</tbody>';
+            var calendarDayHtml = '<tbody id="mainCalendar">' + '<tr class="days">' + '<td class="disabled">' + '<div class="day otherMonth" >' + '</div>' + //將Ajax抓的data(dataSource)作為參數傳入
+            '</td>' + '<td class="disabled">' + '</td>' + '</tr>' + '</tbody>';
             $('.weekTable').append(calendarDayHtml);
             console.log(moment().add(1, 'days').format("D"));
-            self.bornCalendar();
+            // self.bornCalendar(dataSource);
 
             return this;
         }
     }, {
         key: "bornCalendar",
-        value: function bornCalendar() {
+        value: function bornCalendar(dataSource) {
             var self = this;
             var $this = this.$ele; //class="calendar"
+
+            // var dataYear= dataSource[0].date.substring(0,4);
+            // var dataMonth= dataSource[0].date.substring(5,7);
+            // var dataDay= dataSource[0].date.substring(8,10);
+            // var dataDate=parseInt(dataYear+dataMonth+dataDay);
+            // console.log(dataSource[0].date);
+            // console.log(dataDate);
+
             var today = new Date();
             // var year = today.getFullYear();      //本年
             // var month = today.getMonth() + 1;    //本月
