@@ -335,11 +335,17 @@ class Module {
                     html += j;    //开始加日期
                 }
                 else if( j!==day && j<= nDays) {
-                    if(j<10&&month<10){
+                    if(j<10 && month<10){
                         html += '<td class="currentDays '+year+'0'+month+'0'+j+'" date="'+year+'0'+month+'0'+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
                         html += j;
-                    }else{
+                    }else if(j>=10 && month<10){
                         html += '<td class="currentDays '+year+'0'+month+j+'" date="'+year+month+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
+                        html += j;
+                    }else if(j<10 && month>=10){
+                        html += '<td class="currentDays '+year+month+'0'+j+'" date="'+year+month+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
+                        html += j;
+                    }else{
+                        html += '<td class="currentDays '+year+month+j+'" date="'+year+month+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
                         html += j;
                     }    //开始加日期
                 }else{
@@ -371,7 +377,9 @@ class Module {
                     // var self = this;
                     // var $this = this.$ele;
                     $(this).addClass('daysWithData');
+                    var ssssssss="<p>"+dataSource[i].price+"</p>";
                     $('.'+dataDate+'').addClass('daysWithData');
+                    $('.'+dataDate+'').append(ssssssss);
                     console.log($(self));
                     console.log('找到你了');
                 }
