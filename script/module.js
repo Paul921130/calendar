@@ -107,7 +107,7 @@ class Module {
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
                 self.bornCalendar(dataSource);
-            
+
                 var NumOfJData = dataSource.length;
                 // for (var i = 0; i < NumOfJData; i++) {
                 //     console.log(dataSource[i].date);
@@ -245,7 +245,12 @@ class Module {
     monthSelect(){
         var self = this;
         var $this = this.$ele;//class="calendar"
-        $this.find('.tab a').on('click', function() {
+        $.ajax({
+                dataType: "json",
+                method: 'GET',
+                url: './json/data4.json',
+            }).done(function(dataSource) {
+            $this.find('.tab a').on('click', function() {
             $this.find(".tab a").attr('id','');
             $(this).attr('id','currentMonth');
             $this.find('.tab a').removeClass('currentMonth');
@@ -253,8 +258,10 @@ class Module {
             var nowMonth=document.getElementById("currentMonth").textContent;
             console.log('現在是'+nowMonth);
             // self.getNowMonth();
+            console.log(dataSource[0]);
             self.bornCalendar(dataSource);
         });
+    });
         
         return this; 
     }
@@ -285,59 +292,68 @@ class Module {
         return this;
     }
     bornCalendar(dataSource){
-        var self = this;
-        var $this = this.$ele;//class="calendar"
-        
-        // var dataYear= dataSource[0].date.substring(0,4);
-        // var dataMonth= dataSource[0].date.substring(5,7);
-        // var dataDay= dataSource[0].date.substring(8,10);
-        // var dataDate=parseInt(dataYear+dataMonth+dataDay);
-        // console.log(dataSource[0].date);
-        // console.log(dataDate);
-        
-        var today = new Date();
-        // var year = today.getFullYear();      //本年
-        // var month = today.getMonth() + 1;    //本月
-        var year = parseInt($(".currentMonth").attr('data-label').substring(0, 4));      //本年 抓取currentMonth所代表的年分
-        var month =parseInt($(".currentMonth").attr('data-label').substring(4, 10));    //本月 抓取currentMonth所代表的月份
-        var day = today.getDate();           //本日
-        //本月第一天是星期几（距星期日离开的天数）
-        var startDay = new Date(year, month - 1, 1).getDay();
-        //本月有多少天(即最后一天的getDate()，但是最后一天不知道，我们可以用“上个月的0来表示本月的最后一天”)
-        var nDays = new Date(year, month, 0).getDate();
-        //开始画日历
-        var numRow = 0;  //记录行的个数，到达7的时候创建tr
-        var i;        //日期
-        var html = '';
-        html += '<table id="Body"><tbody>';
-        //第一行
-        html += '<tr>';
-        for (i = 0; i < startDay; i++) {
-            html += '<td class="disabled"></td>';
-            numRow++;
-        }     
-        for (var j = 1; j < 37 ; j++) {
-            //為什麼是37啊!!!!!!!!!!!!!!!!!
-            //如果是今天则显示红色
-            if (j == day) {
-                html += '<td class="currentDays" date="'+year+month+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
-                html += j;    //开始加日期
+        $.ajax({
+                dataType: "json",
+                method: 'GET',
+                url: './json/data4.json',
+            }).done(function(dataSource) {
+            dataSource = dataSource.sort(function (a, b) {
+                 return a.date > b.date ? 1 : -1;
+                });//將dataSource按照日期排序,由前至後(2016年開始);    
+           
+            
+            var dataYear= dataSource[0].date.substring(0,4);
+            var dataMonth= dataSource[0].date.substring(5,7);
+            var dataDay= dataSource[0].date.substring(8,10);
+            var dataDate=parseInt(dataYear+dataMonth+dataDay);
+            console.log(dataSource[0].date);
+            console.log(dataDate);
+            var self = this;
+            var $this = this.$ele;//class="calendar"
+            var today = new Date();
+            // var year = today.getFullYear();      //本年
+            // var month = today.getMonth() + 1;    //本月
+            var year = parseInt($(".currentMonth").attr('data-label').substring(0, 4));      //本年 抓取currentMonth所代表的年分
+            var month =parseInt($(".currentMonth").attr('data-label').substring(4, 10));    //本月 抓取currentMonth所代表的月份
+            var day = today.getDate();           //本日
+            //本月第一天是星期几（距星期日离开的天数）
+            var startDay = new Date(year, month - 1, 1).getDay();
+            //本月有多少天(即最后一天的getDate()，但是最后一天不知道，我们可以用“上个月的0来表示本月的最后一天”)
+            var nDays = new Date(year, month, 0).getDate();
+            //开始画日历
+            var numRow = 0;  //记录行的个数，到达7的时候创建tr
+            var i;        //日期
+            var html = '';
+            html += '<table id="Body"><tbody>';
+            //第一行
+            html += '<tr>';
+            for (i = 0; i < startDay; i++) {
+                html += '<td class="disabled"></td>';
+                numRow++;
+            }     
+            for (var j = 1; j < 37 ; j++) {
+                //為什麼是37啊!!!!!!!!!!!!!!!!!
+                //如果是今天则显示红色
+                if (j == day) {
+                    html += '<td class="currentDays" date="'+year+month+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
+                    html += j;    //开始加日期
+                }
+                else if( j!==day && j<= nDays) {
+                    html += '<td class="currentDays" date="'+year+month+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
+                    html += j;    //开始加日期
+                }else{
+                    html += '<td class="disabled">';
+                }
+                html += '</td>';
+                numRow++;
+                if (numRow == 7) {  //如果已经到一行（一周）了，重新创建tr
+                    numRow = 0;
+                    html += '</tr><tr>';
+                }
             }
-            else if( j!==day && j<= nDays) {
-                html += '<td class="currentDays" date="'+year+month+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
-                html += j;    //开始加日期
-            }else{
-                html += '<td class="disabled">';
-            }
-            html += '</td>';
-            numRow++;
-            if (numRow == 7) {  //如果已经到一行（一周）了，重新创建tr
-                numRow = 0;
-                html += '</tr><tr>';
-            }
-        }
-        html += '</tbody></table>';
-        document.getElementById("mainCalendar").innerHTML = html;
+            html += '</tbody></table>';
+            document.getElementById("mainCalendar").innerHTML = html;
+        });
     }
     // 下一個有資料的月份
     nextMonth(){
