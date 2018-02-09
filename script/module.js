@@ -300,10 +300,7 @@ class Module {
             dataSource = dataSource.sort(function (a, b) {
                  return a.date > b.date ? 1 : -1;
             });//將dataSource按照日期排序,由前至後(2016年開始);    
-
-
-           
-           
+ 
             // var self = this;
             var $this = this.$ele;//class="calendar"
             var today = new Date();
@@ -376,8 +373,7 @@ class Module {
                 if($('.currentDays').hasClass(dataDate)){
                     // var self = this;
                     // var $this = this.$ele;
-                    $(this).addClass('daysWithData');
-                    var ssssssss="<p>"+dataSource[i].price+"</p>";
+                    var ssssssss="<span class='price'>"+"$"+dataSource[i].price+"起"+"</span>";
                     $('.'+dataDate+'').addClass('daysWithData');
                     $('.'+dataDate+'').append(ssssssss);
                     console.log($(self));

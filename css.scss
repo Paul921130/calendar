@@ -159,7 +159,6 @@ $classname: 'calendar';
     			border-top: 1px solid transparent;
     			border-left: 1px solid transparent;
     			height: 85px;
-    			
 	    	}
 	    }
 	}
@@ -168,10 +167,11 @@ $classname: 'calendar';
 		cursor: pointer;
 	}
 	.currentDays{
+		font-size: 12px;
 		background-color: #fff;
 	}
 	.daysWithData{
-		background-color: yellow!important;
+		background-color: #fff9e3!important;
 	}
 	.disabled {
     	// border: 1px solid #f8f8f8!important;
@@ -179,6 +179,9 @@ $classname: 'calendar';
     	border-bottom: 1px solid transparent!important;
     	background-color: #f8f8f8;
     	cursor: default;
+	}
+	.price {
+	    color: #e10500;
 	}
 	// style on phone device
 	@media screen and (min-width: $screen-tablet) {
