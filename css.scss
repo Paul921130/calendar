@@ -167,6 +167,12 @@ $classname: 'calendar';
 		background-color: #fff9e3;
 		cursor: pointer;
 	}
+	.currentDays{
+		background-color: #fff;
+	}
+	.daysWithData{
+		background-color: yellow!important;
+	}
 	.disabled {
     	// border: 1px solid #f8f8f8!important;
     	border-right: 1px solid transparent!important;

@@ -149,10 +149,10 @@ class Module {
                 $this.find('.ntb_tab').append(monthsTitle);
                 $(".tab:nth-child(1) a").addClass('currentMonth');
                 $(".tab:nth-child(1) a").attr('id','currentMonth');
-                // $(".tab:nth-child(1) a").addClass('currentMont
-                self.monthSelect();
+                // self.monthSelect();
                 // self.getNowMonth();
         };
+        self.monthSelect();
         // //小箭頭跳currentMonth
         // $('.next').on('click', function() {
         //     if($(".tab:nth-child(3) a").hasClass('currentMonth')===false){ 
@@ -258,7 +258,7 @@ class Module {
             var nowMonth=document.getElementById("currentMonth").textContent;
             console.log('現在是'+nowMonth);
             // self.getNowMonth();
-            console.log(dataSource[0]);
+            // console.log(dataSource[0]);
             self.bornCalendar(dataSource);
         });
     });
@@ -299,16 +299,12 @@ class Module {
             }).done(function(dataSource) {
             dataSource = dataSource.sort(function (a, b) {
                  return a.date > b.date ? 1 : -1;
-                });//將dataSource按照日期排序,由前至後(2016年開始);    
+            });//將dataSource按照日期排序,由前至後(2016年開始);    
+
+
            
-            
-            var dataYear= dataSource[0].date.substring(0,4);
-            var dataMonth= dataSource[0].date.substring(5,7);
-            var dataDay= dataSource[0].date.substring(8,10);
-            var dataDate=parseInt(dataYear+dataMonth+dataDay);
-            console.log(dataSource[0].date);
-            console.log(dataDate);
-            var self = this;
+           
+            // var self = this;
             var $this = this.$ele;//class="calendar"
             var today = new Date();
             // var year = today.getFullYear();      //本年
@@ -335,12 +331,17 @@ class Module {
                 //為什麼是37啊!!!!!!!!!!!!!!!!!
                 //如果是今天则显示红色
                 if (j == day) {
-                    html += '<td class="currentDays" date="'+year+month+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
+                    html += '<td class="currentDays '+year+'0'+month+'0'+j+'" date="'+year+month+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
                     html += j;    //开始加日期
                 }
                 else if( j!==day && j<= nDays) {
-                    html += '<td class="currentDays" date="'+year+month+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
-                    html += j;    //开始加日期
+                    if(j<10&&month<10){
+                        html += '<td class="currentDays '+year+'0'+month+'0'+j+'" date="'+year+'0'+month+'0'+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
+                        html += j;
+                    }else{
+                        html += '<td class="currentDays '+year+'0'+month+j+'" date="'+year+month+j+'" onclick="' + "alert('"+year+'年'+month+'月'+ j + "号');" + '">';
+                        html += j;
+                    }    //开始加日期
                 }else{
                     html += '<td class="disabled">';
                 }
@@ -353,6 +354,28 @@ class Module {
             }
             html += '</tbody></table>';
             document.getElementById("mainCalendar").innerHTML = html;
+                
+            var NumOfJData = dataSource.length;
+            for (i=0; i<NumOfJData; i++){
+                var self = this;
+                var $this = this.$ele;
+                // var $smallBox = $this.find(".content_box2");
+                var dataYear= dataSource[i].date.substring(0,4);
+                var dataMonth= dataSource[i].date.substring(5,7);
+                var dataDay= dataSource[i].date.substring(8,10);
+                var dataDate=parseInt(dataYear + dataMonth + dataDay);
+                // console.log(dataSource[i].date);
+                console.log(dataDate);
+                var calendarDays=parseInt($('.currentDays').attr('date'));
+                if($('.currentDays').hasClass(dataDate)){
+                    // var self = this;
+                    // var $this = this.$ele;
+                    $(this).addClass('daysWithData');
+                    $('.'+dataDate+'').addClass('daysWithData');
+                    console.log($(self));
+                    console.log('找到你了');
+                }
+            }
         });
     }
     // 下一個有資料的月份
