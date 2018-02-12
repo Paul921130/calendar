@@ -253,6 +253,7 @@ var Module = function () {
             this.creatHtml();
             this.getAjax();
             this.showMonthDate();
+
             var nowYear = parseInt($(".currentMonth").attr('data-label').substring(0, 4)); //抓取currentMonth所代表的年分
             var nowMonth = parseInt($(".currentMonth").attr('data-label').substring(4, 10)); //抓取currentMonth所代表的月份
             console.log(nowYear);
@@ -471,7 +472,6 @@ var Module = function () {
                 method: 'GET',
                 url: './json/data4.json'
             }).done(function (dataSource) {
-
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1; //資料依照日期排序       
                 }); //將dataSource按照日期排序,由前至後(2016年開始)
@@ -514,7 +514,7 @@ var Module = function () {
                 for (i = 0; i < startDay; i++) {
                     html += '<td class="disabled"></td>';
                     numRow++;
-                }
+                };
                 for (var j = 1; j < 37; j++) {
                     //為什麼是37啊!!!!!!!!!!!!!!!!!
                     //如果是今天则显示红色
@@ -545,7 +545,7 @@ var Module = function () {
                         numRow = 0;
                         html += '</tr><tr>';
                     }
-                }
+                };
                 html += '</tbody></table>';
                 document.getElementById("mainCalendar").innerHTML = html;
 
@@ -578,13 +578,23 @@ var Module = function () {
                         console.log($(self));
                         console.log('找到你了');
                     }
-                }
+                };
+                ///日期選擇function
+                var self = this;
+                var $this = this.$ele;
+                $('.daysWithData').on('click', function () {
+                    $('.daysWithData').removeClass('daySelected');
+                    $(this).addClass('daySelected');
+                    console.log('hihihi');
+                });
+                //
             });
         }
-        // 下一個有資料的月份
-
     }, {
         key: "nextMonth",
+
+
+        // 下一個有資料的月份
         value: function nextMonth() {
             return this;
         }

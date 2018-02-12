@@ -61,11 +61,12 @@ class Module {
         this.creatHtml();
         this.getAjax();
         this.showMonthDate();
+
         var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
         var nowMonth=parseInt($(".currentMonth").attr('data-label').substring(4, 10));//抓取currentMonth所代表的月份
         console.log(nowYear);
         console.log(nowMonth);
-
+        
         return this;
     }
 
@@ -292,20 +293,22 @@ class Module {
                 
         return this;
     }
+  
+
+
     bornCalendar(dataSource){
         $.ajax({
                 dataType: "json",
                 method: 'GET',
                 url: './json/data4.json',
             }).done(function(dataSource) {
-            
             dataSource = dataSource.sort(function (a, b) {
                  return a.date > b.date ? 1 : -1;//資料依照日期排序       
             });//將dataSource按照日期排序,由前至後(2016年開始)
             
             //篩選日期重複的資料!!!!!!!!!!!!!!!
                 var lookup = {};
-                    var items = dataSource;
+                var items = dataSource;
                     var dataSource = [];
 
                     for (var item, i = 0; item = items[i++];) {
@@ -341,7 +344,7 @@ class Module {
             for (i = 0; i < startDay; i++) {
                 html += '<td class="disabled"></td>';
                 numRow++;
-            }     
+            };     
             for (var j = 1; j < 37 ; j++) {
                 //為什麼是37啊!!!!!!!!!!!!!!!!!
                 //如果是今天则显示红色
@@ -372,12 +375,10 @@ class Module {
                     numRow = 0;
                     html += '</tr><tr>';
                 }
-            }
+            };
             html += '</tbody></table>';
             document.getElementById("mainCalendar").innerHTML = html;
             
-         
-
             var NumOfJData = dataSource.length;
             for (i=0; i<NumOfJData; i++){
                 var self = this;
@@ -407,9 +408,23 @@ class Module {
                     console.log($(self));
                     console.log('找到你了');
                 }
-            }
-        });
-    }
+
+            };
+            ///日期選擇function
+            var self = this;
+            var $this = this.$ele;
+             $('.daysWithData').on('click', function() { 
+                $('.daysWithData').removeClass('daySelected');
+                $(this).addClass('daySelected');
+                console.log('hihihi');
+            });
+            //
+        });       
+    };
+
+   
+
+
     // 下一個有資料的月份
     nextMonth(){
         return this;
