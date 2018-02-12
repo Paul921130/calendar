@@ -338,39 +338,38 @@ var Module = function () {
                 var goMonth = parseInt($('.currentMonth').attr('data-label')) - 201801;
                 if ($(".tab:nth-child(3) a").hasClass('currentMonth') === false) {
                     $(".tab a").removeClass('currentMonth');
-                    // $(".tab a").attr('id','');
-                    // $(".tab:nth-child("+(goMonth+1)+") a").attr('id','currentMonth');
+                    $(".tab a").attr('id', '');
+                    $(".tab:nth-child(" + (goMonth + 1) + ") a").attr('id', 'currentMonth');
                     $(".tab:nth-child(" + (goMonth + 1) + ") a").addClass('currentMonth');
                     console.log('gogo!' + goMonth);
-                    self.monthSelect();
+
                     self.getNowMonth();
                     self.bornCalendar();
-                    // goMonth++;
+                    console.log($('.currentMonth').attr('data-label'));
                     // goMonth++;
                 } else {
                     var goMonth = parseInt($('.currentMonth').attr('data-label')) - 201801;
                     $this.find('.ntb_tab').empty();
                     for (var i = goMonth; i <= goMonth + 2; i++) {
                         var nextMonthMo = moment().add(i, 'months').format("YYYY MMM");
-                        console.log(nextMonthMo);
                         var monthsTitle = '<li class="tab">' + '<a href="#" class="' + moment().add(i, 'months').format("YYYYMM") + '" id="" data-label="' + moment().add(i, 'months').format("YYYYMM") + '">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
                         $this.find('.ntb_tab').append(monthsTitle);
-                        $(".tab a").attr('id', '');
-                        $(".tab:nth-child(1) a").attr('id', 'currentMonth');
-                        $(".tab:nth-child(1) a").addClass('currentMonth');
+                        // $(".tab a").attr('id','');
+                        // $(".tab:nth-child(1) a").attr('id','currentMonth');
+                        $(".tab:first-child a").addClass('currentMonth');
                     };
-                    self.monthSelect();
+                    console.log('gogo!' + goMonth);
                     self.getNowMonth();
                     self.bornCalendar();
-                    return this;
+                    console.log($('.currentMonth').attr('data-label'));
                 };
+                goMonth++;
                 console.log($('.currentMonth').attr('data-label'));
             }); //小箭頭跳currentMonth
 
 
             $('.prev').on('click', function () {
                 var goMonth = parseInt($('.currentMonth').attr('data-label')) - 201801;
-
                 if ($(".tab:nth-child(1) a").hasClass('currentMonth') !== true) {
                     $(".tab a").removeClass('currentMonth');
                     $(".tab a").attr('id', '');
@@ -378,7 +377,6 @@ var Module = function () {
                     $(".tab:nth-child(" + (goMonth - 1) + ") a").addClass('currentMonth');
                     console.log('gogo!' + goMonth);
                     goMonth--;
-                    self.monthSelect();
                     self.getNowMonth();
                     self.bornCalendar();
                 } else {
