@@ -169,6 +169,20 @@ $classname: 'calendar';
 	.currentDays{
 		font-size: 12px;
 		background-color: #fff;
+		p{
+			margin:0;
+			padding: 0;
+			line-height: 17px; 
+		}
+		.dataStatus_Or{
+			color: #ff7800;
+		}
+		.dataStatus_Re{
+			color: #e10500;
+		}
+		.dataStatus_Gr{
+			color: #24a07c;
+		}
 	}
 	.daysWithData{
 		background-color: #fff9e3!important;
