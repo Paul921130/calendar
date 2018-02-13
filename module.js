@@ -594,7 +594,6 @@ var Module = function () {
 
 
                         $('.calendar_list .' + dataDate + '').addClass('daysWithData').removeClass('hideData');
-
                         $('.calendar_list .' + dataDate + '').append(li_middle, li_right);
                         // $('.'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                         if (dataSource[i].status === '額滿' || dataSource[i].status === '截止' || dataSource[i].status === '後補') {
@@ -624,7 +623,6 @@ var Module = function () {
         key: "getWeekday",
         value: function getWeekday() {
             // var listDate=$('.currentLists').attr('date');
-
             // console.log('')
             // console.log('getWeekday work'+listDate);
         }

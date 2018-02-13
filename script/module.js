@@ -427,7 +427,6 @@ class Module {
 
 
                     $('.calendar_list .'+dataDate+'').addClass('daysWithData').removeClass('hideData');
-
                     $('.calendar_list .'+dataDate+'').append(li_middle, li_right);
                     // $('.'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                     if(dataSource[i].status==='額滿' ||dataSource[i].status==='截止' ||dataSource[i].status==='後補'){
@@ -438,7 +437,7 @@ class Module {
                     };  
                 };
                 //日期對上星期幾!!!!
-                var listDay= new Date(dataYear+"," + dataMonth+","+dataDay);
+                var listDay= new Date(dataYear+","+dataMonth+","+dataDay);
                 var weekdays = "星期日,星期一,星期二,星期三,星期四,星期五,星期六".split(",");
                 var weekdayHtml="<span>"+weekdays[listDay.getDay()]+"</span>";
                 $('.calendar_list .'+dataDate+' .li_left .dayDate').append(weekdayHtml);              
@@ -456,7 +455,6 @@ class Module {
 
     getWeekday(){
         // var listDate=$('.currentLists').attr('date');
-        
         // console.log('')
         // console.log('getWeekday work'+listDate);
     }
