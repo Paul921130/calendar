@@ -370,42 +370,31 @@ class Module {
             var i;        //日期
             var html = '';
             html += '<table id="Body"><tbody>';
-            //第一行
-            // html += '<tr>';
-            // for (i = 0; i < startDay; i++) {
-            //     html += '<td class="disabled"></td>';
-            //     numRow++;
-            // };     
             for (var j = 1; j < 37 ; j++) {
                 //為什麼是37啊!!!!!!!!!!!!!!!!!
                 //如果是今天则显示红色
                 if (j == day) {
-                    html += '<tr><td class="currentDays '+year+'0'+month+'0'+j+'" date="'+year+month+j+'">';
+                    html += '<tr><td class="currentLists hide '+year+'0'+month+'0'+j+'" date="'+year+month+j+'">';
                     html += j;    //开始加日期
                 }
                 else if( j!==day && j<= nDays) {
                     if(j<10 && month<10){
-                        html += '<tr><td class="currentDays '+year+'0'+month+'0'+j+'" date="'+year+'0'+month+'0'+j+'">';
+                        html += '<tr><td class="currentLists hide '+year+'0'+month+'0'+j+'" date="'+year+'0'+month+'0'+j+'">';
                         html += j;
                     }else if(j>=10 && month<10){
-                        html += '<tr><td class="currentDays '+year+'0'+month+j+'" date="'+year+month+j+'">';
+                        html += '<tr><td class="currentLists hide '+year+'0'+month+j+'" date="'+year+month+j+'">';
                         html += j;
                     }else if(j<10 && month>=10){
-                        html += '<tr><td class="currentDays '+year+month+'0'+j+'" date="'+year+month+j+'">';
+                        html += '<tr><td class="currentLists hide '+year+month+'0'+j+'" date="'+year+month+j+'">';
                         html += j;
                     }else{
-                        html += '<tr><td class="currentDays '+year+month+j+'" date="'+year+month+j+'">';
+                        html += '<tr><td class="currentLists hide '+year+month+j+'" date="'+year+month+j+'">';
                         html += j;
                     }    //开始加日期
                 }else{
                     html += '<tr><td class="disabled">';
                 }
                 html += '</td></tr>';
-                // numRow++;
-                // if (numRow == 7) {  //如果已经到一行（一周）了，重新创建tr
-                //     numRow = 0;
-                //     html += '</tr><tr>';
-                // }
             };
             html += '</tbody></table>';
             document.getElementById("calendars_list").innerHTML = html;
@@ -420,14 +409,14 @@ class Module {
                 var dataDay= dataSource[i].date.substring(8,10);
                 var dataDate=parseInt(dataYear + dataMonth + dataDay);
                 var calendarDays=parseInt($('.currentDays').attr('date'));
-                if($('.currentDays').hasClass(dataDate)){
+                if($('.currentLists').hasClass(dataDate)){
                     // var self = this;
                     // var $this = this.$ele;
                     var dataPrice="<p class='price'>"+"$"+dataSource[i].price+"起"+"</p>";
                     var dataStatus="<p class='dataStatus'>"+dataSource[i].status+"</p>";
                     var dataAvailable="<p>"+"可賣:"+dataSource[i].availableVancancy+"</p>";
                     var dataTotal="<p>"+"團位:"+dataSource[i].totalVacnacy+"</p>";
-                    $('.'+dataDate+'').addClass('daysWithData');
+                    $('.'+dataDate+'').addClass('daysWithData').removeClass('hide');
                     $('.'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                     if(dataSource[i].status==='額滿' ||dataSource[i].status==='截止' ||dataSource[i].status==='後補'){
                         $('.'+dataDate+' .dataStatus').addClass('dataStatus_Or');
@@ -439,7 +428,10 @@ class Module {
                     // console.log($(self));
                     // console.log('找到你了');
                 }
-
+                // if($('.currentDays').hasClass('daysWithData')===false){
+                //     $(this).addClass('hide');
+                //     console.log('hihihi');
+                // }
             };
             ///日期選擇function
              $('.daysWithData').on('click', function() { 
@@ -447,6 +439,10 @@ class Module {
                 $(this).addClass('daySelected');
             });
             //
+            // if($('.currentDays').hasClass('daysWithData')===false){
+            //     $(this).addClass('hide');
+            //     console.log('hihihi');
+            // }
         });       
     };
 
