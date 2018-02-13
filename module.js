@@ -254,7 +254,7 @@ var Module = function () {
             this.getAjax();
             this.showMonthDate();
             this.switch();
-            this.creatList();
+
             var nowYear = parseInt($(".currentMonth").attr('data-label').substring(0, 4)); //抓取currentMonth所代表的年分
             var nowMonth = parseInt($(".currentMonth").attr('data-label').substring(4, 10)); //抓取currentMonth所代表的月份
             console.log(nowYear);
@@ -584,10 +584,10 @@ var Module = function () {
                     if ($('.currentLists').hasClass(dataDate)) {
                         // var self = this;
                         // var $this = this.$ele;
-                        var dataPrice = "<p class='price'>" + "$" + dataSource[i].price + "起" + "</p>";
-                        var dataStatus = "<p class='dataStatus'>" + dataSource[i].status + "</p>";
-                        var dataAvailable = "<p>" + "可賣:" + dataSource[i].availableVancancy + "</p>";
-                        var dataTotal = "<p>" + "團位:" + dataSource[i].totalVacnacy + "</p>";
+                        var dataPrice = "<span class='price'>" + "$" + dataSource[i].price + "起" + "</span>";
+                        var dataStatus = "<span class='dataStatus'>" + dataSource[i].status + "</span>";
+                        var dataAvailable = "<span>" + "可賣:" + dataSource[i].availableVancancy + "</span>";
+                        var dataTotal = "<span>" + "團位:" + dataSource[i].totalVacnacy + "</span>";
                         $('.calendar_list .' + dataDate + '').addClass('daysWithData').removeClass('hide');
                         $('.calendar_list .' + dataDate + '').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                         // $('.'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
@@ -727,19 +727,10 @@ var Module = function () {
             });
         }
     }, {
-        key: "creatList",
-        value: function creatList() {}
-        // if($('.calendar_weeksWrap').hasClass('.hide')){
-        //     console.log('calendar was hiden!');
-        //     var jijijiji="<p class='price'>dajijijijijiijijiji</p>";
-        //     $('.calendar_tabWrap').append('jijijiji'); 
-        // }
+        key: "nextMonth",
 
 
         // 下一個有資料的月份
-
-    }, {
-        key: "nextMonth",
         value: function nextMonth() {
             return this;
         }

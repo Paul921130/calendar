@@ -210,15 +210,33 @@ $classname: 'calendar';
 		box-sizing:border-box;
 		border: 2px solid #66bb3c!important;
 	}
+	.calendar_list{
+		.daysWithData{
+			box-sizing:border-box;
+			padding: 5px;
+			height: 60px;
+			background: #fff!important;
+			border-style: solid;
+    		border-color: transparent #e3e3e3 #e3e3e3;
+    		border-width: 1px;
+		}
+		.daySelected{
+			box-sizing:border-box;
+			border: 1px solid #66bb3c!important;
+			background-color: #fff9e3!important;
+		}
+		.daysWithData:hover{
+			background-color: #fff9e3!important;
+			cursor: pointer;
+		}
+	}
 	// style on phone device
 	@media screen and (min-width: $screen-tablet) {
 	
 		// style on tablet device
 	}
 	@media screen and (min-width: $screen-desktop) {
-
 		// style on desktop device
-	
 	}
 	@media screen and (min-width: $screen-lg-desktop) {
 
