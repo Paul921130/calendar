@@ -140,7 +140,7 @@ class Module {
     showMonthDate(){
         var self = this;
         var $this = this.$ele;//class="calendar"
-        var goMonth = 1;
+        var goMonth =1;
         for (var i = 0 ;i <= 2 ; i++ ){
                 var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
@@ -163,10 +163,10 @@ class Module {
                 self.getNowMonth();
                 self.bornCalendar(); 
                 }else {
-                var goMonth =Math.abs(parseInt($('.currentMonth').attr('data-label'))-201801);
+                // var goMonth =Math.abs(parseInt($('.currentMonth').attr('data-label'))-201801);
                 $this.find('.ntb_tab').empty();
                 $(".tab a").removeClass('currentMonth');
-                for (var i = goMonth ;i <= goMonth + 2 ; i++ ){
+                for (var i = goMonth ;i <= goMonth  + 2 ; i++ ){
                     var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
                     console.log(nextMonthMo);
                     var monthsTitle= '<li class="tab">'+
@@ -179,9 +179,9 @@ class Module {
                 self.monthSelect();
                 self.getNowMonth();
                 self.bornCalendar();
-                    return this;
+                console.log(goMonth);
                 };
-                    // goMonth++;
+                goMonth++;
                 console.log($('.currentMonth').attr('data-label'));
         });//小箭頭跳currentMonth
 
@@ -194,13 +194,12 @@ class Module {
                 self.getNowMonth();
                 self.bornCalendar(); 
             }else{
-                var goMonth =Math.abs(parseInt($('.currentMonth').attr('data-label'))-201801);
+                // var goMonth =Math.abs(parseInt($('.currentMonth').attr('data-label'))-201801);
                 $this.find('.ntb_tab').empty();
                 $(".tab a").removeClass('currentMonth');
-                for (var i = goMonth-2 ;i <= (goMonth-2) + 2 ; i++ ){
+                for (var i = (goMonth-2) ;i <= (goMonth-2) + 2 ; i++ ){
                     var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
                     // console.log(nextMonthMo);
-
                     var monthsTitle='<li class="tab">'+
                                        '<a href="#" class="'+moment().add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                     '</li>';
@@ -209,13 +208,14 @@ class Module {
                      // $(".tab:nth-child(1) a").attr('id','currentMonth');
                      $(".tab:nth-child(1) a").addClass('currentMonth');                 
                 };
-                // goMonth--;
+             
                 self.monthSelect();
                 self.getNowMonth();
                 self.bornCalendar();
                 console.log(goMonth);
-                return this;
+                // return this;
             }
+            goMonth--;
             console.log($('.currentMonth').attr('data-label'));
         });//小箭頭跳currentMonth        
 
