@@ -102,7 +102,7 @@ class Module {
         $.ajax({
                 dataType: "json",
                 method: 'GET',
-                url: './json/data4.json',
+                url: './json/data2.json',
             }).done(function(dataSource) {
                 // alert(dataSource[0]);
                 dataSource = dataSource.sort(function (a, b) {
@@ -284,11 +284,11 @@ class Module {
     monthSelect(){
         var self = this;
         var $this = this.$ele;//class="calendar"
-        $.ajax({
-                dataType: "json",
-                method: 'GET',
-                url: './json/data4.json',
-            }).done(function(dataSource) {
+        // $.ajax({
+        //         dataType: "json",
+        //         method: 'GET',
+        //         url: './json/data1.json',
+        //     }).done(function(dataSource) {
             $this.find('.tab a').on('click', function() {
             $this.find('.tab a').removeClass('currentMonth');
             $(this).addClass('currentMonth');
@@ -299,7 +299,7 @@ class Module {
             self.bornCalendar(dataSource);
             self.bornList(dataSource);
         });
-    });
+    // });
         
         return this; 
     }
@@ -334,7 +334,7 @@ class Module {
          $.ajax({
                 dataType: "json",
                 method: 'GET',
-                url: './json/data4.json',
+                url: './json/data2.json',
             }).done(function(dataSource) {
             dataSource = dataSource.sort(function (a, b) {
                  return a.date > b.date ? 1 : -1;//資料依照日期排序       
@@ -416,11 +416,11 @@ class Module {
                     var dataPrice="<span class='price'>"+"$"+dataSource[i].price+"起"+"</span>";
                     var dataStatus="<span class='dataStatus'>"+dataSource[i].status+"</span>";
 
-                    var li_right="<div class='li_right'><span class='dataStatus'>"+dataSource[i].status+"</span><span class='price'>"+"$"+dataSource[i].price+"起"+"</span></div>";
+                    var li_right="<div class='li_right'><span class='dataStatus'>"+(dataSource[i].status||dataSource[i].state)+"</span><span class='price'>"+"$"+dataSource[i].price+"起"+"</span></div>";
                     var li_left="<div class='li_left'></div>";
                     var li_middle="<div class='li_middle'><span>"+
-                                "可賣:"+dataSource[i].availableVancancy+"</span><span>"
-                                +"團位:"+dataSource[i].totalVacnacy
+                                "可賣:"+(dataSource[i].availableVancancy||dataSource[i].onsell)+"</span><span>"
+                                +"團位:"+(dataSource[i].totalVacnacy||dataSource[i].total)
                                 +"</span><div class='lb_gpls'>行程一</div></div>"
                     // var dataAvailable="<span>"+"可賣:"+dataSource[i].availableVancancy+"</span>";
                     // var dataTotal="<span>"+"團位:"+dataSource[i].totalVacnacy+"</span>";
@@ -462,7 +462,7 @@ class Module {
         $.ajax({
                 dataType: "json",
                 method: 'GET',
-                url: './json/data4.json',
+                url: './json/data2.json',
             }).done(function(dataSource) {
             dataSource = dataSource.sort(function (a, b) {
                  return a.date > b.date ? 1 : -1;//資料依照日期排序       
@@ -555,9 +555,9 @@ class Module {
                     // var self = this;
                     // var $this = this.$ele;
                     var dataPrice="<p class='price'>"+"$"+dataSource[i].price+"起"+"</p>";
-                    var dataStatus="<p class='dataStatus'>"+dataSource[i].status+"</p>";
-                    var dataAvailable="<p>"+"可賣:"+dataSource[i].availableVancancy+"</p>";
-                    var dataTotal="<p>"+"團位:"+dataSource[i].totalVacnacy+"</p>";
+                    var dataStatus="<p class='dataStatus'>"+(dataSource[i].status||dataSource[i].state)+"</p>";
+                    var dataAvailable="<p>"+"可賣:"+(dataSource[i].availableVancancy||dataSource[i].onsell)+"</p>";
+                    var dataTotal="<p>"+"團位:"+(dataSource[i].totalVacnacy||dataSource[i].total)+"</p>";
                     $('.calendar_weeksWrap .'+dataDate+'').addClass('daysWithData');
                     $('.calendar_weeksWrap .'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                     if(dataSource[i].status==='額滿' ||dataSource[i].status==='截止' ||dataSource[i].status==='後補'){
