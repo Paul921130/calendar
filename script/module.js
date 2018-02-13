@@ -145,12 +145,14 @@ class Module {
     showMonthDate(){
         var self = this;
         var $this = this.$ele;//class="calendar"
+        var initYearMonth=this.option.initYearMonth;//抓到useAge所設定的初始月份
+        console.log(initYearMonth);
         var goMonth =1;
         for (var i = 0 ;i <= 2 ; i++ ){
-                var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
+                var nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
                 var monthsTitle= '<li class="tab">'+
-                                   '<a href="#" class="'+moment().add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                   '<a href="#" class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                  '</li>';              
                 $this.find('.ntb_tab').append(monthsTitle);
                 $(".tab:nth-child(1) a").addClass('currentMonth');
@@ -173,10 +175,10 @@ class Module {
                 $this.find('.ntb_tab').empty();
                 $(".tab a").removeClass('currentMonth');
                 for (var i = goMonth ;i <= goMonth  + 2 ; i++ ){
-                    var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
+                    var nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                     console.log(nextMonthMo);
                     var monthsTitle= '<li class="tab">'+
-                                       '<a href="#" class="'+moment().add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                       '<a href="#" class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                      '</li>';
                     $this.find('.ntb_tab').append(monthsTitle);
                     $(".tab a").attr('id','');
@@ -207,10 +209,10 @@ class Module {
                 $this.find('.ntb_tab').empty();
                 $(".tab a").removeClass('currentMonth');
                 for (var i = (goMonth-2) ;i <= (goMonth-2) + 2 ; i++ ){
-                    var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
+                    var nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                     // console.log(nextMonthMo);
                     var monthsTitle='<li class="tab">'+
-                                       '<a href="#" class="'+moment().add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                       '<a href="#" class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                     '</li>';
                      $this.find('.ntb_tab').append(monthsTitle);
                      $(".tab a").attr('id','');
@@ -221,7 +223,6 @@ class Module {
                 self.getNowMonth();
                 self.bornList(); 
                 self.bornCalendar();
-                
                 console.log(goMonth);
                 // return this;
             }
