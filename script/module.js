@@ -216,8 +216,7 @@ class Module {
                      $(".tab a").attr('id','');
                      // $(".tab:nth-child(1) a").attr('id','currentMonth');
                      $(".tab:nth-child(1) a").addClass('currentMonth');                 
-                };
-             
+                };             
                 self.monthSelect();
                 self.getNowMonth();
                 self.bornList(); 
@@ -441,7 +440,7 @@ class Module {
                 var weekdays = "星期日,星期一,星期二,星期三,星期四,星期五,星期六".split(",");
                 var weekdayHtml="<span>"+weekdays[listDay.getDay()]+"</span>";
                 $('.calendar_list .'+dataDate+' .li_left .dayDate').append(weekdayHtml);              
-                //日期對上星期幾
+                //日期對上星期幾!!!
             };
             ///日期選擇function
              $('.daysWithData').on('click', function() { 
