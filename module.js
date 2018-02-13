@@ -296,6 +296,30 @@ var Module = function () {
                     return a.date > b.date ? 1 : -1;
                 }); //將dataSource按照日期排序,由前至後(2016年開始);
 
+
+                //篩選日期重複的資料!!!!!!!!!!!!!!!//以及覆蓋新Key值!!!!!!!!!!
+                var lookup = {};
+                var items = dataSource;
+                var dataSource = [];
+
+                for (var item, i = 0; item = items[i++];) {
+                    var date = item.date;
+                    var statusChange = item.state;
+                    delete item.state;
+                    item.status = statusChange;
+
+                    var availableChange = item.onsell;
+                    delete item.onsell;
+                    item.availableVancancy = availableChange;
+                    if (!(date in lookup)) {
+                        lookup[date] = 1;
+                        dataSource.push(item);
+                    }
+                }
+                // console.log(dataSource);
+                //篩選日期重複的資料!!!!!!!!!!!!!!!
+                console.log(dataSource[0].status);
+
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
 
@@ -457,20 +481,13 @@ var Module = function () {
         value: function monthSelect() {
             var self = this;
             var $this = this.$ele; //class="calendar"
-            // $.ajax({
-            //         dataType: "json",
-            //         method: 'GET',
-            //         url: './json/data1.json',
-            //     }).done(function(dataSource) {
+
             $this.find('.tab a').on('click', function () {
                 $this.find('.tab a').removeClass('currentMonth');
                 $(this).addClass('currentMonth');
                 var nowMonth = $(".currentMonth").textContent;
-                // console.log('現在是'+nowMonth);
-                // self.getNowMonth();
-                // console.log(dataSource[0]);
-                self.bornCalendar(dataSource);
-                self.bornList(dataSource);
+                self.bornCalendar();
+                self.bornList();
             });
             // });
 
@@ -518,6 +535,14 @@ var Module = function () {
 
                 for (var item, i = 0; item = items[i++];) {
                     var date = item.date;
+                    var statusChange = item.state;
+                    delete item.state; //刪除原本JSON中的state K值
+                    item.status = statusChange; //插入新的K值
+
+                    var availableChange = item.onsell;
+                    delete item.onsell;
+                    item.availableVancancy = availableChange;
+
                     if (!(date in lookup)) {
                         lookup[date] = 1;
                         dataSource.push(item);
@@ -586,9 +611,9 @@ var Module = function () {
                         var dataPrice = "<span class='price'>" + "$" + dataSource[i].price + "起" + "</span>";
                         var dataStatus = "<span class='dataStatus'>" + dataSource[i].status + "</span>";
 
-                        var li_right = "<div class='li_right'><span class='dataStatus'>" + (dataSource[i].status || dataSource[i].state) + "</span><span class='price'>" + "$" + dataSource[i].price + "起" + "</span></div>";
+                        var li_right = "<div class='li_right'><span class='dataStatus'>" + dataSource[i].status + "</span><span class='price'>" + "$" + dataSource[i].price + "起" + "</span></div>";
                         var li_left = "<div class='li_left'></div>";
-                        var li_middle = "<div class='li_middle'><span>" + "可賣:" + (dataSource[i].availableVancancy || dataSource[i].onsell) + "</span><span>" + "團位:" + (dataSource[i].totalVacnacy || dataSource[i].total) + "</span><div class='lb_gpls'>行程一</div></div>";
+                        var li_middle = "<div class='li_middle'><span>" + "可賣:" + dataSource[i].availableVancancy + "</span><span>" + "團位:" + (dataSource[i].totalVacnacy || dataSource[i].total) + "</span><div class='lb_gpls'>行程一</div></div>";
                         // var dataAvailable="<span>"+"可賣:"+dataSource[i].availableVancancy+"</span>";
                         // var dataTotal="<span>"+"團位:"+dataSource[i].totalVacnacy+"</span>";
 
@@ -645,6 +670,13 @@ var Module = function () {
 
                 for (var item, i = 0; item = items[i++];) {
                     var date = item.date;
+                    var statusChange = item.state;
+                    delete item.state;
+                    item.status = statusChange;
+
+                    var availableChange = item.onsell;
+                    delete item.onsell;
+                    item.availableVancancy = availableChange;
 
                     if (!(date in lookup)) {
                         lookup[date] = 1;
@@ -725,8 +757,8 @@ var Module = function () {
                         // var self = this;
                         // var $this = this.$ele;
                         var dataPrice = "<p class='price'>" + "$" + dataSource[i].price + "起" + "</p>";
-                        var dataStatus = "<p class='dataStatus'>" + (dataSource[i].status || dataSource[i].state) + "</p>";
-                        var dataAvailable = "<p>" + "可賣:" + (dataSource[i].availableVancancy || dataSource[i].onsell) + "</p>";
+                        var dataStatus = "<p class='dataStatus'>" + dataSource[i].status + "</p>";
+                        var dataAvailable = "<p>" + "可賣:" + dataSource[i].availableVancancy + "</p>";
                         var dataTotal = "<p>" + "團位:" + (dataSource[i].totalVacnacy || dataSource[i].total) + "</p>";
                         $('.calendar_weeksWrap .' + dataDate + '').addClass('daysWithData');
                         $('.calendar_weeksWrap .' + dataDate + '').append(dataStatus, dataAvailable, dataTotal, dataPrice);
