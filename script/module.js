@@ -81,7 +81,7 @@ class Module {
     creatHtml(){
         var self = this;
         var $this = this.$ele;//class="calendar"
-        var calendarHtml='<div class="calendars_tabWrap">'+
+        var calendarHtml='<div class="calendar_tabWrap">'+
                             '<div class="ntb_gpbt yellow">'+
                                 '<a href="#" class="prev on">'+'</a>'+
                                 '<ul class="ntb_tab">'+                                            
@@ -89,9 +89,9 @@ class Module {
                                 '<a href="#" class="next on">'+'</a>'+
                             '</div>'+
                         '</div>'+
-                        '<div class="calendars_weeksWrap">'+
+                        '<div class="calendar_weeksWrap">'+
                         '</div>'+
-                        '<div class="calendars_list hide" id="calendars_list">'+
+                        '<div class="calendar_list hide" id="calendar_list">'+
                         '</div>';//要記得用"+"連起來呦    
         $this.append(calendarHtml);               
         return this;
@@ -139,7 +139,7 @@ class Module {
                                     '</tr>'+
                                 '</thead>'+
                             '</table>';
-            $this.find('.calendars_weeksWrap').append(calendarHtml);               
+            $this.find('.calendar_weeksWrap').append(calendarHtml);               
             return this;
     }
     showMonthDate(){
@@ -308,8 +308,8 @@ class Module {
         // var $this = this.$ele;//class="calendar"
         // var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
         // var nowMonth=parseInt($(".currentMonth").attr('data-label').substring(4, 10));//抓取currentMonth所代表的月份
-        // // // console.log(nowYear);
-        // // // console.log(nowMonth);
+        // console.log(nowYear);
+        // console.log(nowMonth);
     }
     creatCalendarDay(dataSource){
         var self = this;
@@ -347,7 +347,6 @@ class Module {
 
                     for (var item, i = 0; item = items[i++];) {
                       var date = item.date;
-
                       if (!(date in lookup)) {
                         lookup[date] = 1;
                         dataSource.push(item);
@@ -400,7 +399,7 @@ class Module {
                 html += '</li>';
             };
             html += '</ul>';
-            document.getElementById("calendars_list").innerHTML = html;
+            document.getElementById("calendar_list").innerHTML = html;
             
             var NumOfJData = dataSource.length;
             for (i=0; i<NumOfJData; i++){
@@ -419,8 +418,8 @@ class Module {
                     var dataStatus="<p class='dataStatus'>"+dataSource[i].status+"</p>";
                     var dataAvailable="<p>"+"可賣:"+dataSource[i].availableVancancy+"</p>";
                     var dataTotal="<p>"+"團位:"+dataSource[i].totalVacnacy+"</p>";
-                    $('.calendars_list .'+dataDate+'').addClass('daysWithData').removeClass('hide');
-                    $('.calendars_list .'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
+                    $('.calendar_list .'+dataDate+'').addClass('daysWithData').removeClass('hide');
+                    $('.calendar_list .'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                     // $('.'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                     if(dataSource[i].status==='額滿' ||dataSource[i].status==='截止' ||dataSource[i].status==='後補'){
                         $('.'+dataDate+' .dataStatus').addClass('dataStatus_Or');
@@ -428,7 +427,7 @@ class Module {
                     if(dataSource[i].status==='報名' ||dataSource[i].status==='預定'){
                         $('.'+dataDate+' .dataStatus').addClass('dataStatus_Gr');
                     };  
-                }
+                };
             };
             ///日期選擇function
              $('.daysWithData').on('click', function() { 
@@ -539,8 +538,8 @@ class Module {
                     var dataStatus="<p class='dataStatus'>"+dataSource[i].status+"</p>";
                     var dataAvailable="<p>"+"可賣:"+dataSource[i].availableVancancy+"</p>";
                     var dataTotal="<p>"+"團位:"+dataSource[i].totalVacnacy+"</p>";
-                    $('.calendars_weeksWrap .'+dataDate+'').addClass('daysWithData');
-                    $('.calendars_weeksWrap .'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
+                    $('.calendar_weeksWrap .'+dataDate+'').addClass('daysWithData');
+                    $('.calendar_weeksWrap .'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                     if(dataSource[i].status==='額滿' ||dataSource[i].status==='截止' ||dataSource[i].status==='後補'){
                         $('.'+dataDate+' .dataStatus').addClass('dataStatus_Or');
                     };
@@ -560,10 +559,10 @@ class Module {
     };
 
    creatList(){
-    // if($('.calendars_weeksWrap').hasClass('.hide')){
+    // if($('.calendar_weeksWrap').hasClass('.hide')){
     //     console.log('calendar was hiden!');
     //     var jijijiji="<p class='price'>dajijijijijiijijiji</p>";
-    //     $('.calendars_tabWrap').append('jijijiji'); 
+    //     $('.calendar_tabWrap').append('jijijiji'); 
     // }
    }
 
@@ -581,8 +580,8 @@ class Module {
     // 切換日曆或列表模式
     switch(){
         $('.switchMode').on('click', function() {
-            $('.calendars_weeksWrap').toggleClass('hide');
-            $('.calendars_list').toggleClass('hide');
+            $('.calendar_weeksWrap').toggleClass('hide');
+            $('.calendar_list').toggleClass('hide');
         });
         return this;
     }

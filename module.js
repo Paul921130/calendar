@@ -277,7 +277,7 @@ var Module = function () {
         value: function creatHtml() {
             var self = this;
             var $this = this.$ele; //class="calendar"
-            var calendarHtml = '<div class="calendars_tabWrap">' + '<div class="ntb_gpbt yellow">' + '<a href="#" class="prev on">' + '</a>' + '<ul class="ntb_tab">' + '</ul>' + '<a href="#" class="next on">' + '</a>' + '</div>' + '</div>' + '<div class="calendars_weeksWrap">' + '</div>' + '<div class="calendars_list hide" id="calendars_list">' + '</div>'; //要記得用"+"連起來呦    
+            var calendarHtml = '<div class="calendar_tabWrap">' + '<div class="ntb_gpbt yellow">' + '<a href="#" class="prev on">' + '</a>' + '<ul class="ntb_tab">' + '</ul>' + '<a href="#" class="next on">' + '</a>' + '</div>' + '</div>' + '<div class="calendar_weeksWrap">' + '</div>' + '<div class="calendar_list hide" id="calendar_list">' + '</div>'; //要記得用"+"連起來呦    
             $this.append(calendarHtml);
             return this;
         }
@@ -316,7 +316,7 @@ var Module = function () {
             var self = this;
             var $this = this.$ele; //class="calendar"
             var calendarHtml = '<table class="weekTable">' + '<thead>' + '<tr class="week">' + '<th>' + '星期日' + '</th>' + '<th>' + '星期一' + '</th>' + '<th>' + '星期二' + '</th>' + '<th>' + '星期三' + '</th>' + '<th>' + '星期四' + '</th>' + '<th>' + '星期五' + '</th>' + '<th>' + '星期六' + '</th>' + '</tr>' + '</thead>' + '</table>';
-            $this.find('.calendars_weeksWrap').append(calendarHtml);
+            $this.find('.calendar_weeksWrap').append(calendarHtml);
             return this;
         }
     }, {
@@ -483,8 +483,8 @@ var Module = function () {
             // var $this = this.$ele;//class="calendar"
             // var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
             // var nowMonth=parseInt($(".currentMonth").attr('data-label').substring(4, 10));//抓取currentMonth所代表的月份
-            // // // console.log(nowYear);
-            // // // console.log(nowMonth);
+            // console.log(nowYear);
+            // console.log(nowMonth);
         }
     }, {
         key: "creatCalendarDay",
@@ -518,7 +518,6 @@ var Module = function () {
 
                 for (var item, i = 0; item = items[i++];) {
                     var date = item.date;
-
                     if (!(date in lookup)) {
                         lookup[date] = 1;
                         dataSource.push(item);
@@ -570,7 +569,7 @@ var Module = function () {
                     html += '</li>';
                 };
                 html += '</ul>';
-                document.getElementById("calendars_list").innerHTML = html;
+                document.getElementById("calendar_list").innerHTML = html;
 
                 var NumOfJData = dataSource.length;
                 for (i = 0; i < NumOfJData; i++) {
@@ -589,8 +588,8 @@ var Module = function () {
                         var dataStatus = "<p class='dataStatus'>" + dataSource[i].status + "</p>";
                         var dataAvailable = "<p>" + "可賣:" + dataSource[i].availableVancancy + "</p>";
                         var dataTotal = "<p>" + "團位:" + dataSource[i].totalVacnacy + "</p>";
-                        $('.calendars_list .' + dataDate + '').addClass('daysWithData').removeClass('hide');
-                        $('.calendars_list .' + dataDate + '').append(dataStatus, dataAvailable, dataTotal, dataPrice);
+                        $('.calendar_list .' + dataDate + '').addClass('daysWithData').removeClass('hide');
+                        $('.calendar_list .' + dataDate + '').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                         // $('.'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                         if (dataSource[i].status === '額滿' || dataSource[i].status === '截止' || dataSource[i].status === '後補') {
                             $('.' + dataDate + ' .dataStatus').addClass('dataStatus_Or');
@@ -598,7 +597,7 @@ var Module = function () {
                         if (dataSource[i].status === '報名' || dataSource[i].status === '預定') {
                             $('.' + dataDate + ' .dataStatus').addClass('dataStatus_Gr');
                         };
-                    }
+                    };
                 };
                 ///日期選擇function
                 $('.daysWithData').on('click', function () {
@@ -709,8 +708,8 @@ var Module = function () {
                         var dataStatus = "<p class='dataStatus'>" + dataSource[i].status + "</p>";
                         var dataAvailable = "<p>" + "可賣:" + dataSource[i].availableVancancy + "</p>";
                         var dataTotal = "<p>" + "團位:" + dataSource[i].totalVacnacy + "</p>";
-                        $('.calendars_weeksWrap .' + dataDate + '').addClass('daysWithData');
-                        $('.calendars_weeksWrap .' + dataDate + '').append(dataStatus, dataAvailable, dataTotal, dataPrice);
+                        $('.calendar_weeksWrap .' + dataDate + '').addClass('daysWithData');
+                        $('.calendar_weeksWrap .' + dataDate + '').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                         if (dataSource[i].status === '額滿' || dataSource[i].status === '截止' || dataSource[i].status === '後補') {
                             $('.' + dataDate + ' .dataStatus').addClass('dataStatus_Or');
                         };
@@ -730,10 +729,10 @@ var Module = function () {
     }, {
         key: "creatList",
         value: function creatList() {}
-        // if($('.calendars_weeksWrap').hasClass('.hide')){
+        // if($('.calendar_weeksWrap').hasClass('.hide')){
         //     console.log('calendar was hiden!');
         //     var jijijiji="<p class='price'>dajijijijijiijijiji</p>";
-        //     $('.calendars_tabWrap').append('jijijiji'); 
+        //     $('.calendar_tabWrap').append('jijijiji'); 
         // }
 
 
@@ -759,8 +758,8 @@ var Module = function () {
         key: "switch",
         value: function _switch() {
             $('.switchMode').on('click', function () {
-                $('.calendars_weeksWrap').toggleClass('hide');
-                $('.calendars_list').toggleClass('hide');
+                $('.calendar_weeksWrap').toggleClass('hide');
+                $('.calendar_list').toggleClass('hide');
             });
             return this;
         }

@@ -35,7 +35,8 @@ $classname: 'calendar';
 	li{
 		list-style: none;
 	}
-	.calendars_tabWrap{
+
+	.calendar_tabWrap{
 			overflow: hidden;
 			background-color: #ede9dd;
 			.ntb_gpbt>a {
@@ -138,10 +139,10 @@ $classname: 'calendar';
 		    border-color: transparent transparent transparent #f4f4f4;
 		}
 	}
-	// .calendars_weeksWrap{
-	// 	border: 1px solid #eee;
-	// }
-	.calendars_weeksWrap>table{
+	.calendar_weeksWrap{
+		border: 1px solid #eee;
+	}
+	.calendar_weeksWrap>table{
 		width: 100%;
 		thead> tr{
 			display: flex;
@@ -225,6 +226,10 @@ $classname: 'calendar';
 	}
 	&.#{$classname}_modifier {
 		
+	}
+
+	&.#{$classname}_weeksWrap {
+
 	}
 	& > .#{$classname}_child {
 		
