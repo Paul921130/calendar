@@ -213,8 +213,8 @@ $classname: 'calendar';
 	.calendar_list{
 		.daysWithData{
 			box-sizing:border-box;
-			padding: 5px;
-			height: 60px;
+		
+			height: 62px;
 			background: #fff!important;
 			border-style: solid;
     		border-color: transparent #e3e3e3 #e3e3e3;
@@ -229,6 +229,64 @@ $classname: 'calendar';
 			background-color: #fff9e3!important;
 			cursor: pointer;
 		}
+		.dataStatus {
+			display: block;
+			font-size: 16px;
+		}
+		.dataStatus_Or{
+			color: #ff7800;
+		}
+		.dataStatus_Re{
+			color: #e10500;
+		}
+		.dataStatus_Gr{
+			color: #24a07c;
+		}
+		.price {
+	    color: #e10500;
+	    margin-bottom:0; 
+	    font-size: 16px;
+		}
+		.currentLists {
+			display: flex;
+			.li_right, .li_left, .li_middle{
+				padding: 5px;
+				float: left;
+			}
+			.li_left{
+				flex:1;
+				.dayDate{
+					color: #666;
+    text-align: center;
+    font-size: 24px;
+				}
+			}
+			.li_middle{
+				flex:6;
+				span{
+					margin-right: 30px;
+					color: #666;
+				}
+				.lb_gpls{
+					max-width: 50px;
+					min-width: auto;
+    				line-height: 20px;
+					margin-top: 5px;
+					text-align: center;
+    				font-weight: 400;
+					color: #24a07d;
+					background-color: #cee5df;		
+				}
+			}
+			.li_right{
+				flex:3;
+				text-align: right;
+			}
+		}
+	}
+	
+	.hideData{
+		display: none;
 	}
 	// style on phone device
 	@media screen and (min-width: $screen-tablet) {

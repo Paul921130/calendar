@@ -547,24 +547,22 @@ var Module = function () {
                     //為什麼是37啊!!!!!!!!!!!!!!!!!
                     //如果是今天则显示红色
                     if (j == day) {
-                        html += '<li class="currentLists hide ' + year + '0' + month + '0' + j + '" date="' + year + month + j + '">';
-                        html += j; //开始加日期
+                        html += '<li class="currentLists hideData ' + year + '0' + month + '0' + j + '" date="' + year + month + j + '">';
+                        html += '<div class="li_left"><div class="dayDate">' + j + '</div></div>'; //开始加日期
                     } else if (j !== day && j <= nDays) {
                         if (j < 10 && month < 10) {
-                            html += '<li class="currentLists hide ' + year + '0' + month + '0' + j + '" date="' + year + '0' + month + '0' + j + '">';
-                            html += j;
+                            html += '<li class="currentLists hideData ' + year + '0' + month + '0' + j + '" date="' + year + '0' + month + '0' + j + '">';
+                            html += '<div class="li_left"><div class="dayDate">' + j + '</div></div>';
                         } else if (j >= 10 && month < 10) {
-                            html += '<li class="currentLists hide ' + year + '0' + month + j + '" date="' + year + month + j + '">';
-                            html += j;
+                            html += '<li class="currentLists hideData ' + year + '0' + month + j + '" date="' + year + month + j + '">';
+                            html += '<div class="li_left"><div class="dayDate">' + j + '</div></div>';
                         } else if (j < 10 && month >= 10) {
-                            html += '<li class="currentLists hide ' + year + month + '0' + j + '" date="' + year + month + j + '">';
-                            html += j;
+                            html += '<li class="currentLists hideData ' + year + month + '0' + j + '" date="' + year + month + j + '">';
+                            html += '<div class="li_left"><div class="dayDate">' + j + '</div></div>';
                         } else {
-                            html += '<li class="currentLists hide ' + year + month + j + '" date="' + year + month + j + '">';
-                            html += j;
+                            html += '<li class="currentLists hideData ' + year + month + j + '" date="' + year + month + j + '">';
+                            html += '<div class="li_left"><div class="dayDate">' + j + '</div></div>';
                         } //开始加日期
-                    } else {
-                        html += '<li class="disabled">';
                     }
                     html += '</li>';
                 };
@@ -584,18 +582,26 @@ var Module = function () {
                     if ($('.currentLists').hasClass(dataDate)) {
                         // var self = this;
                         // var $this = this.$ele;
+
                         var dataPrice = "<span class='price'>" + "$" + dataSource[i].price + "起" + "</span>";
                         var dataStatus = "<span class='dataStatus'>" + dataSource[i].status + "</span>";
-                        var dataAvailable = "<span>" + "可賣:" + dataSource[i].availableVancancy + "</span>";
-                        var dataTotal = "<span>" + "團位:" + dataSource[i].totalVacnacy + "</span>";
-                        $('.calendar_list .' + dataDate + '').addClass('daysWithData').removeClass('hide');
-                        $('.calendar_list .' + dataDate + '').append(dataStatus, dataAvailable, dataTotal, dataPrice);
+
+                        var li_right = "<div class='li_right'><span class='dataStatus'>" + dataSource[i].status + "</span><span class='price'>" + "$" + dataSource[i].price + "起" + "</span></div>";
+                        var li_left = "<div class='li_left'></div>";
+                        var li_middle = "<div class='li_middle'><span>" + "可賣:" + dataSource[i].availableVancancy + "</span><span>" + "團位:" + dataSource[i].totalVacnacy + "</span><div class='lb_gpls'>行程一</div></div>";
+                        // var dataAvailable="<span>"+"可賣:"+dataSource[i].availableVancancy+"</span>";
+                        // var dataTotal="<span>"+"團位:"+dataSource[i].totalVacnacy+"</span>";
+
+
+                        $('.calendar_list .' + dataDate + '').addClass('daysWithData').removeClass('hideData');
+
+                        $('.calendar_list .' + dataDate + '').append(li_middle, li_right);
                         // $('.'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                         if (dataSource[i].status === '額滿' || dataSource[i].status === '截止' || dataSource[i].status === '後補') {
-                            $('.' + dataDate + ' .dataStatus').addClass('dataStatus_Or');
+                            $('.calendar_list .' + dataDate + ' .dataStatus').addClass('dataStatus_Or');
                         };
                         if (dataSource[i].status === '報名' || dataSource[i].status === '預定') {
-                            $('.' + dataDate + ' .dataStatus').addClass('dataStatus_Gr');
+                            $('.calendar_list .' + dataDate + ' .dataStatus').addClass('dataStatus_Gr');
                         };
                     };
                 };
@@ -604,6 +610,7 @@ var Module = function () {
                     $('.daysWithData').removeClass('daySelected');
                     $(this).addClass('daySelected');
                 });
+                $(".hideData").remove();
             });
         }
     }, {
