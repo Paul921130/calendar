@@ -106,7 +106,7 @@ class Module {
             }).done(function(dataSource) {
                 // alert(dataSource[0]);
                 dataSource = dataSource.sort(function (a, b) {
-                 return a.date > b.date ? 1 : -1;
+                return a.date > b.date ? 1 : -1;
                 });//將dataSource按照日期排序,由前至後(2016年開始);
 
                 self.creatCalendar(dataSource);
