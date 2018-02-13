@@ -111,6 +111,7 @@ class Module {
 
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
+
                 self.bornCalendar(dataSource);
                 self.bornList(dataSource);
                 var NumOfJData = dataSource.length;
@@ -165,8 +166,8 @@ class Module {
             $this.find('.currentMonth').parent().prev().children().removeClass('currentMonth');
                 self.monthSelect();
                 self.getNowMonth();
+                self.bornList();
                 self.bornCalendar();
-                self.bornList(); 
                 }else {
                 // var goMonth =Math.abs(parseInt($('.currentMonth').attr('data-label'))-201801);
                 $this.find('.ntb_tab').empty();
@@ -183,8 +184,8 @@ class Module {
                 };
                 self.monthSelect();
                 self.getNowMonth();
-                self.bornCalendar();
                 self.bornList();
+                self.bornCalendar();
                 console.log(goMonth);
                 };
                 goMonth++;
@@ -198,8 +199,9 @@ class Module {
                 $this.find('.currentMonth').parent().next().children().removeClass('currentMonth');
                 self.monthSelect();
                 self.getNowMonth();
-                self.bornCalendar();
                 self.bornList(); 
+                self.bornCalendar();
+                
             }else{
                 // var goMonth =Math.abs(parseInt($('.currentMonth').attr('data-label'))-201801);
                 $this.find('.ntb_tab').empty();
@@ -218,8 +220,9 @@ class Module {
              
                 self.monthSelect();
                 self.getNowMonth();
-                self.bornCalendar();
                 self.bornList(); 
+                self.bornCalendar();
+                
                 console.log(goMonth);
                 // return this;
             }
@@ -350,7 +353,7 @@ class Module {
                         dataSource.push(item);
                     }
                 }
-                // console.log(dataSource);
+            // console.log(dataSource);
             //篩選日期重複的資料!!!!!!!!!!!!!!!
                      
             var self = this;
@@ -369,34 +372,34 @@ class Module {
             // var numRow = 0;  //记录行的个数，到达7的时候创建tr
             var i;        //日期
             var html = '';
-            html += '<table id="Body"><tbody>';
-            for (var j = 1; j < 37 ; j++) {
+            html += '<ul id="Body">';
+            for (var j = 1; j < 31 ; j++) {
                 //為什麼是37啊!!!!!!!!!!!!!!!!!
                 //如果是今天则显示红色
                 if (j == day) {
-                    html += '<tr><td class="currentLists hide '+year+'0'+month+'0'+j+'" date="'+year+month+j+'">';
+                    html += '<li class="currentLists hide '+year+'0'+month+'0'+j+'" date="'+year+month+j+'">';
                     html += j;    //开始加日期
                 }
                 else if( j!==day && j<= nDays) {
                     if(j<10 && month<10){
-                        html += '<tr><td class="currentLists hide '+year+'0'+month+'0'+j+'" date="'+year+'0'+month+'0'+j+'">';
+                        html += '<li class="currentLists hide '+year+'0'+month+'0'+j+'" date="'+year+'0'+month+'0'+j+'">';
                         html += j;
                     }else if(j>=10 && month<10){
-                        html += '<tr><td class="currentLists hide '+year+'0'+month+j+'" date="'+year+month+j+'">';
+                        html += '<li class="currentLists hide '+year+'0'+month+j+'" date="'+year+month+j+'">';
                         html += j;
                     }else if(j<10 && month>=10){
-                        html += '<tr><td class="currentLists hide '+year+month+'0'+j+'" date="'+year+month+j+'">';
+                        html += '<li class="currentLists hide '+year+month+'0'+j+'" date="'+year+month+j+'">';
                         html += j;
                     }else{
-                        html += '<tr><td class="currentLists hide '+year+month+j+'" date="'+year+month+j+'">';
+                        html += '<li class="currentLists hide '+year+month+j+'" date="'+year+month+j+'">';
                         html += j;
                     }    //开始加日期
                 }else{
-                    html += '<tr><td class="disabled">';
+                    html += '<li class="disabled">';
                 }
-                html += '</td></tr>';
+                html += '</li>';
             };
-            html += '</tbody></table>';
+            html += '</ul>';
             document.getElementById("calendars_list").innerHTML = html;
             
             var NumOfJData = dataSource.length;
@@ -408,7 +411,7 @@ class Module {
                 var dataMonth= dataSource[i].date.substring(5,7);
                 var dataDay= dataSource[i].date.substring(8,10);
                 var dataDate=parseInt(dataYear + dataMonth + dataDay);
-                var calendarDays=parseInt($('.currentDays').attr('date'));
+                var calendarDays=parseInt($('.currentLists').attr('date'));
                 if($('.currentLists').hasClass(dataDate)){
                     // var self = this;
                     // var $this = this.$ele;
@@ -416,33 +419,22 @@ class Module {
                     var dataStatus="<p class='dataStatus'>"+dataSource[i].status+"</p>";
                     var dataAvailable="<p>"+"可賣:"+dataSource[i].availableVancancy+"</p>";
                     var dataTotal="<p>"+"團位:"+dataSource[i].totalVacnacy+"</p>";
-                    $('.'+dataDate+'').addClass('daysWithData').removeClass('hide');
-                    $('.'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
+                    $('.calendars_list .'+dataDate+'').addClass('daysWithData').removeClass('hide');
+                    $('.calendars_list .'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
+                    // $('.'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                     if(dataSource[i].status==='額滿' ||dataSource[i].status==='截止' ||dataSource[i].status==='後補'){
                         $('.'+dataDate+' .dataStatus').addClass('dataStatus_Or');
                     };
                     if(dataSource[i].status==='報名' ||dataSource[i].status==='預定'){
                         $('.'+dataDate+' .dataStatus').addClass('dataStatus_Gr');
-                    };
-                    // console.log(dataSource[i].status);
-                    // console.log($(self));
-                    // console.log('找到你了');
+                    };  
                 }
-                // if($('.currentDays').hasClass('daysWithData')===false){
-                //     $(this).addClass('hide');
-                //     console.log('hihihi');
-                // }
             };
             ///日期選擇function
              $('.daysWithData').on('click', function() { 
-                $('.daysWithData').removeClass('daySelected');
-                $(this).addClass('daySelected');
+             $('.daysWithData').removeClass('daySelected');
+             $(this).addClass('daySelected');
             });
-            //
-            // if($('.currentDays').hasClass('daysWithData')===false){
-            //     $(this).addClass('hide');
-            //     console.log('hihihi');
-            // }
         });       
     };
 
@@ -547,17 +539,14 @@ class Module {
                     var dataStatus="<p class='dataStatus'>"+dataSource[i].status+"</p>";
                     var dataAvailable="<p>"+"可賣:"+dataSource[i].availableVancancy+"</p>";
                     var dataTotal="<p>"+"團位:"+dataSource[i].totalVacnacy+"</p>";
-                    $('.'+dataDate+'').addClass('daysWithData');
-                    $('.'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
+                    $('.calendars_weeksWrap .'+dataDate+'').addClass('daysWithData');
+                    $('.calendars_weeksWrap .'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                     if(dataSource[i].status==='額滿' ||dataSource[i].status==='截止' ||dataSource[i].status==='後補'){
                         $('.'+dataDate+' .dataStatus').addClass('dataStatus_Or');
                     };
                     if(dataSource[i].status==='報名' ||dataSource[i].status==='預定'){
                         $('.'+dataDate+' .dataStatus').addClass('dataStatus_Gr');
                     };
-                    // console.log(dataSource[i].status);
-                    // console.log($(self));
-                    // console.log('找到你了');
                 }
 
             };

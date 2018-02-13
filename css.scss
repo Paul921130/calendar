@@ -26,7 +26,8 @@ $classname: 'calendar';
 }
 .#{$classname} {
 	ul{
-		padding: 0;
+		padding:0;
+		margin:0;
 	}
 	.hide{
 		display:none;
@@ -202,6 +203,7 @@ $classname: 'calendar';
 	}
 	.price {
 	    color: #e10500;
+	    margin-bottom:0; 
 	}
 	.daySelected{
 		box-sizing:border-box;
