@@ -604,6 +604,12 @@ var Module = function () {
                             $('.calendar_list .' + dataDate + ' .dataStatus').addClass('dataStatus_Gr');
                         };
                     };
+                    //日期對上星期幾!!!!
+                    var listDay = new Date(dataYear + "," + dataMonth + "," + dataDay);
+                    var weekdays = "星期日,星期一,星期二,星期三,星期四,星期五,星期六".split(",");
+                    var weekdayHtml = "<span>" + weekdays[listDay.getDay()] + "</span>";
+                    $('.calendar_list .' + dataDate + ' .li_left .dayDate').append(weekdayHtml);
+                    //日期對上星期幾
                 };
                 ///日期選擇function
                 $('.daysWithData').on('click', function () {
@@ -612,6 +618,15 @@ var Module = function () {
                 });
                 $(".hideData").remove();
             });
+            // this.getWeekday();      
+        }
+    }, {
+        key: "getWeekday",
+        value: function getWeekday() {
+            // var listDate=$('.currentLists').attr('date');
+
+            // console.log('')
+            // console.log('getWeekday work'+listDate);
         }
     }, {
         key: "bornCalendar",
