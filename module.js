@@ -353,9 +353,6 @@ var Module = function () {
                 var monthsTitle = '<li class="tab">' + '<a href="#" class="' + moment(initYearMonth).add(i, 'months').format("YYYYMM") + '" id="" data-label="' + moment(initYearMonth).add(i, 'months').format("YYYYMM") + '">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
                 $this.find('.ntb_tab').append(monthsTitle);
                 $(".tab:nth-child(1) a").addClass('currentMonth');
-                // $(".tab:nth-child(1) a").attr('id','currentMonth');
-                // self.monthSelect();
-                // self.getNowMonth();
             };
             self.monthSelect(dataSource);
             // //小箭頭跳currentMonth
@@ -364,7 +361,6 @@ var Module = function () {
                     $this.find('.currentMonth').parent().next().children().addClass('currentMonth');
                     $this.find('.currentMonth').parent().prev().children().removeClass('currentMonth');
                     self.monthSelect(dataSource);
-                    self.getNowMonth();
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                 } else {
@@ -380,7 +376,6 @@ var Module = function () {
                         $(".tab:nth-child(1) a").addClass('currentMonth');
                     };
                     self.monthSelect(dataSource);
-                    self.getNowMonth();
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                     console.log(goMonth);
@@ -395,7 +390,6 @@ var Module = function () {
                     $this.find('.currentMonth').parent().prev().children().addClass('currentMonth');
                     $this.find('.currentMonth').parent().next().children().removeClass('currentMonth');
                     self.monthSelect(dataSource);
-                    self.getNowMonth();
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                 } else {
@@ -412,7 +406,6 @@ var Module = function () {
                         $(".tab:nth-child(1) a").addClass('currentMonth');
                     };
                     self.monthSelect(dataSource);
-                    self.getNowMonth();
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                     console.log(goMonth);
@@ -488,9 +481,6 @@ var Module = function () {
 
             return this;
         }
-    }, {
-        key: "getNowMonth",
-        value: function getNowMonth() {}
     }, {
         key: "creatCalendarDay",
         value: function creatCalendarDay(dataSource) {
@@ -716,9 +706,19 @@ var Module = function () {
     }, {
         key: "switch",
         value: function _switch() {
+            if ($('.calendar_list').hasClass('hide')) {
+                $(".switchMode").text("切換列表模式");
+            } else {
+                $(".switchMode").text("切換月曆模式");
+            }
             $('.switchMode').on('click', function () {
                 $('.calendar_weeksWrap').toggleClass('hide');
                 $('.calendar_list').toggleClass('hide');
+                if ($('.calendar_list').hasClass('hide')) {
+                    $(".switchMode").text("切換列表模式");
+                } else {
+                    $(".switchMode").text("切換月曆模式");
+                }
             });
             return this;
         }

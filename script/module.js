@@ -179,9 +179,6 @@ class Module {
                                  '</li>';              
                 $this.find('.ntb_tab').append(monthsTitle);
                 $(".tab:nth-child(1) a").addClass('currentMonth');
-                // $(".tab:nth-child(1) a").attr('id','currentMonth');
-                // self.monthSelect();
-                // self.getNowMonth();
         };
          self.monthSelect(dataSource);
         // //小箭頭跳currentMonth
@@ -190,7 +187,6 @@ class Module {
             $this.find('.currentMonth').parent().next().children().addClass('currentMonth');
             $this.find('.currentMonth').parent().prev().children().removeClass('currentMonth');
                 self.monthSelect(dataSource);
-                self.getNowMonth();
                 self.bornList(dataSource);
                 self.bornCalendar(dataSource);
                 }else {
@@ -208,7 +204,6 @@ class Module {
                     $(".tab:nth-child(1) a").addClass('currentMonth');              
                 };
                 self.monthSelect(dataSource);
-                self.getNowMonth();
                 self.bornList(dataSource);
                 self.bornCalendar(dataSource);
                 console.log(goMonth);
@@ -223,7 +218,6 @@ class Module {
                 $this.find('.currentMonth').parent().prev().children().addClass('currentMonth');
                 $this.find('.currentMonth').parent().next().children().removeClass('currentMonth');
                 self.monthSelect(dataSource);
-                self.getNowMonth();
                 self.bornList(dataSource); 
                 self.bornCalendar(dataSource);
             }else{
@@ -242,7 +236,6 @@ class Module {
                      $(".tab:nth-child(1) a").addClass('currentMonth');                 
                 };             
                 self.monthSelect(dataSource);
-                self.getNowMonth();
                 self.bornList(dataSource); 
                 self.bornCalendar(dataSource);
                 console.log(goMonth);
@@ -316,9 +309,6 @@ class Module {
     // });
         
         return this; 
-    }
-    getNowMonth(){
-  
     }
     creatCalendarDay(dataSource){
         var self = this;
@@ -548,9 +538,19 @@ class Module {
 
     // 切換日曆或列表模式
     switch(){
+        if($('.calendar_list').hasClass('hide')){
+            $(".switchMode").text("切換列表模式");
+            }else{
+                $(".switchMode").text("切換月曆模式");
+            }
         $('.switchMode').on('click', function() {
             $('.calendar_weeksWrap').toggleClass('hide');
             $('.calendar_list').toggleClass('hide');
+            if($('.calendar_list').hasClass('hide')){
+            $(".switchMode").text("切換列表模式");
+            }else{
+                $(".switchMode").text("切換月曆模式");
+            }
         });
         return this;
     }
