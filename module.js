@@ -352,7 +352,6 @@ var Module = function () {
                 self.creatCalendarDay(dataSource);
                 self.bornCalendar(dataSource);
                 self.bornList(dataSource);
-                self.monthSelect(dataSource);
             });
         }
     }, {
@@ -379,13 +378,13 @@ var Module = function () {
                 $this.find('.ntb_tab').append(monthsTitle);
                 $(".tab:nth-child(1) a").addClass('currentMonth');
             };
-            // self.monthSelect(dataSource);
+            self.monthSelect(dataSource);
             // //小箭頭跳currentMonth
             $('.next').on('click', function () {
                 if ($(".tab:nth-child(3) a").hasClass('currentMonth') === false) {
                     $this.find('.currentMonth').parent().next().children().addClass('currentMonth');
                     $this.find('.currentMonth').parent().prev().children().removeClass('currentMonth');
-                    // self.monthSelect(dataSource);
+                    self.monthSelect(dataSource);
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                 } else {
@@ -400,7 +399,7 @@ var Module = function () {
                         $(".tab a").attr('id', '');
                         $(".tab:nth-child(1) a").addClass('currentMonth');
                     };
-                    // self.monthSelect(dataSource);
+                    self.monthSelect(dataSource);
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                     console.log(goMonth);
@@ -413,7 +412,7 @@ var Module = function () {
                 if ($(".tab:nth-child(1) a").hasClass('currentMonth') !== true) {
                     $this.find('.currentMonth').parent().prev().children().addClass('currentMonth');
                     $this.find('.currentMonth').parent().next().children().removeClass('currentMonth');
-                    // self.monthSelect(dataSource);
+                    self.monthSelect(dataSource);
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                 } else {
@@ -427,7 +426,7 @@ var Module = function () {
                         $(".tab a").attr('id', '');
                         $(".tab:nth-child(3) a").addClass('currentMonth');
                     };
-                    // self.monthSelect(dataSource);
+                    self.monthSelect(dataSource);
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                     console.log(goMonth);
@@ -559,20 +558,19 @@ var Module = function () {
             var pageSize = 7; //每頁顯示數據條數
             var currentPage = 1; //當前頁數
             var totalSize = $(".calendar_list ul li").length; //獲取總數據
-            var totalPage = Math.ceil(totalSize / pageSize); //計算總頁數
+            var totalPage = Math.floor(totalSize / pageSize) + 1; //計算總頁數
             $(".calendar_list ul li:gt(6)").hide(); //設置首頁顯示7條數據
             $(".total").text(totalPage); //設置總頁數
             $(".current_page").text(currentPage); //設置當前頁數
             //實現下一頁
             $(".nextList").click(function () {
-                currentPage++;
                 console.log('clickNext');
                 if (currentPage == totalPage) {
                     //當前頁數==最後一頁，禁止下一頁
                     return false;
                 } else {
                     //不是最後一頁，顯示應該顯示的數據.
-
+                    currentPage++;
                     $(".current_page").text(currentPage); //當前頁數先+1
                     var start = pageSize * (currentPage - 1);
                     var end = pageSize * currentPage;
@@ -587,13 +585,12 @@ var Module = function () {
             });
             //實現上一頁
             $(".prevList").click(function () {
-                currentPage--;
                 console.log('clickPrev');
-                if (currentPage == 1) {
+                if (currentPage == 1 || currentPage == 0) {
                     //當前頁數==1，禁止上一頁
                     return false;
                 } else {
-
+                    currentPage--;
                     $(".current_page").text(currentPage); //當前頁數先-1
                     var start = pageSize * (currentPage - 1);
                     var end = pageSize * currentPage;
