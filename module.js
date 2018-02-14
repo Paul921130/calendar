@@ -304,13 +304,18 @@ var Module = function () {
 
                 for (var item, i = 0; item = items[i++];) {
                     var date = item.date;
-                    var statusChange = item.state;
-                    delete item.state;
+                    var statusChange = item.state || item.status;
+                    delete (item.state || item.status);
                     item.status = statusChange;
 
-                    var availableChange = item.onsell;
-                    delete item.onsell;
+                    var availableChange = item.onsell || item.availableVancancy;
+                    delete (item.onsell || item.availableVancancy);
                     item.availableVancancy = availableChange;
+
+                    var totalChange = item.totalVacnacy || item.total;
+                    delete (item.totalVacnacy || item.total);
+                    item.totalVacnacy = totalChange;
+
                     if (!(date in lookup)) {
                         lookup[date] = 1;
                         dataSource.push(item);
@@ -512,8 +517,7 @@ var Module = function () {
             '</td>' + '<td class="disabled">' + '</td>' + '</tr>' + '</tbody>';
             $('.weekTable').append(calendarDayHtml);
             // console.log(moment().add(1, 'days').format("D"));
-            // self.bornCalendar(dataSource);
-
+            // self.bornCalendar(dataSource);    
             return this;
         }
     }, {
@@ -535,12 +539,16 @@ var Module = function () {
 
                 for (var item, i = 0; item = items[i++];) {
                     var date = item.date;
-                    var statusChange = item.state;
-                    delete item.state; //刪除原本JSON中的state K值
-                    item.status = statusChange; //插入新的K值
+                    var statusChange = item.state || item.status;
+                    delete (item.state || item.status); //刪除原本JSON中的state Key值
+                    item.status = statusChange; //插入新的Key值
 
-                    var availableChange = item.onsell;
-                    delete item.onsell;
+                    var totalChange = item.totalVacnacy || item.total;
+                    delete (item.totalVacnacy || item.total);
+                    item.totalVacnacy = totalChange;
+
+                    var availableChange = item.onsell || item.availableVancancy;
+                    delete (item.onsell || item.availableVancancy);
                     item.availableVancancy = availableChange;
 
                     if (!(date in lookup)) {
@@ -613,7 +621,7 @@ var Module = function () {
 
                         var li_right = "<div class='li_right'><span class='dataStatus'>" + dataSource[i].status + "</span><span class='price'>" + "$" + dataSource[i].price + "起" + "</span></div>";
                         var li_left = "<div class='li_left'></div>";
-                        var li_middle = "<div class='li_middle'><span>" + "可賣:" + dataSource[i].availableVancancy + "</span><span>" + "團位:" + (dataSource[i].totalVacnacy || dataSource[i].total) + "</span><div class='lb_gpls'>行程一</div></div>";
+                        var li_middle = "<div class='li_middle'><span>" + "可賣:" + dataSource[i].availableVancancy + "</span><span>" + "團位:" + dataSource[i].totalVacnacy + "</span><div class='lb_gpls'>行程一</div></div>";
                         // var dataAvailable="<span>"+"可賣:"+dataSource[i].availableVancancy+"</span>";
                         // var dataTotal="<span>"+"團位:"+dataSource[i].totalVacnacy+"</span>";
 
@@ -670,12 +678,16 @@ var Module = function () {
 
                 for (var item, i = 0; item = items[i++];) {
                     var date = item.date;
-                    var statusChange = item.state;
-                    delete item.state;
+                    var statusChange = item.state || item.status;
+                    delete (item.state || item.status);
                     item.status = statusChange;
 
-                    var availableChange = item.onsell;
-                    delete item.onsell;
+                    var totalChange = item.totalVacnacy || item.total;
+                    delete (item.totalVacnacy || item.total);
+                    item.totalVacnacy = totalChange;
+
+                    var availableChange = item.onsell || item.availableVancancy;
+                    delete (item.onsell || item.availableVancancy);
                     item.availableVancancy = availableChange;
 
                     if (!(date in lookup)) {
@@ -759,7 +771,7 @@ var Module = function () {
                         var dataPrice = "<p class='price'>" + "$" + dataSource[i].price + "起" + "</p>";
                         var dataStatus = "<p class='dataStatus'>" + dataSource[i].status + "</p>";
                         var dataAvailable = "<p>" + "可賣:" + dataSource[i].availableVancancy + "</p>";
-                        var dataTotal = "<p>" + "團位:" + (dataSource[i].totalVacnacy || dataSource[i].total) + "</p>";
+                        var dataTotal = "<p>" + "團位:" + dataSource[i].totalVacnacy + "</p>";
                         $('.calendar_weeksWrap .' + dataDate + '').addClass('daysWithData');
                         $('.calendar_weeksWrap .' + dataDate + '').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                         if (dataSource[i].status === '額滿' || dataSource[i].status === '截止' || dataSource[i].status === '後補') {
