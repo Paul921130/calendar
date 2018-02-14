@@ -115,6 +115,7 @@ class Module {
                       delete(item.state||item.status);
                       item.status= statusChange;
 
+                      
                       var availableChange=(item.onsell||item.availableVancancy);
                       delete(item.onsell||item.availableVancancy);
                       item.availableVancancy= availableChange;
@@ -131,20 +132,19 @@ class Module {
 
                 // console.log(dataSource);
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
-                // alert(dataSource[0]);
+             
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1;
                 });//將dataSource按照日期排序,由前至後(2016年開始);
 
-                // return (dataSource);
+    
                 self.showMonthDate(dataSource);
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
-
                 self.bornCalendar(dataSource);
                 self.bornList(dataSource);
+
             });
-        return this;
     }
     creatCalendar(dataSource){
         var self = this;
@@ -318,12 +318,7 @@ class Module {
         return this; 
     }
     getNowMonth(){
-        // var self = this;
-        // var $this = this.$ele;//class="calendar"
-        // var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
-        // var nowMonth=parseInt($(".currentMonth").attr('data-label').substring(4, 10));//抓取currentMonth所代表的月份
-        // console.log(nowYear);
-        // console.log(nowMonth);
+  
     }
     creatCalendarDay(dataSource){
         var self = this;
@@ -338,48 +333,11 @@ class Module {
                                     '</tr>'+          
                                 '</tbody>';
         $('.weekTable').append(calendarDayHtml);
-        // console.log(moment().add(1, 'days').format("D"));
-        // self.bornCalendar(dataSource);    
+     
         return this;
     }
   
-    bornList(dataSource){
-         // $.ajax({
-         //        dataType: "json",
-         //        method: 'GET',
-         //        url: './json/data2.json',
-         //    }).done(function(dataSource) {
-         //    dataSource = dataSource.sort(function (a, b) {
-         //         return a.date > b.date ? 1 : -1;//資料依照日期排序       
-         //    });//將dataSource按照日期排序,由前至後(2016年開始)
-            
-         //    //篩選日期重複的資料!!!!!!!!!!!!!!!
-         //        var lookup = {};
-         //        var items = dataSource;
-         //            var dataSource = [];
-
-         //            for (var item, i = 0; item = items[i++];) {
-         //              var date = item.date;
-         //              var statusChange=(item.state||item.status);
-         //              delete(item.state||item.status);//刪除原本JSON中的state Key值
-         //              item.status= statusChange;//插入新的Key值
-
-         //              var totalChange=(item.totalVacnacy||item.total);
-         //              delete(item.totalVacnacy||item.total);
-         //              item.totalVacnacy=totalChange;
-
-         //              var availableChange=(item.onsell||item.availableVancancy);
-         //              delete(item.onsell||item.availableVancancy);
-         //              item.availableVancancy= availableChange;
-
-         //              if (!(date in lookup)) {
-         //                lookup[date] = 1;
-         //                dataSource.push(item);
-         //            }
-         //        }
-            // console.log(dataSource);
-            //篩選日期重複的資料!!!!!!!!!!!!!!!
-                     
+    bornList(dataSource){                 
             var self = this;
             var $this = this.$ele;//class="calendar"
             var today = new Date();
@@ -473,54 +431,11 @@ class Module {
              $('.daysWithData').removeClass('daySelected');
              $(this).addClass('daySelected');
             });
-             $( ".hideData" ).remove();
-        // }); 
-        // this.getWeekday();      
+             $( ".hideData" ).remove(); 
     };
 
-    getWeekday(){
-        // var listDate=$('.currentLists').attr('date');
-        // console.log('')
-        // console.log('getWeekday work'+listDate);
-    }
-    bornCalendar(dataSource){
-        // $.ajax({
-        //         dataType: "json",
-        //         method: 'GET',
-        //         url: './json/data2.json',
-        //     }).done(function(dataSource) {
-        //     dataSource = dataSource.sort(function (a, b) {
-        //          return a.date > b.date ? 1 : -1;//資料依照日期排序       
-        //     });//將dataSource按照日期排序,由前至後(2016年開始)
-            
-        //     //篩選日期重複的資料!!!!!!!!!!!!!!!
-        //         var lookup = {};
-        //         var items = dataSource;
-        //             var dataSource = [];
-
-        //             for (var item, i = 0; item = items[i++];) {
-        //               var date = item.date;
-        //               var statusChange=(item.state||item.status);
-        //               delete(item.state||item.status);
-        //               item.status= statusChange;
-
-        //               var totalChange=(item.totalVacnacy||item.total);
-        //               delete(item.totalVacnacy||item.total);
-        //               item.totalVacnacy=totalChange;
-
-        //               var availableChange=(item.onsell||item.availableVancancy);
-        //               delete(item.onsell||item.availableVancancy);
-        //               item.availableVancancy= availableChange;
-
-
-        //               if (!(date in lookup)) {
-        //                 lookup[date] = 1;
-        //                 dataSource.push(item);
-        //             }
-        //         }
-                // console.log(dataSource);
-                //篩選日期重複的資料!!!!!!!!!!!!!!!
-                     
+   
+    bornCalendar(dataSource){                 
             var self = this;
             var $this = this.$ele;//class="calendar"
             var today = new Date();
@@ -591,6 +506,12 @@ class Module {
                 if($('.currentDays').hasClass(dataDate)){
                     // var self = this;
                     // var $this = this.$ele;
+
+                    if(dataSource[i].availableVancancy==undefined)
+                        {
+                            dataSource[i].availableVancancy = 0;
+                    };//可賣為零時會出現bug...............................
+
                     var dataPrice="<p class='price'>"+"$"+dataSource[i].price+"起"+"</p>";
                     var dataStatus="<p class='dataStatus'>"+(dataSource[i].status)+"</p>";
                     var dataAvailable="<p>"+"可賣:"+(dataSource[i].availableVancancy)+"</p>";
@@ -610,9 +531,7 @@ class Module {
              $('.daysWithData').on('click', function() { 
                 $('.daysWithData').removeClass('daySelected');
                 $(this).addClass('daySelected');
-            });
-            //
-        // });       
+            });     
     };
 
 
