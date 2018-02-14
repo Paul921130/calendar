@@ -24,7 +24,11 @@ $classname: 'calendar';
 .p_0{
 	padding: 0!important;
 }
+a{
+	text-decoration: none!important;
+}
 .#{$classname} {
+
 	ul{
 		padding:0;
 		margin:0;
@@ -267,7 +271,6 @@ $classname: 'calendar';
 					text-align: center;
 				}
 				}
-				
 			}
 			.li_middle{
 				flex:6;

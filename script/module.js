@@ -60,17 +60,38 @@ class Module {
         console.log('moduleIn!!!!');
         this.creatHtml();
         this.getAjax();
-        this.showMonthDate();
         this.switch();
+        console.log(self.formatNumber(11111111111112211));
+       
 
-        var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
-        var nowMonth=parseInt($(".currentMonth").attr('data-label').substring(4, 10));//抓取currentMonth所代表的月份
-        console.log(nowYear);
-        console.log(nowMonth);
+        // var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
+        // var nowMonth=parseInt($(".currentMonth").attr('data-label').substring(4, 10));//抓取currentMonth所代表的月份
+        // console.log(nowYear);
+        // console.log(nowMonth);
         
         return this;
     }
-
+///////////////////////////////////////////////////////////將數字轉為金額格式(每三位數一個",")
+    formatNumber(num, precision, separator){
+        var parts;
+            // 判断是否为数字
+            if (!isNaN(parseFloat(num)) && isFinite(num)) {
+                // 把类似 .5, 5. 之类的数据转化成0.5, 5, 为数据精度处理做准, 至于为什么
+                // 不在判断中直接写 if (!isNaN(num = parseFloat(num)) && isFinite(num))
+                // 是因为parseFloat有一个奇怪的精度问题, 比如 parseFloat(12312312.1234567119)
+                // 的值变成了 12312312.123456713
+                num = Number(num);
+                // 处理小数点位数
+                num = (typeof precision !== 'undefined' ? num.toFixed(precision) : num).toString();
+                // 分离数字的小数部分和整数部分
+                parts = num.split('.');
+                // 整数部分加[separator]分隔, 借用一个著名的正则表达式
+                parts[0] = parts[0].toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + (separator || ','));
+                return parts.join('.');
+            }
+            return NaN;
+    }
+///////////////////////////////////////////////////////////將數字轉為金額格式(每三位數一個",")    
     methods() {
         return this;
     }
@@ -104,16 +125,10 @@ class Module {
                 method: 'GET',
                 url: './json/data2.json',
             }).done(function(dataSource) {
-                // alert(dataSource[0]);
-                dataSource = dataSource.sort(function (a, b) {
-                return a.date > b.date ? 1 : -1;
-                });//將dataSource按照日期排序,由前至後(2016年開始);
-
-
                 //篩選日期重複的資料!!!!!!!!!!!!!!!//以及覆蓋新Key值!!!!!!!!!!
                 var lookup = {};
                 var items = dataSource;
-                    var dataSource = [];
+                var dataSource = [];
 
                     for (var item, i = 0; item = items[i++];) {
                       var date = item.date;
@@ -121,6 +136,7 @@ class Module {
                       delete(item.state||item.status);
                       item.status= statusChange;
 
+                      
                       var availableChange=(item.onsell||item.availableVancancy);
                       delete(item.onsell||item.availableVancancy);
                       item.availableVancancy= availableChange;
@@ -134,23 +150,19 @@ class Module {
                         dataSource.push(item);
                     }
                 }
+
                 // console.log(dataSource);
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
-                console.log(dataSource[0].status);
-                
+             
+                dataSource = dataSource.sort(function (a, b) {
+                    return a.date > b.date ? 1 : -1;
+                });//將dataSource按照日期排序,由前至後(2016年開始);
+                self.showMonthDate(dataSource);
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
-
                 self.bornCalendar(dataSource);
                 self.bornList(dataSource);
-                var NumOfJData = dataSource.length;
-                // for (var i = 0; i < NumOfJData; i++) {
-                //     console.log(dataSource[i].date);
-                // };  //所有資料的日期都跑一次
-                console.log(NumOfJData);
-                console.log(dataSource[0]);
             });
-        return this;
     }
     creatCalendar(dataSource){
         var self = this;
@@ -171,12 +183,12 @@ class Module {
             $this.find('.calendar_weeksWrap').append(calendarHtml);               
             return this;
     }
-    showMonthDate(){
+    showMonthDate(dataSource){
         var self = this;
         var $this = this.$ele;//class="calendar"
         var initYearMonth=this.option.initYearMonth;//抓到useAge所設定的初始月份
         console.log(initYearMonth);
-        var goMonth =1;
+        var goMonth =0;
         for (var i = 0 ;i <= 2 ; i++ ){
                 var nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
@@ -185,25 +197,21 @@ class Module {
                                  '</li>';              
                 $this.find('.ntb_tab').append(monthsTitle);
                 $(".tab:nth-child(1) a").addClass('currentMonth');
-                // $(".tab:nth-child(1) a").attr('id','currentMonth');
-                // self.monthSelect();
-                // self.getNowMonth();
         };
-        self.monthSelect();
+        self.monthSelect(dataSource);
         // //小箭頭跳currentMonth
         $('.next').on('click', function() {         
             if($(".tab:nth-child(3) a").hasClass('currentMonth')===false){
             $this.find('.currentMonth').parent().next().children().addClass('currentMonth');
             $this.find('.currentMonth').parent().prev().children().removeClass('currentMonth');
-                self.monthSelect();
-                self.getNowMonth();
-                self.bornList();
-                self.bornCalendar();
+                self.monthSelect(dataSource);
+                self.bornList(dataSource);
+                self.bornCalendar(dataSource);
                 }else {
-                // var goMonth =Math.abs(parseInt($('.currentMonth').attr('data-label'))-201801);
+                goMonth=goMonth + 3;
                 $this.find('.ntb_tab').empty();
                 $(".tab a").removeClass('currentMonth');
-                for (var i = goMonth ;i <= goMonth  + 2 ; i++ ){
+                for (var i = goMonth;i <= goMonth+2 ; i++ ){
                     var nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                     console.log(nextMonthMo);
                     var monthsTitle= '<li class="tab">'+
@@ -213,124 +221,58 @@ class Module {
                     $(".tab a").attr('id','');
                     $(".tab:nth-child(1) a").addClass('currentMonth');              
                 };
-                self.monthSelect();
-                self.getNowMonth();
-                self.bornList();
-                self.bornCalendar();
+                self.monthSelect(dataSource);
+                self.bornList(dataSource);
+                self.bornCalendar(dataSource);
                 console.log(goMonth);
                 };
-                goMonth++;
+               
                 console.log($('.currentMonth').attr('data-label'));
         });//小箭頭跳currentMonth
-
 
         $('.prev').on('click', function() {
             if($(".tab:nth-child(1) a").hasClass('currentMonth')!==true){
                 $this.find('.currentMonth').parent().prev().children().addClass('currentMonth');
                 $this.find('.currentMonth').parent().next().children().removeClass('currentMonth');
-                self.monthSelect();
-                self.getNowMonth();
-                self.bornList(); 
-                self.bornCalendar();
+                self.monthSelect(dataSource);
+                self.bornList(dataSource); 
+                self.bornCalendar(dataSource);
             }else{
-                // var goMonth =Math.abs(parseInt($('.currentMonth').attr('data-label'))-201801);
+                goMonth= goMonth - 3;
                 $this.find('.ntb_tab').empty();
                 $(".tab a").removeClass('currentMonth');
-                for (var i = (goMonth-2) ;i <= (goMonth-2) + 2 ; i++ ){
+                for (var i = goMonth;i <= goMonth+2 ; i++ ){
                     var nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
-                    // console.log(nextMonthMo);
                     var monthsTitle='<li class="tab">'+
                                        '<a href="#" class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                     '</li>';
                      $this.find('.ntb_tab').append(monthsTitle);
                      $(".tab a").attr('id','');
-                     // $(".tab:nth-child(1) a").attr('id','currentMonth');
-                     $(".tab:nth-child(1) a").addClass('currentMonth');                 
+                     $(".tab:nth-child(3) a").addClass('currentMonth');                 
                 };             
-                self.monthSelect();
-                self.getNowMonth();
-                self.bornList(); 
-                self.bornCalendar();
+                self.monthSelect(dataSource);
+                self.bornList(dataSource); 
+                self.bornCalendar(dataSource);
                 console.log(goMonth);
-                // return this;
-            }
-            goMonth--;
+            };
+            
             console.log($('.currentMonth').attr('data-label'));
         });//小箭頭跳currentMonth        
-
         // 小箭頭跳currentMonth
-
-
-        // 小箭頭跳頁click
-        // $('.next').on('click', function() {   
-        //         $this.find('.ntb_tab').empty();
-        //         $(".tab a").removeClass('currentMonth');
-        //         for (var i = goMonth ;i <= goMonth + 2 ; i++ ){
-        //             var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
-        //             console.log(nextMonthMo);
-        //             var monthsTitle= '<li class="tab">'+
-        //                                '<a href="#" class="'+moment().add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
-        //                              '</li>';
-        //             $this.find('.ntb_tab').append(monthsTitle);
-        //             $(".tab a").attr('id','');
-        //             // $(".tab:nth-child("+(goMonth+1)+") a").attr('id','currentMonth');
-        //             // $(".tab:nth-child("+(goMonth+1)+") a").addClass('currentMonth'); 
-        //             // $(".tab:nth-child(1) a").attr('id','currentMonth');
-        //             $(".tab:nth-child(1) a").addClass('currentMonth');              
-        //         };
-        //         goMonth++; 
-        //         self.monthSelect();
-        //         self.getNowMonth();
-        //         self.bornCalendar();
-            
-        // });//顯示下個月的title
-        // $('.prev').on('click', function() {
-        //         $this.find('.ntb_tab').empty();
-        //         $(".tab a").removeClass('currentMonth');
-        //         for (var i = goMonth-2 ;i <= (goMonth-2) + 2 ; i++ ){
-        //             var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
-        //             // console.log(nextMonthMo);
-
-        //             var monthsTitle='<li class="tab">'+
-        //                                '<a href="#" class="'+moment().add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
-        //                             '</li>';
-        //              $this.find('.ntb_tab').append(monthsTitle);
-        //              $(".tab a").attr('id','');
-        //              // $(".tab:nth-child(1) a").attr('id','currentMonth');
-        //              $(".tab:nth-child(1) a").addClass('currentMonth');                 
-        //         };
-        //         goMonth--;
-        //         self.monthSelect();
-        //         self.getNowMonth();
-        //         self.bornCalendar();
-        // });
-        // 顯示上個月的title
-        // 小箭頭跳頁click
         return this;
     }
 
-    monthSelect(){
+    monthSelect(dataSource){
         var self = this;
         var $this = this.$ele;//class="calendar"
-     
             $this.find('.tab a').on('click', function() {
             $this.find('.tab a').removeClass('currentMonth');
             $(this).addClass('currentMonth');
             var nowMonth=$(".currentMonth").textContent;
-            self.bornCalendar();
-            self.bornList();
+            self.bornCalendar(dataSource);
+            self.bornList(dataSource);
         });
-    // });
-        
         return this; 
-    }
-    getNowMonth(){
-        // var self = this;
-        // var $this = this.$ele;//class="calendar"
-        // var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
-        // var nowMonth=parseInt($(".currentMonth").attr('data-label').substring(4, 10));//抓取currentMonth所代表的月份
-        // console.log(nowYear);
-        // console.log(nowMonth);
     }
     creatCalendarDay(dataSource){
         var self = this;
@@ -345,48 +287,11 @@ class Module {
                                     '</tr>'+          
                                 '</tbody>';
         $('.weekTable').append(calendarDayHtml);
-        // console.log(moment().add(1, 'days').format("D"));
-        // self.bornCalendar(dataSource);    
+     
         return this;
     }
-  
-    bornList(dataSource){
-         $.ajax({
-                dataType: "json",
-                method: 'GET',
-                url: './json/data2.json',
-            }).done(function(dataSource) {
-            dataSource = dataSource.sort(function (a, b) {
-                 return a.date > b.date ? 1 : -1;//資料依照日期排序       
-            });//將dataSource按照日期排序,由前至後(2016年開始)
-            
-            //篩選日期重複的資料!!!!!!!!!!!!!!!
-                var lookup = {};
-                var items = dataSource;
-                    var dataSource = [];
-
-                    for (var item, i = 0; item = items[i++];) {
-                      var date = item.date;
-                      var statusChange=(item.state||item.status);
-                      delete(item.state||item.status);//刪除原本JSON中的state Key值
-                      item.status= statusChange;//插入新的Key值
-
-                      var totalChange=(item.totalVacnacy||item.total);
-                      delete(item.totalVacnacy||item.total);
-                      item.totalVacnacy=totalChange;
-
-                      var availableChange=(item.onsell||item.availableVancancy);
-                      delete(item.onsell||item.availableVancancy);
-                      item.availableVancancy= availableChange;
-
-                      if (!(date in lookup)) {
-                        lookup[date] = 1;
-                        dataSource.push(item);
-                    }
-                }
-            // console.log(dataSource);
-            //篩選日期重複的資料!!!!!!!!!!!!!!!
-                     
+    
+    bornList(dataSource){                 
             var self = this;
             var $this = this.$ele;//class="calendar"
             var today = new Date();
@@ -442,13 +347,7 @@ class Module {
                 var dataDate=parseInt(dataYear + dataMonth + dataDay);
                 var calendarDays=parseInt($('.currentLists').attr('date'));
                 if($('.currentLists').hasClass(dataDate)){
-                    // var self = this;
-                    // var $this = this.$ele;
-
-                    var dataPrice="<span class='price'>"+"$"+dataSource[i].price+"起"+"</span>";
-                    var dataStatus="<span class='dataStatus'>"+dataSource[i].status+"</span>";
-
-                    var li_right="<div class='li_right'><span class='dataStatus'>"+(dataSource[i].status)+"</span><span class='price'>"+"$"+dataSource[i].price+"起"+"</span></div>";
+                    var li_right="<div class='li_right'><span class='dataStatus'>"+(dataSource[i].status)+"</span><span class='price'>"+"$"+self.formatNumber(dataSource[i].price)+"起"+"</span></div>";
                     var li_left="<div class='li_left'></div>";
                     var li_middle="<div class='li_middle'><span>"+
                                 "可賣:"+(dataSource[i].availableVancancy)+"</span><span>"
@@ -481,53 +380,61 @@ class Module {
              $(this).addClass('daySelected');
             });
              $( ".hideData" ).remove();
-        }); 
-        // this.getWeekday();      
+            self.listChange();       
     };
 
-    getWeekday(){
-        // var listDate=$('.currentLists').attr('date');
-        // console.log('')
-        // console.log('getWeekday work'+listDate);
-    }
-    bornCalendar(dataSource){
-        $.ajax({
-                dataType: "json",
-                method: 'GET',
-                url: './json/data2.json',
-            }).done(function(dataSource) {
-            dataSource = dataSource.sort(function (a, b) {
-                 return a.date > b.date ? 1 : -1;//資料依照日期排序       
-            });//將dataSource按照日期排序,由前至後(2016年開始)
-            
-            //篩選日期重複的資料!!!!!!!!!!!!!!!
-                var lookup = {};
-                var items = dataSource;
-                    var dataSource = [];
-
-                    for (var item, i = 0; item = items[i++];) {
-                      var date = item.date;
-                      var statusChange=(item.state||item.status);
-                      delete(item.state||item.status);
-                      item.status= statusChange;
-
-                      var totalChange=(item.totalVacnacy||item.total);
-                      delete(item.totalVacnacy||item.total);
-                      item.totalVacnacy=totalChange;
-
-                      var availableChange=(item.onsell||item.availableVancancy);
-                      delete(item.onsell||item.availableVancancy);
-                      item.availableVancancy= availableChange;
-
-
-                      if (!(date in lookup)) {
-                        lookup[date] = 1;
-                        dataSource.push(item);
+    listChange(){
+        //實現分頁思路:
+        var pageSize=7;      //每頁顯示數據條數
+        var currentPage=1;   //當前頁數
+        var totalSize=$(".calendar_list ul li").length; //獲取總數據
+        var totalPage=Math.floor(totalSize / pageSize)+1; //計算總頁數
+        $(".calendar_list ul li:gt(6)").hide(); //設置首頁顯示7條數據
+        $(".total").text(totalPage);  //設置總頁數
+        $(".current_page").text(currentPage); //設置當前頁數
+        //實現下一頁
+        $(".nextList").click(function(){
+            console.log('clickNext');
+            if(currentPage == totalPage){ //當前頁數==最後一頁，禁止下一頁
+                   return false;
+                }else{//不是最後一頁，顯示應該顯示的數據.
+                    currentPage++;
+                    $(".current_page").text(currentPage);  //當前頁數先+1
+                    var start=pageSize*(currentPage-1);
+                    var end=pageSize*currentPage;
+                    $.each($('.calendar_list ul li'),function(index,item){
+                            if(index >=start && index < end){
+                                $(this).show();
+                                }
+                                else{
+                                    $(this).hide();
+                                    }
+                        });
                     }
-                }
-                // console.log(dataSource);
-                //篩選日期重複的資料!!!!!!!!!!!!!!!
-                     
+            });    
+            //實現上一頁
+        $(".prevList").click(function(){
+            console.log('clickPrev');
+            if(currentPage == 1 || currentPage == 0){//當前頁數==1，禁止上一頁
+                 return false;
+                }else{
+                    currentPage--;
+                     $(".current_page").text(currentPage);  //當前頁數先-1
+                     var start=pageSize*(currentPage-1);
+                     var end=pageSize*currentPage;
+                     $.each($('.calendar_list ul li'),function(index,item){
+                           if(index >=start && index < end){
+                                $(this).show();
+                                }
+                                else{
+                                    $(this).hide();
+                                    }
+                         });
+                    }
+            });
+    }
+   
+    bornCalendar(dataSource){                 
             var self = this;
             var $this = this.$ele;//class="calendar"
             var today = new Date();
@@ -598,7 +505,13 @@ class Module {
                 if($('.currentDays').hasClass(dataDate)){
                     // var self = this;
                     // var $this = this.$ele;
-                    var dataPrice="<p class='price'>"+"$"+dataSource[i].price+"起"+"</p>";
+
+                    if(dataSource[i].availableVancancy==undefined)
+                        {
+                            dataSource[i].availableVancancy = 0;
+                    };//可賣為零時會出現bug...............................
+
+                    var dataPrice="<p class='price'>"+"$"+self.formatNumber(dataSource[i].price)+"起"+"</p>";
                     var dataStatus="<p class='dataStatus'>"+(dataSource[i].status)+"</p>";
                     var dataAvailable="<p>"+"可賣:"+(dataSource[i].availableVancancy)+"</p>";
                     var dataTotal="<p>"+"團位:"+(dataSource[i].totalVacnacy)+"</p>";
@@ -617,9 +530,7 @@ class Module {
              $('.daysWithData').on('click', function() { 
                 $('.daysWithData').removeClass('daySelected');
                 $(this).addClass('daySelected');
-            });
-            //
-        });       
+            });     
     };
 
 
@@ -636,9 +547,19 @@ class Module {
 
     // 切換日曆或列表模式
     switch(){
+        if($('.calendar_list').hasClass('hide')){
+            $(".switchMode").text("切換列表模式");
+            }else{
+                $(".switchMode").text("切換月曆模式");
+            }
         $('.switchMode').on('click', function() {
             $('.calendar_weeksWrap').toggleClass('hide');
             $('.calendar_list').toggleClass('hide');
+            if($('.calendar_list').hasClass('hide')){
+            $(".switchMode").text("切換列表模式");
+            }else{
+                $(".switchMode").text("切換月曆模式");
+            }
         });
         return this;
     }
@@ -656,7 +577,8 @@ class Module {
     // destroy calendar，destroy時連class new出來的實例物件也要刪除
     destroy(){
         return this;
-    }  
+    }
+
 };
 
 export { ModuleName, ModuleDefaults, ModuleReturns, Module };

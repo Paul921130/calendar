@@ -17,7 +17,10 @@
 <body>
     <div class="container p_0">
         <div class="row">
-            <a href="#" class="switchMode">切換模式</a>
+            <a href="#" class="switchMode"></a>
+            <a class="prevList">上一頁</a>
+                <span class="num"><span class="current_page">1</span><span style="padding:0 3px;">/</span><span class="total"></span></span>
+            <a class="nextList">下一頁</a> 
             <div class="col-md-12 col-lg-12 hidden-xs hidden-sm p_0">
                 <div class="calendar" >
                 </div>
@@ -42,7 +45,7 @@
                 ],
                 // 輸入一開始要在哪一個月份 [string] YYYYMM，若輸入的年月沒有資料，
                 // 就要找相近的年月，若前一個月後一個月都有資料，就顯示資料比數比較多的那一個月
-                initYearMonth: '2017-05',
+                initYearMonth: '2018-06',
                 // 設定各資料的key
                 dataKeySetting: {
                     // 保證出團
