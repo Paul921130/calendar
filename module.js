@@ -253,6 +253,7 @@ var Module = function () {
             this.creatHtml();
             this.getAjax();
             this.switch();
+            console.log(self.formatNumber(11111111111112211));
 
             // var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
             // var nowMonth=parseInt($(".currentMonth").attr('data-label').substring(4, 10));//抓取currentMonth所代表的月份
@@ -261,6 +262,31 @@ var Module = function () {
 
             return this;
         }
+        ///////////////////////////////////////////////////////////將數字轉為金額格式(每三位數一個",")
+
+    }, {
+        key: "formatNumber",
+        value: function formatNumber(num, precision, separator) {
+            var parts;
+            // 判断是否为数字
+            if (!isNaN(parseFloat(num)) && isFinite(num)) {
+                // 把类似 .5, 5. 之类的数据转化成0.5, 5, 为数据精度处理做准, 至于为什么
+                // 不在判断中直接写 if (!isNaN(num = parseFloat(num)) && isFinite(num))
+                // 是因为parseFloat有一个奇怪的精度问题, 比如 parseFloat(12312312.1234567119)
+                // 的值变成了 12312312.123456713
+                num = Number(num);
+                // 处理小数点位数
+                num = (typeof precision !== 'undefined' ? num.toFixed(precision) : num).toString();
+                // 分离数字的小数部分和整数部分
+                parts = num.split('.');
+                // 整数部分加[separator]分隔, 借用一个著名的正则表达式
+                parts[0] = parts[0].toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + (separator || ','));
+                return parts.join('.');
+            }
+            return NaN;
+        }
+        ///////////////////////////////////////////////////////////將數字轉為金額格式(每三位數一個",")    
+
     }, {
         key: "methods",
         value: function methods() {
@@ -346,7 +372,7 @@ var Module = function () {
             var $this = this.$ele; //class="calendar"
             var initYearMonth = this.option.initYearMonth; //抓到useAge所設定的初始月份
             console.log(initYearMonth);
-            var goMonth = 1;
+            var goMonth = 0;
             for (var i = 0; i <= 2; i++) {
                 var nextMonthMo = moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
@@ -364,7 +390,7 @@ var Module = function () {
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                 } else {
-                    // var goMonth =Math.abs(parseInt($('.currentMonth').attr('data-label'))-201801);
+                    goMonth = goMonth + 3;
                     $this.find('.ntb_tab').empty();
                     $(".tab a").removeClass('currentMonth');
                     for (var i = goMonth; i <= goMonth + 2; i++) {
@@ -380,10 +406,9 @@ var Module = function () {
                     self.bornCalendar(dataSource);
                     console.log(goMonth);
                 };
-                goMonth++;
+
                 console.log($('.currentMonth').attr('data-label'));
             }); //小箭頭跳currentMonth
-
 
             $('.prev').on('click', function () {
                 if ($(".tab:nth-child(1) a").hasClass('currentMonth') !== true) {
@@ -393,28 +418,24 @@ var Module = function () {
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                 } else {
-                    // var goMonth =Math.abs(parseInt($('.currentMonth').attr('data-label'))-201801);
+                    goMonth = goMonth - 3;
                     $this.find('.ntb_tab').empty();
                     $(".tab a").removeClass('currentMonth');
-                    for (var i = goMonth - 2; i <= goMonth - 2 + 2; i++) {
+                    for (var i = goMonth; i <= goMonth + 2; i++) {
                         var nextMonthMo = moment(initYearMonth).add(i, 'months').format("YYYY MMM");
-                        // console.log(nextMonthMo);
                         var monthsTitle = '<li class="tab">' + '<a href="#" class="' + moment(initYearMonth).add(i, 'months').format("YYYYMM") + '" id="" data-label="' + moment(initYearMonth).add(i, 'months').format("YYYYMM") + '">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
                         $this.find('.ntb_tab').append(monthsTitle);
                         $(".tab a").attr('id', '');
-                        // $(".tab:nth-child(1) a").attr('id','currentMonth');
-                        $(".tab:nth-child(1) a").addClass('currentMonth');
+                        $(".tab:nth-child(3) a").addClass('currentMonth');
                     };
                     self.monthSelect(dataSource);
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                     console.log(goMonth);
-                    // return this;
-                }
-                goMonth--;
+                };
+
                 console.log($('.currentMonth').attr('data-label'));
             }); //小箭頭跳currentMonth        
-
             // 小箭頭跳currentMonth
 
 
@@ -549,13 +570,7 @@ var Module = function () {
                 var dataDate = parseInt(dataYear + dataMonth + dataDay);
                 var calendarDays = parseInt($('.currentLists').attr('date'));
                 if ($('.currentLists').hasClass(dataDate)) {
-                    // var self = this;
-                    // var $this = this.$ele;
-
-                    var dataPrice = "<span class='price'>" + "$" + dataSource[i].price + "起" + "</span>";
-                    var dataStatus = "<span class='dataStatus'>" + dataSource[i].status + "</span>";
-
-                    var li_right = "<div class='li_right'><span class='dataStatus'>" + dataSource[i].status + "</span><span class='price'>" + "$" + dataSource[i].price + "起" + "</span></div>";
+                    var li_right = "<div class='li_right'><span class='dataStatus'>" + dataSource[i].status + "</span><span class='price'>" + "$" + self.formatNumber(dataSource[i].price) + "起" + "</span></div>";
                     var li_left = "<div class='li_left'></div>";
                     var li_middle = "<div class='li_middle'><span>" + "可賣:" + dataSource[i].availableVancancy + "</span><span>" + "團位:" + dataSource[i].totalVacnacy + "</span><div class='lb_gpls'>行程一</div></div>";
                     // var dataAvailable="<span>"+"可賣:"+dataSource[i].availableVancancy+"</span>";
@@ -664,7 +679,7 @@ var Module = function () {
                         dataSource[i].availableVancancy = 0;
                     }; //可賣為零時會出現bug...............................
 
-                    var dataPrice = "<p class='price'>" + "$" + dataSource[i].price + "起" + "</p>";
+                    var dataPrice = "<p class='price'>" + "$" + self.formatNumber(dataSource[i].price) + "起" + "</p>";
                     var dataStatus = "<p class='dataStatus'>" + dataSource[i].status + "</p>";
                     var dataAvailable = "<p>" + "可賣:" + dataSource[i].availableVancancy + "</p>";
                     var dataTotal = "<p>" + "團位:" + dataSource[i].totalVacnacy + "</p>";
