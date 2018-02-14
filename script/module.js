@@ -399,7 +399,7 @@ class Module {
         $(".nextList").click(function(){
             // console.log(currentPage);
             // console.log(totalPage);
-            console.log('clickNext');
+            // console.log('clickNext');
             if(currentPage == totalPage){ //當前頁數==最後一頁，禁止下一頁
                    return false;
                 }else{//不是最後一頁，顯示應該顯示的數據.
@@ -420,7 +420,7 @@ class Module {
         $(".prevList").click(function(){
             // console.log(currentPage);
             // console.log(totalPage);
-            console.log('clickPrev');
+            // console.log('clickPrev');
             if(currentPage == 1 || currentPage == 0){//當前頁數==1，禁止上一頁
                  return false;
                 }else{
