@@ -561,15 +561,12 @@ var Module = function () {
             var pageSize = 7; //每頁顯示數據條數
             var currentPage = 1; //當前頁數
             var totalSize = $(".calendar_list ul li").length; //獲取總數據
-            var totalPage = Math.floor(totalSize / pageSize) + 1; //計算總頁數
+            var totalPage = Math.ceil(totalSize / pageSize); //計算總頁數
             $(".calendar_list ul li:gt(6)").hide(); //設置首頁顯示7條數據
             $(".total").text(totalPage); //設置總頁數
             $(".current_page").text(currentPage); //設置當前頁數
             //實現下一頁
             $(".nextList").click(function () {
-                // console.log(currentPage);
-                // console.log(totalPage);
-                // console.log('clickNext');
                 if (currentPage == totalPage) {
                     //當前頁數==最後一頁，禁止下一頁
                     return false;
@@ -589,9 +586,6 @@ var Module = function () {
             });
             //實現上一頁
             $(".prevList").click(function () {
-                // console.log(currentPage);
-                // console.log(totalPage);
-                // console.log('clickPrev');
                 if (currentPage == 1 || currentPage == 0) {
                     //當前頁數==1，禁止上一頁
                     return false;
@@ -682,10 +676,11 @@ var Module = function () {
                 if ($('.currentDays').hasClass(dataDate)) {
                     // var self = this;
                     // var $this = this.$ele;
-
+                    //可賣為零時會出現bug...............................
                     if (dataSource[i].availableVancancy == undefined) {
                         dataSource[i].availableVancancy = 0;
-                    }; //可賣為零時會出現bug...............................
+                    };
+                    //可賣為零時會出現bug...............................
 
                     var dataPrice = "<p class='price'>" + "$" + self.formatNumber(dataSource[i].price) + "起" + "</p>";
                     var dataStatus = "<p class='dataStatus'>" + dataSource[i].status + "</p>";

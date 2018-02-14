@@ -18,12 +18,15 @@
 		
 		//實現下一頁
 		$(".next").click(function(){
+			
 			if(currentPage ==totalPage){ //當前頁數==最後一頁，禁止下一頁
 				   return false;
 				}else{//不是最後一頁，顯示應該顯示的數據.
+
 				    $(".current_page").text(++currentPage);  //當前頁數先+1
 					var start=pageSize*(currentPage-1);
 					var end=pageSize*currentPage;
+					console.log(currentPage);
 					$.each($('ul li'),function(index,item){
 							if(index >=start && index < end){
 								$(this).show();
@@ -38,12 +41,14 @@
 			
 			//實現上一頁
 		$(".prev").click(function(){
+		
 			if(currentPage == 1){//當前頁數==1，禁止上一頁
 			     return false;
 				}else{
 					 $(".current_page").text(--currentPage);  //當前頁數先-1
 					 var start=pageSize*(currentPage-1);
 					 var end=pageSize*currentPage;
+					 	console.log(currentPage);
 					 $.each($('ul li'),function(index,item){
 						   if(index >=start && index < end){
 								$(this).show();
@@ -106,6 +111,18 @@
                 <li>26</li> 
                 <li>27</li> 
                 <li>28</li> 
+                  <li>25</li> 
+                <li>26</li> 
+                <li>27</li> 
+                <li>28</li> 
+                  <li>25</li> 
+                <li>26</li> 
+                <li>27</li> 
+                <li>28</li> 
+                  <li>25</li> 
+                <li>26</li> 
+                <li>27</li> 
+                
             </ul> 
         </div> 
         <div class="page_btn clear"> 
