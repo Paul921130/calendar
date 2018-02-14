@@ -398,8 +398,7 @@ class Module {
             if(currentPage == totalPage){ //當前頁數==最後一頁，禁止下一頁
                    return false;
                 }else{//不是最後一頁，顯示應該顯示的數據.
-                    currentPage++;
-                    $(".current_page").text(currentPage);  //當前頁數先+1
+                    $(".current_page").text(++currentPage);  //當前頁數先+1
                     var start=pageSize*(currentPage-1);
                     var end=pageSize*currentPage;
                     $.each($('.calendar_list ul li'),function(index,item){
@@ -418,8 +417,7 @@ class Module {
             if(currentPage == 1 || currentPage == 0){//當前頁數==1，禁止上一頁
                  return false;
                 }else{
-                    currentPage--;
-                     $(".current_page").text(currentPage);  //當前頁數先-1
+                     $(".current_page").text(--currentPage);  //當前頁數先-1
                      var start=pageSize*(currentPage-1);
                      var end=pageSize*currentPage;
                      $.each($('.calendar_list ul li'),function(index,item){
