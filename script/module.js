@@ -397,7 +397,7 @@ class Module {
         $(".current_page").text(currentPage); //設置當前頁數
         //實現下一頁
         $(".nextList").click(function(){
-            if(currentPage == totalPage){ //當前頁數==最後一頁，禁止下一頁
+            if(currentPage == totalPage||currentPage == 0){ //當前頁數==最後一頁，禁止下一頁
                    return false;
                 }else{//不是最後一頁，顯示應該顯示的數據.
                     $(".current_page").text(++currentPage);  //當前頁數先+1
@@ -415,7 +415,7 @@ class Module {
             });    
             //實現上一頁
         $(".prevList").click(function(){
-            if(currentPage == 1 || currentPage == 0){//當前頁數==1，禁止上一頁
+            if(currentPage == 1 ){//當前頁數==1，禁止上一頁
                  return false;
                 }else{
                      $(".current_page").text(--currentPage);  //當前頁數先-1

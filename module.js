@@ -567,7 +567,7 @@ var Module = function () {
             $(".current_page").text(currentPage); //設置當前頁數
             //實現下一頁
             $(".nextList").click(function () {
-                if (currentPage == totalPage) {
+                if (currentPage == totalPage || currentPage == 0) {
                     //當前頁數==最後一頁，禁止下一頁
                     return false;
                 } else {
@@ -586,7 +586,7 @@ var Module = function () {
             });
             //實現上一頁
             $(".prevList").click(function () {
-                if (currentPage == 1 || currentPage == 0) {
+                if (currentPage == 1) {
                     //當前頁數==1，禁止上一頁
                     return false;
                 } else {
