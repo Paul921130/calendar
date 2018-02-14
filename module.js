@@ -347,11 +347,12 @@ var Module = function () {
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1;
                 }); //將dataSource按照日期排序,由前至後(2016年開始);
-                self.showMonthDate(dataSource);
+
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
-                self.bornCalendar(dataSource);
-                self.bornList(dataSource);
+                self.showMonthDate(dataSource);
+                // self.bornCalendar(dataSource);
+                // self.bornList(dataSource);
             });
         }
     }, {
@@ -379,6 +380,8 @@ var Module = function () {
                 $(".tab:nth-child(1) a").addClass('currentMonth');
             };
             self.monthSelect(dataSource);
+            self.bornCalendar(dataSource);
+            self.bornList(dataSource);
             // //小箭頭跳currentMonth
             $('.next').on('click', function () {
                 if ($(".tab:nth-child(3) a").hasClass('currentMonth') === false) {
@@ -564,6 +567,8 @@ var Module = function () {
             $(".current_page").text(currentPage); //設置當前頁數
             //實現下一頁
             $(".nextList").click(function () {
+                // console.log(currentPage);
+                // console.log(totalPage);
                 console.log('clickNext');
                 if (currentPage == totalPage) {
                     //當前頁數==最後一頁，禁止下一頁
@@ -584,6 +589,8 @@ var Module = function () {
             });
             //實現上一頁
             $(".prevList").click(function () {
+                // console.log(currentPage);
+                // console.log(totalPage);
                 console.log('clickPrev');
                 if (currentPage == 1 || currentPage == 0) {
                     //當前頁數==1，禁止上一頁
