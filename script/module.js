@@ -538,8 +538,6 @@ class Module {
             });     
     };
 
-
-
     // 下一個有資料的月份
     nextMonth(){
         return this;
