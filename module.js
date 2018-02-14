@@ -347,13 +347,12 @@ var Module = function () {
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1;
                 }); //將dataSource按照日期排序,由前至後(2016年開始);
-
-
                 self.showMonthDate(dataSource);
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
                 self.bornCalendar(dataSource);
                 self.bornList(dataSource);
+                self.monthSelect(dataSource);
             });
         }
     }, {
@@ -380,13 +379,13 @@ var Module = function () {
                 $this.find('.ntb_tab').append(monthsTitle);
                 $(".tab:nth-child(1) a").addClass('currentMonth');
             };
-            self.monthSelect(dataSource);
+            // self.monthSelect(dataSource);
             // //小箭頭跳currentMonth
             $('.next').on('click', function () {
                 if ($(".tab:nth-child(3) a").hasClass('currentMonth') === false) {
                     $this.find('.currentMonth').parent().next().children().addClass('currentMonth');
                     $this.find('.currentMonth').parent().prev().children().removeClass('currentMonth');
-                    self.monthSelect(dataSource);
+                    // self.monthSelect(dataSource);
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                 } else {
@@ -401,7 +400,7 @@ var Module = function () {
                         $(".tab a").attr('id', '');
                         $(".tab:nth-child(1) a").addClass('currentMonth');
                     };
-                    self.monthSelect(dataSource);
+                    // self.monthSelect(dataSource);
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                     console.log(goMonth);
@@ -414,7 +413,7 @@ var Module = function () {
                 if ($(".tab:nth-child(1) a").hasClass('currentMonth') !== true) {
                     $this.find('.currentMonth').parent().prev().children().addClass('currentMonth');
                     $this.find('.currentMonth').parent().next().children().removeClass('currentMonth');
-                    self.monthSelect(dataSource);
+                    // self.monthSelect(dataSource);
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                 } else {
@@ -428,7 +427,7 @@ var Module = function () {
                         $(".tab a").attr('id', '');
                         $(".tab:nth-child(3) a").addClass('currentMonth');
                     };
-                    self.monthSelect(dataSource);
+                    // self.monthSelect(dataSource);
                     self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                     console.log(goMonth);
@@ -437,53 +436,6 @@ var Module = function () {
                 console.log($('.currentMonth').attr('data-label'));
             }); //小箭頭跳currentMonth        
             // 小箭頭跳currentMonth
-
-
-            // 小箭頭跳頁click
-            // $('.next').on('click', function() {   
-            //         $this.find('.ntb_tab').empty();
-            //         $(".tab a").removeClass('currentMonth');
-            //         for (var i = goMonth ;i <= goMonth + 2 ; i++ ){
-            //             var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
-            //             console.log(nextMonthMo);
-            //             var monthsTitle= '<li class="tab">'+
-            //                                '<a href="#" class="'+moment().add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
-            //                              '</li>';
-            //             $this.find('.ntb_tab').append(monthsTitle);
-            //             $(".tab a").attr('id','');
-            //             // $(".tab:nth-child("+(goMonth+1)+") a").attr('id','currentMonth');
-            //             // $(".tab:nth-child("+(goMonth+1)+") a").addClass('currentMonth'); 
-            //             // $(".tab:nth-child(1) a").attr('id','currentMonth');
-            //             $(".tab:nth-child(1) a").addClass('currentMonth');              
-            //         };
-            //         goMonth++; 
-            //         self.monthSelect();
-            //         self.getNowMonth();
-            //         self.bornCalendar();
-
-            // });//顯示下個月的title
-            // $('.prev').on('click', function() {
-            //         $this.find('.ntb_tab').empty();
-            //         $(".tab a").removeClass('currentMonth');
-            //         for (var i = goMonth-2 ;i <= (goMonth-2) + 2 ; i++ ){
-            //             var nextMonthMo=moment().add(i, 'months').format("YYYY MMM");
-            //             // console.log(nextMonthMo);
-
-            //             var monthsTitle='<li class="tab">'+
-            //                                '<a href="#" class="'+moment().add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment().add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
-            //                             '</li>';
-            //              $this.find('.ntb_tab').append(monthsTitle);
-            //              $(".tab a").attr('id','');
-            //              // $(".tab:nth-child(1) a").attr('id','currentMonth');
-            //              $(".tab:nth-child(1) a").addClass('currentMonth');                 
-            //         };
-            //         goMonth--;
-            //         self.monthSelect();
-            //         self.getNowMonth();
-            //         self.bornCalendar();
-            // });
-            // 顯示上個月的title
-            // 小箭頭跳頁click
             return this;
         }
     }, {
@@ -498,8 +450,6 @@ var Module = function () {
                 self.bornCalendar(dataSource);
                 self.bornList(dataSource);
             });
-            // });
-
             return this;
         }
     }, {
@@ -600,6 +550,62 @@ var Module = function () {
                 $(this).addClass('daySelected');
             });
             $(".hideData").remove();
+            self.listChange();
+        }
+    }, {
+        key: "listChange",
+        value: function listChange() {
+            //實現分頁思路:
+            var pageSize = 7; //每頁顯示數據條數
+            var currentPage = 1; //當前頁數
+            var totalSize = $(".calendar_list ul li").length; //獲取總數據
+            var totalPage = Math.ceil(totalSize / pageSize); //計算總頁數
+            $(".calendar_list ul li:gt(6)").hide(); //設置首頁顯示7條數據
+            $(".total").text(totalPage); //設置總頁數
+            $(".current_page").text(currentPage); //設置當前頁數
+            //實現下一頁
+            $(".nextList").click(function () {
+                currentPage++;
+                console.log('clickNext');
+                if (currentPage == totalPage) {
+                    //當前頁數==最後一頁，禁止下一頁
+                    return false;
+                } else {
+                    //不是最後一頁，顯示應該顯示的數據.
+
+                    $(".current_page").text(currentPage); //當前頁數先+1
+                    var start = pageSize * (currentPage - 1);
+                    var end = pageSize * currentPage;
+                    $.each($('.calendar_list ul li'), function (index, item) {
+                        if (index >= start && index < end) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                }
+            });
+            //實現上一頁
+            $(".prevList").click(function () {
+                currentPage--;
+                console.log('clickPrev');
+                if (currentPage == 1) {
+                    //當前頁數==1，禁止上一頁
+                    return false;
+                } else {
+
+                    $(".current_page").text(currentPage); //當前頁數先-1
+                    var start = pageSize * (currentPage - 1);
+                    var end = pageSize * currentPage;
+                    $.each($('.calendar_list ul li'), function (index, item) {
+                        if (index >= start && index < end) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                }
+            });
         }
     }, {
         key: "bornCalendar",
