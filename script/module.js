@@ -58,10 +58,16 @@ class Module {
         var opts = this.option;
         // console.log(ModuleDefaults.dataSource);
         console.log('moduleIn!!!!');
-        this.creatHtml();
         this.getAjax();
+        this.creatHtml();
+        
         this.switch();
         console.log(self.formatNumber(11111111111112211));
+        $('.switchMode').on('click', function() {
+            self.switch();
+        });
+        // this.inputData();
+         console.log(this.inputData());
        
 
         // var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
@@ -93,10 +99,18 @@ class Module {
     }
 ///////////////////////////////////////////////////////////將數字轉為金額格式(每三位數一個",")    
     methods() {
+        this.destroy();
+        this.nextMonth();
+        this.prevMonth();
+         this.switch();
         return this;
     }
 
     calendar() {
+        this.destroy();
+        this.nextMonth();
+         this.switch();
+        this.prevMonth();
         return this;
     }
     creatHtml(){
@@ -125,10 +139,12 @@ class Module {
                 method: 'GET',
                 url: './json/data2.json',
             }).done(function(dataSource) {
+
                 //篩選日期重複的資料!!!!!!!!!!!!!!!//以及覆蓋新Key值!!!!!!!!!!
                 var lookup = {};
                 var items = dataSource;
                 var dataSource = [];
+                // dataSource= dataSource.concat(self.inputData());
 
                     for (var item, i = 0; item = items[i++];) {
                       var date = item.date;
@@ -150,17 +166,23 @@ class Module {
                         dataSource.push(item);
                     }
                 }
-
+                // self.inputData();
+                
                 // console.log(dataSource);
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
-             
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1;
                 });//將dataSource按照日期排序,由前至後(2016年開始);
-                
+                // self.inputData(dataSource);
+             
+                console.log(dataSource);
+
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
+
+                // self.nextMonth(dataSource);
+                // self.prevMonth(dataSource);
                 // self.bornCalendar(dataSource);
                 // self.bornList(dataSource);
             });
@@ -534,23 +556,33 @@ class Module {
     };
 
     // 下一個有資料的月份
-    nextMonth(){
+    nextMonth(dataSource){
+        var self = this;
+        var $this = this.$ele;
+        console.log('nextMonth');
+        console.log(dataSource);
         return this;
     }
 
     // 上一個有資料的月份
-    prevMonth(){
+    prevMonth(dataSource){
+        var self = this;
+        var $this = this.$ele;
+        console.log('prevMonth');
+        console.log(dataSource);
         return this;
     }
 
     // 切換日曆或列表模式
     switch(){
+        var self = this;
+        var $this = this.$ele;
         if($('.calendar_list').hasClass('hide')){
             $(".switchMode").text("切換列表模式");
             }else{
                 $(".switchMode").text("切換月曆模式");
             }
-        $('.switchMode').on('click', function() {
+        
             $('.calendar_weeksWrap').toggleClass('hide');
             $('.calendar_list').toggleClass('hide');
             if($('.calendar_list').hasClass('hide')){
@@ -558,13 +590,21 @@ class Module {
             }else{
                 $(".switchMode").text("切換月曆模式");
             }
-        });
         return this;
     }
 
     // 加資料時如果有相同日期的資料，以後輸入為主，輸入時如果輸入沒有的月份，模組會加上該月份
-    inputData(){
+    inputData(inputOpt){
+        var self = this;
+        var $this = this.$ele;
+        var inputOpt;
+        // console.log(dataSource);
+        console.log(inputOpt);
+        // dataSource= inputOpt.concat(dataSource);
+        // console.log(dataSource);
+        return inputOpt;
         return this;
+        // return this;
     }
 
     // 重設資料時，月曆、tab重新產出
@@ -574,6 +614,7 @@ class Module {
 
     // destroy calendar，destroy時連class new出來的實例物件也要刪除
     destroy(){
+        $('.calendar').empty();
         return this;
     }
 

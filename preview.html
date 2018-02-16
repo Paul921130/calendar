@@ -81,18 +81,18 @@
                 console.log(data, module);
             });
             // 上一個有資料的月份
-            $('.calendars').calendar('prevMonth', function( data, module ) {
+            $('.calendars').calendar('prevMonth ', function( data, module ) {
                 console.log(data, module);
             });
             // 切換日曆或列表模式
-            $('.calendars').calendar('switch');
+            $('.calendars').calendar('switch');//ok
             // 加資料時如果有相同日期的資料，以後輸入為主，輸入時如果輸入沒有的月份，模組會加上該月份
-            $('.calendars').calendar('inputData', [
+            $('.calendar').calendar('inputData', [
                 {
-                    "guaranteed": true, // {boolean}
-                    "date": "2016/12/15", // {string} YYYY/MM/DD
-                    "price": "234567", // {string|number} XXXXXX | 近期上架
-                    "availableVancancy": 0, // {number}
+                    "certain": true, // {boolean}
+                    "date": "2018/06/15", // {string} YYYY/MM/DD
+                    "price": 234567, // {string|number} XXXXXX | 近期上架
+                    "onsell": 0, // {number}
                     "totalVacnacy": 20, // {number}
                     "status": "報名" // {string} 報名 | 後補 | 預定 | 截止 | 額滿 | 關團
                 },
@@ -110,8 +110,8 @@
                 },
                 // ...
             ]);
-            // destroy calendar，destroy時連class new出來的實例物件也要刪除
-            $('.calendars').calendar('destroy');
+            // destroy calendar，destroy時連class new出來的實例物件也要刪除//ok
+            // $('.calendar').calendar('destroy');
     </script>
 </body>
 
