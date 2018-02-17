@@ -784,12 +784,13 @@ var Module = function () {
         value: function inputData(inputOpt, dataSource) {
             var self = this;
             var $this = this.$ele;
+            var dataSource = dataSource;
             // var inputOpt;
 
             console.log(inputOpt);
             dataSource = inputOpt.concat(dataSource);
             console.log(dataSource);
-            // return inputOpt;
+            return dataSource;
             // return this;
         }
 
