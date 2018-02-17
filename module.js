@@ -335,8 +335,11 @@ var Module = function () {
                 var lookup = {};
                 var items = dataSource;
                 var dataSource = [];
-                // dataSource= dataSource.concat(self.inputData());
 
+                //inputData
+                // console.log(self.inputData());
+                // dataSource= dataSource.concat(self.inputData());
+                //inputData
                 for (var item, i = 0; item = items[i++];) {
                     var date = item.date;
                     var statusChange = item.state || item.status;
@@ -356,7 +359,7 @@ var Module = function () {
                         dataSource.push(item);
                     }
                 }
-                // self.inputData();
+                self.inputData(dataSource);
 
                 // console.log(dataSource);
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
@@ -776,13 +779,13 @@ var Module = function () {
 
     }, {
         key: "inputData",
-        value: function inputData(inputOpt) {
+        value: function inputData(inputOpt, dataSource) {
             var self = this;
             var $this = this.$ele;
-            var inputOpt;
-            // console.log(dataSource);
+            // var inputOpt;
+
             console.log(inputOpt);
-            // dataSource= inputOpt.concat(dataSource);
+            // dataSource = inputOpt.concat(dataSource);
             // console.log(dataSource);
             return inputOpt;
             return this;

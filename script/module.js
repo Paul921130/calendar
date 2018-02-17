@@ -144,8 +144,12 @@ class Module {
                 var lookup = {};
                 var items = dataSource;
                 var dataSource = [];
-                // dataSource= dataSource.concat(self.inputData());
 
+
+                //inputData
+                // console.log(self.inputData());
+                // dataSource= dataSource.concat(self.inputData());
+                //inputData
                     for (var item, i = 0; item = items[i++];) {
                       var date = item.date;
                       var statusChange=(item.state||item.status);
@@ -166,7 +170,7 @@ class Module {
                         dataSource.push(item);
                     }
                 }
-                // self.inputData();
+                self.inputData(dataSource);
                 
                 // console.log(dataSource);
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
@@ -594,13 +598,13 @@ class Module {
     }
 
     // 加資料時如果有相同日期的資料，以後輸入為主，輸入時如果輸入沒有的月份，模組會加上該月份
-    inputData(inputOpt){
+    inputData(inputOpt, dataSource){
         var self = this;
         var $this = this.$ele;
-        var inputOpt;
-        // console.log(dataSource);
+        // var inputOpt;
+       
         console.log(inputOpt);
-        // dataSource= inputOpt.concat(dataSource);
+        // dataSource = inputOpt.concat(dataSource);
         // console.log(dataSource);
         return inputOpt;
         return this;
