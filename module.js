@@ -234,12 +234,13 @@ var ModuleDefaults = {
 var ModuleReturns = ['output', 'methods'];
 
 var Module = function () {
-    function Module(ele, options) {
+    function Module(ele, options, options2) {
         _classCallCheck(this, Module);
 
         this.ele = ele;
         this.$ele = $(ele);
         this.option = options;
+        this.option2 = options2;
     }
 
     _createClass(Module, [{
@@ -259,7 +260,8 @@ var Module = function () {
                 self.switch();
             });
             // this.inputData();
-            console.log(this.inputData());
+            console.log('initConsolez:' + this.inputData()); //uundefined
+
 
             // var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
             // var nowMonth=parseInt($(".currentMonth").attr('data-label').substring(4, 10));//抓取currentMonth所代表的月份
@@ -785,10 +787,9 @@ var Module = function () {
             // var inputOpt;
 
             console.log(inputOpt);
-            // dataSource = inputOpt.concat(dataSource);
-            // console.log(dataSource);
-            return inputOpt;
-            return this;
+            dataSource = inputOpt.concat(dataSource);
+            console.log(dataSource);
+            // return inputOpt;
             // return this;
         }
 

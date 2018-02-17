@@ -47,10 +47,11 @@ const ModuleDefaults = {
 const ModuleReturns = ['output', 'methods'];
 
 class Module {
-    constructor(ele, options) {
+    constructor(ele, options, options2) {
         this.ele = ele;
         this.$ele = $(ele);
         this.option = options;
+        this.option2= options2;
     }
     init() {
         var self = this;
@@ -67,7 +68,7 @@ class Module {
             self.switch();
         });
         // this.inputData();
-         console.log(this.inputData());
+         console.log('initConsolez:'+this.inputData());//uundefined
        
 
         // var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
@@ -602,12 +603,11 @@ class Module {
         var self = this;
         var $this = this.$ele;
         // var inputOpt;
-       
+        
         console.log(inputOpt);
-        // dataSource = inputOpt.concat(dataSource);
-        // console.log(dataSource);
-        return inputOpt;
-        return this;
+        dataSource = inputOpt.concat(dataSource);
+        console.log(dataSource);
+        // return inputOpt;
         // return this;
     }
 
