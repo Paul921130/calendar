@@ -67,8 +67,9 @@ class Module {
         $('.switchMode').on('click', function() {
             self.switch();
         });
-        // this.inputData();
-         console.log('initConsolez:'+this.inputData());//uundefined
+     
+         console.log('initConsolez:'+this.inputData());//undefined
+
        
 
         // var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
@@ -110,7 +111,7 @@ class Module {
     calendar() {
         this.destroy();
         this.nextMonth();
-         this.switch();
+        this.switch();
         this.prevMonth();
         return this;
     }
@@ -135,6 +136,7 @@ class Module {
     getAjax(){
         var self = this;
         var $this = this.$ele;//class="calendar"
+        var inputOpt= new Array;
         $.ajax({
                 dataType: "json",
                 method: 'GET',
@@ -171,16 +173,17 @@ class Module {
                         dataSource.push(item);
                     }
                 }
-                self.inputData(dataSource);
+                // self.inputData(dataSource);
                 
-                // console.log(dataSource);
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1;
                 });//將dataSource按照日期排序,由前至後(2016年開始);
-                // self.inputData(dataSource);
-             
+                
+                
                 console.log(dataSource);
+
+                self.inputData(dataSource);
 
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
@@ -192,6 +195,7 @@ class Module {
                 // self.bornList(dataSource);
             });
     }
+
     creatCalendar(dataSource){
         var self = this;
         var $this = this.$ele;//class="calendar"
@@ -602,12 +606,13 @@ class Module {
     inputData(inputOpt, dataSource){
         var self = this;
         var $this = this.$ele;
-        var dataSource=dataSource;
-        // var inputOpt;
-        
+        var inputOpt;
+        var dataSource;
+        // var dataSource=dataSource;
+        // var inputOpt= inputOpt;
         console.log(inputOpt);
-        // dataSource = inputOpt.concat(dataSource);
-        // console.log(dataSource);
+        var dataSource=inputOpt.concat(dataSource);
+        console.log(dataSource);
         return dataSource;
         // return this;
     }
