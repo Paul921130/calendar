@@ -183,7 +183,12 @@ class Module {
                 
                 console.log(dataSource);
 
-                self.inputData(dataSource);
+
+                
+                self.inputData();
+                var aaaa;
+                console.log(aaaa);
+
 
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
@@ -603,17 +608,18 @@ class Module {
     }
 
     // 加資料時如果有相同日期的資料，以後輸入為主，輸入時如果輸入沒有的月份，模組會加上該月份
-    inputData(inputOpt, dataSource){
+    inputData(inputOpt){
         var self = this;
         var $this = this.$ele;
-        var inputOpt;
-        var dataSource;
+        var aaaa= inputOpt;
+        console.log(inputOpt);
+        // var dataSource;
         // var dataSource=dataSource;
         // var inputOpt= inputOpt;
-        console.log(inputOpt);
-        var dataSource=inputOpt.concat(dataSource);
-        console.log(dataSource);
-        return dataSource;
+        // console.log(inputOpt);
+        // var dataSource=inputOpt.concat(dataSource);
+        // console.log(dataSource);
+        return aaaa;
         // return this;
     }
 

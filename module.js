@@ -372,7 +372,9 @@ var Module = function () {
 
                 console.log(dataSource);
 
-                self.inputData(dataSource);
+                self.inputData();
+                var aaaa;
+                console.log(aaaa);
 
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
@@ -783,17 +785,18 @@ var Module = function () {
 
     }, {
         key: "inputData",
-        value: function inputData(inputOpt, dataSource) {
+        value: function inputData(inputOpt) {
             var self = this;
             var $this = this.$ele;
-            var inputOpt;
-            var dataSource;
+            var aaaa = inputOpt;
+            console.log(inputOpt);
+            // var dataSource;
             // var dataSource=dataSource;
             // var inputOpt= inputOpt;
-            console.log(inputOpt);
-            var dataSource = inputOpt.concat(dataSource);
-            console.log(dataSource);
-            return dataSource;
+            // console.log(inputOpt);
+            // var dataSource=inputOpt.concat(dataSource);
+            // console.log(dataSource);
+            return aaaa;
             // return this;
         }
 
