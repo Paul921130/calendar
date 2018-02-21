@@ -339,10 +339,6 @@ var Module = function () {
                 var items = dataSource;
                 var dataSource = [];
 
-                //inputData
-                // console.log(self.inputData());
-                // dataSource= dataSource.concat(self.inputData());
-                //inputData
                 for (var item, i = 0; item = items[i++];) {
                     var date = item.date;
                     var statusChange = item.state || item.status;
@@ -440,6 +436,7 @@ var Module = function () {
                 };
 
                 console.log($('.currentMonth').attr('data-label'));
+                self.nextMonth(dataSource);
             }); //小箭頭跳currentMonth
 
             $('.prev').on('click', function () {
@@ -465,8 +462,8 @@ var Module = function () {
                     self.bornCalendar(dataSource);
                     console.log(goMonth);
                 };
-
                 console.log($('.currentMonth').attr('data-label'));
+                self.prevMonth(dataSource);
             }); //小箭頭跳currentMonth        
             // 小箭頭跳currentMonth
             return this;
