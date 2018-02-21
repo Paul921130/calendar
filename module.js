@@ -251,14 +251,11 @@ var Module = function () {
         value: function init() {
             var self = this;
             console.log('moduleIn!!!!');
-            this.getAjax();
+            // this.inputData();
             this.creatHtml();
-
             this.$this.find('.switchMode').on('click', function () {
                 self.switch();
             });
-
-            // console.log('initConsolez:'+this.inputData());//undefineds  
             return this;
         }
         ///////////////////////////////////////////////////////////將數字轉為金額格式(每三位數一個",")
@@ -313,25 +310,18 @@ var Module = function () {
             return this;
         }
     }, {
-        key: "getAjax",
-        value: function getAjax() {
+        key: "resetData",
+        value: function resetData(resetOpt) {
             var self = this;
-            var inputOpt = self.inputData();
-            console.log(inputOpt);
-            // self.inputData(inputOpt);
-            // console.log(inputOpt);
-
             $.ajax({
                 dataType: "json",
                 method: 'GET',
                 url: './json/data1.json'
             }).done(function (dataSource) {
-
                 //篩選日期重複的資料!!!!!!!!!!!!!!!//以及覆蓋新Key值!!!!!!!!!!
                 var lookup = {};
                 var items = dataSource;
                 var dataSource = [];
-
                 for (var item, i = 0; item = items[i++];) {
                     var date = item.date;
                     var statusChange = item.state || item.status;
@@ -351,15 +341,17 @@ var Module = function () {
                         dataSource.push(item);
                     }
                 }
-                // self.inputData(dataSource);
+
+                var dataSource = resetOpt.concat(dataSource); //將inputData的陣列與dataSource
 
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1;
                 }); //將dataSource按照日期排序,由前至後(2016年開始);
 
-
                 console.log(dataSource);
+                // console.log(concatArray);
+                // console.log(dataSource);
 
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
@@ -369,7 +361,62 @@ var Module = function () {
                 self.onClickPrev(dataSource);
                 self.onClickDate(dataSource);
 
-                self.inputData();
+                // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
+            });
+        }
+    }, {
+        key: "inputData",
+        value: function inputData(inputOpt) {
+            var self = this;
+            $.ajax({
+                dataType: "json",
+                method: 'GET',
+                url: './json/data1.json'
+            }).done(function (dataSource) {
+                //篩選日期重複的資料!!!!!!!!!!!!!!!//以及覆蓋新Key值!!!!!!!!!!
+                var lookup = {};
+                var items = dataSource;
+                var dataSource = [];
+                for (var item, i = 0; item = items[i++];) {
+                    var date = item.date;
+                    var statusChange = item.state || item.status;
+                    delete (item.state || item.status);
+                    item.status = statusChange;
+
+                    var availableChange = item.onsell || item.availableVancancy;
+                    delete (item.onsell || item.availableVancancy);
+                    item.availableVancancy = availableChange;
+
+                    var totalChange = item.totalVacnacy || item.total;
+                    delete (item.totalVacnacy || item.total);
+                    item.totalVacnacy = totalChange;
+
+                    if (!(date in lookup)) {
+                        lookup[date] = 1;
+                        dataSource.push(item);
+                    }
+                }
+
+                var dataSource = inputOpt.concat(dataSource); //將inputData的陣列與dataSource
+
+                //篩選日期重複的資料!!!!!!!!!!!!!!!
+                dataSource = dataSource.sort(function (a, b) {
+                    return a.date > b.date ? 1 : -1;
+                }); //將dataSource按照日期排序,由前至後(2016年開始);
+
+                console.log(dataSource);
+                // console.log(concatArray);
+                // console.log(dataSource);
+
+                self.creatCalendar(dataSource);
+                self.creatCalendarDay(dataSource);
+                self.showMonthDate(dataSource);
+
+                self.onClickNext(dataSource);
+                self.onClickPrev(dataSource);
+                self.onClickDate(dataSource);
+
+                // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
             });
         }
     }, {
@@ -842,27 +889,9 @@ var Module = function () {
             } else {
                 self.$this.find(".switchMode").text("切換月曆模式");
             }
-            return this;
         }
 
         // 加資料時如果有相同日期的資料，以後輸入為主，輸入時如果輸入沒有的月份，模組會加上該月份
-
-    }, {
-        key: "inputData",
-        value: function inputData(inputOpt) {
-            var self = this;
-            // var $this = this.$ele;
-            // var inputOpt= inputOpt;
-            console.log(inputOpt);
-            // var dataSource;
-            // var dataSource=dataSource;
-            // var inputOpt= inputOpt;
-            // console.log(inputOpt);
-            // var dataSource=inputOpt.concat(dataSource);
-            // console.log(dataSource);
-            return inputOpt;
-            // return this;
-        }
 
         // 重設資料時，月曆、tab重新產出
 
