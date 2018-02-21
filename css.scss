@@ -24,11 +24,23 @@ $classname: 'calendar';
 .p_0{
 	padding: 0!important;
 }
+a{
+	text-decoration: none!important;
+}
 .#{$classname} {
+
+	ul{
+		padding:0;
+		margin:0;
+	}
+	.hide{
+		display:none;
+	}
 	li{
 		list-style: none;
 	}
-	.calendars_tabWrap{
+
+	.calendar_tabWrap{
 			overflow: hidden;
 			background-color: #ede9dd;
 			.ntb_gpbt>a {
@@ -64,14 +76,20 @@ $classname: 'calendar';
 	    		text-decoration: none;
 	    		margin: 0 3px;
 	    		padding-top: 6px;
-	    		background: #fff;
+	    		// background: #fff;
 	    		span{
 	    			    display: block;
 					    font-size: 16px;
-					    color: #e10500;
+					    color: #666;
 					    line-height: 1.25;
 	    		}
 	    	}
+		}
+		.currentMonth{
+			background: #fff;
+			span{
+				color: #e10500!important;
+			}
 		}
 		.ntb_gpbt>.ntb_tab>li, .ntb_gpbt>.ntb_tab>li.tab {
 	    	width: 33.3333%;
@@ -125,10 +143,10 @@ $classname: 'calendar';
 		    border-color: transparent transparent transparent #f4f4f4;
 		}
 	}
-	// .calendars_weeksWrap{
-	// 	border: 1px solid #eee;
-	// }
-	.calendars_weeksWrap>table{
+	.calendar_weeksWrap{
+		border: 1px solid #eee;
+	}
+	.calendar_weeksWrap>table{
 		width: 100%;
 		thead> tr{
 			display: flex;
@@ -153,7 +171,6 @@ $classname: 'calendar';
     			border-top: 1px solid transparent;
     			border-left: 1px solid transparent;
     			height: 85px;
-    			
 	    	}
 	    }
 	}
@@ -161,11 +178,169 @@ $classname: 'calendar';
 		background-color: #fff9e3;
 		cursor: pointer;
 	}
+	.currentDays{
+		font-size: 12px;
+		background-color: #fff;
+		p{
+			margin:0;
+			padding: 0;
+			line-height: 17px; 
+		}
+		.dataStatus_Or{
+			color: #ff7800;
+		}
+		.dataStatus_Re{
+			color: #e10500;
+		}
+		.dataStatus_Gr{
+			color: #24a07c;
+		}
+	}
+	.daysWithData{
+		background-color: #fff9e3!important;
+	}
 	.disabled {
     	// border: 1px solid #f8f8f8!important;
     	border-right: 1px solid transparent!important;
+    	border-bottom: 1px solid transparent!important;
     	background-color: #f8f8f8;
     	cursor: default;
+	}
+	.price {
+	    color: #e10500;
+	    margin-bottom:0; 
+	}
+	.daySelected{
+		box-sizing:border-box;
+		border: 2px solid #66bb3c!important;
+	}
+	.calendar_list{
+		ul{
+			position: relative;
+			height: 510px;
+		}
+		.daysWithData{
+			box-sizing:border-box;
+			height: 62px;
+			background: #fff!important;
+			border-style: solid;
+    		border-color: transparent #e3e3e3 #e3e3e3;
+    		border-width: 1px;
+		}
+		.daySelected{
+			box-sizing:border-box;
+			border: 1px solid #66bb3c!important;
+			background-color: #fff9e3!important;
+		}
+		.daysWithData:hover{
+			background-color: #fff9e3!important;
+			cursor: pointer;
+		}
+		.dataStatus {
+			display: block;
+			font-size: 16px;
+		}
+		.dataStatus_Or{
+			color: #ff7800;
+		}
+		.dataStatus_Re{
+			color: #e10500;
+		}
+		.dataStatus_Gr{
+			color: #24a07c;
+		}
+		.price {
+	    color: #e10500;
+	    margin-bottom:0; 
+	    font-size: 16px;
+		}
+		.currentLists {
+			display: flex;
+			.li_right, .li_left, .li_middle{
+				padding: 5px;
+				float: left;
+			}
+			.li_left{
+				flex:1;
+				.dayDate{
+					// padding-bottom: 5px;
+					color: #666;
+				    text-align: center;
+				    font-size: 24px;
+				    line-height: 26px;
+				    span{
+				    	font-size: 16px;
+						display: block;
+						text-align: center;
+					}
+				}
+			}
+			.li_middle{
+				flex:6;
+				span{
+					margin-right: 30px;
+					color: #666;
+				}
+				.lb_gpls{
+					max-width: 50px;
+					min-width: auto;
+    				line-height: 20px;
+					margin-top: 5px;
+					text-align: center;
+    				font-weight: 400;
+					color: #24a07d;
+					background-color: #cee5df;		
+				}
+			}
+			.li_right{
+				flex:3;
+				text-align: right;
+			}
+		}
+	}
+	.listPage{
+		position: absolute;
+		height: 20px;
+		width: 100%;
+		bottom: 0;
+		text-align: center;
+		.nextList{
+			float: right;
+		}
+		.prevList{
+			float: left;
+		}
+		span{
+			font-size: 14px;
+			line-height: 1.5;
+			color: #666;
+		}
+	}
+	.prevList , .nextList{
+		cursor: pointer;
+	}
+	.arrow-gr{
+		display: inline-block;
+    	width: 0;
+    	height: 0;
+    	border-style: solid;
+    	vertical-align: middle;
+    	margin-top: -3px;
+    	border-width: 4.5px 0 4.5px 5px;
+    	border-color: transparent transparent transparent #24a07c;
+	}
+	.arrow-gl{
+		display: inline-block;
+    	width: 0;
+    	height: 0;
+    	border-style: solid;
+    	vertical-align: middle;
+    	margin-top: -3px;
+    	border-width: 4.5px 5px 4.5px 0;
+    	border-color: transparent #24a07c transparent transparent;
+	} 
+	.hideData{
+		display: none;
 	}
 	// style on phone device
 	@media screen and (min-width: $screen-tablet) {
@@ -173,9 +348,7 @@ $classname: 'calendar';
 		// style on tablet device
 	}
 	@media screen and (min-width: $screen-desktop) {
-
 		// style on desktop device
-	
 	}
 	@media screen and (min-width: $screen-lg-desktop) {
 
@@ -183,6 +356,10 @@ $classname: 'calendar';
 	}
 	&.#{$classname}_modifier {
 		
+	}
+
+	&.#{$classname}_weeksWrap {
+
 	}
 	& > .#{$classname}_child {
 		

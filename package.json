@@ -12,7 +12,9 @@
     "type": "git"
   },
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "moment": "^2.20.1"
+  },
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.0",
