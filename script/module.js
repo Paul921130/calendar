@@ -58,7 +58,7 @@ class Module {
     init() {
         var self = this;
         console.log('moduleIn!!!!');
-        // this.inputData();
+        this.getAjax();
         this.creatHtml();
         this.$this.find('.switchMode').on('click', function() {
             self.switch();
@@ -87,19 +87,11 @@ class Module {
     }
 ///////////////////////////////////////////////////////////將數字轉為金額格式(每三位數一個",")    
     methods() {
-        this.destroy();
-        this.nextMonth();
-        this.prevMonth();
-        this.switch();
-        return this;
+
     }
 
     calendar() {
-        this.destroy();
-        this.nextMonth();
-        this.switch();
-        this.prevMonth();
-        return this;
+  
     }
     creatHtml(){
         var self = this;
@@ -119,7 +111,8 @@ class Module {
         return this;
     }
 
-    resetData(resetOpt){
+
+    getAjax(){
         var self = this;
         $.ajax({
                 dataType: "json",
@@ -151,8 +144,6 @@ class Module {
                     }
                 }
 
-                var dataSource=resetOpt.concat(dataSource);//將inputData的陣列與dataSource
-
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1;
@@ -166,6 +157,7 @@ class Module {
                 self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
 
+
                 self.onClickNext(dataSource);
                 self.onClickPrev(dataSource);
                 self.onClickDate(dataSource);
@@ -173,8 +165,61 @@ class Module {
                 // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
             });
     }
+    resetData(resetOpt){
+        var self = this;
+        $.ajax({
+                dataType: "json",
+                method: 'GET',
+                url: './json/data1.json',
+            }).done(function(dataSource) {
+                //篩選日期重複的資料!!!!!!!!!!!!!!!//以及覆蓋新Key值!!!!!!!!!!
+                var lookup = {};
+                var items = dataSource;
+                var dataSource = [];
+                    for (var item, i = 0; item = items[i++];) {
+                      var date = item.date;
+                      var statusChange=(item.state||item.status);
+                      delete(item.state||item.status);
+                      item.status= statusChange;
+                      
+                      var availableChange=(item.onsell||item.availableVancancy);
+                      delete(item.onsell||item.availableVancancy);
+                      item.availableVancancy= availableChange;
 
-     inputData(inputOpt){
+                      var totalChange=(item.totalVacnacy||item.total);
+                      delete(item.totalVacnacy||item.total);
+                      item.totalVacnacy=totalChange;
+
+                      if (!(date in lookup)) {
+                        lookup[date] = 1;
+                        dataSource.push(item);
+                    }
+                }
+
+                var dataSource = resetOpt.concat(dataSource);//將inputData的陣列與dataSource
+
+                //篩選日期重複的資料!!!!!!!!!!!!!!!
+                dataSource = dataSource.sort(function (a, b) {
+                    return a.date > b.date ? 1 : -1;
+                });//將dataSource按照日期排序,由前至後(2016年開始);
+                
+                // console.log(dataSource);
+                // console.log(concatArray);
+                // console.log(dataSource);
+
+                self.creatCalendar(dataSource);
+                self.creatCalendarDay(dataSource);
+                self.showMonthDate(dataSource);
+
+                self.onClickNext(dataSource);
+                self.onClickPrev(dataSource);
+                self.onClickDate(dataSource);
+
+                // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
+            });
+            // location.reload();
+    };
+    inputData(inputOpt){
         var self = this;
         $.ajax({
                 dataType: "json",
@@ -191,7 +236,6 @@ class Module {
                       delete(item.state||item.status);
                       item.status= statusChange;
 
-                      
                       var availableChange=(item.onsell||item.availableVancancy);
                       delete(item.onsell||item.availableVancancy);
                       item.availableVancancy= availableChange;
@@ -217,18 +261,12 @@ class Module {
                 // console.log(concatArray);
                 // console.log(dataSource);
 
-                self.creatCalendar(dataSource);
-                self.creatCalendarDay(dataSource);
-                self.showMonthDate(dataSource);
-
-
                 self.onClickNext(dataSource);
                 self.onClickPrev(dataSource);
                 self.onClickDate(dataSource);
-
                 // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
             });
-    }
+    };
     creatCalendar(dataSource){
         var self = this;
         var calendarHtml='<table class="weekTable">'+

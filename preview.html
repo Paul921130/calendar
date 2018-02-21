@@ -84,6 +84,7 @@
             $('.calendars').calendar('prevMonth ', function( data, module ) {
                 console.log(data, module);
             });
+            
             // 切換日曆或列表模式
             $('.calendar').calendar('switch');//ok
             // 加資料時如果有相同日期的資料，以後輸入為主，輸入時如果輸入沒有的月份，模組會加上該月份
@@ -112,25 +113,32 @@
                 },
                 // ...
             ]);
+            $('.calendar').calendar('resetData', [
+                {
+                    "certain": true, // {boolean}
+                    "date": "2017/06/15", // {string} YYYY/MM/DD
+                    "price": 234567, // {string|number} XXXXXX | 近期上架
+                    "onsell": 0, // {number}
+                    "totalVacnacy": 20, // {number}
+                    "status": "報名" // {string} 報名 | 後補 | 預定 | 截止 | 額滿 | 關團
+                },{
+                    "certain": true, // {boolean}
+                    "date": "2017/09/22", // {string} YYYY/MM/DD
+                    "price": 234567, // {string|number} XXXXXX | 近期上架
+                    "onsell": 0, // {number}
+                    "totalVacnacy": 20, // {number}
+                    "status": "報名" // {string} 報名 | 後補 | 預定 | 截止 | 額滿 | 關團
+                },{
+                    "certain": true, // {boolean}
+                    "date": "2017/12/29", // {string} YYYY/MM/DD
+                    "price": 234567, // {string|number} XXXXXX | 近期上架
+                    "onsell": 0, // {number}
+                    "totalVacnacy": 20, // {number}
+                    "status": "報名" // {string} 報名 | 後補 | 預定 | 截止 | 額滿 | 關團
+                },
+                // ...
+            ]);
             // 重設資料時，月曆、tab重新產出
-            // $('.calendar').calendar('resetData', [
-            //     {
-            //         "guaranteed": true, // {boolean}
-            //         "date": "2016/12/15", // {string} YYYY/MM/DD
-            //         "price": "234567", // {string|number} XXXXXX | 近期上架
-            //         "availableVancancy": 0, // {number}
-            //         "totalVacnacy": 20, // {number}
-            //         "status": "報名" // {string} 報名 | 後補 | 預定 | 截止 | 額滿 | 關團
-            //     },{
-            //         "guaranteed": true, // {boolean}
-            //         "date": "2016/04/15", // {string} YYYY/MM/DD
-            //         "price": "234567", // {string|number} XXXXXX | 近期上架
-            //         "availableVancancy": 0, // {number}
-            //         "totalVacnacy": 20, // {number}
-            //         "status": "報名" // {string} 報名 | 後補 | 預定 | 截止 | 額滿 | 關團
-            //     },
-            //     // ...
-            // ]);
             // destroy calendar，destroy時連class new出來的實例物件也要刪除//ok
             // $('.calendar').calendar('destroy');
     </script>

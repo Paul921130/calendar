@@ -251,7 +251,7 @@ var Module = function () {
         value: function init() {
             var self = this;
             console.log('moduleIn!!!!');
-            // this.inputData();
+            this.getAjax();
             this.creatHtml();
             this.$this.find('.switchMode').on('click', function () {
                 self.switch();
@@ -285,22 +285,10 @@ var Module = function () {
 
     }, {
         key: "methods",
-        value: function methods() {
-            this.destroy();
-            this.nextMonth();
-            this.prevMonth();
-            this.switch();
-            return this;
-        }
+        value: function methods() {}
     }, {
         key: "calendar",
-        value: function calendar() {
-            this.destroy();
-            this.nextMonth();
-            this.switch();
-            this.prevMonth();
-            return this;
-        }
+        value: function calendar() {}
     }, {
         key: "creatHtml",
         value: function creatHtml() {
@@ -308,6 +296,59 @@ var Module = function () {
             var calendarHtml = '<div class="calendar_tabWrap">' + '<div class="ntb_gpbt yellow">' + '<a href="#" class="prev on">' + '</a>' + '<ul class="ntb_tab">' + '</ul>' + '<a href="#" class="next on">' + '</a>' + '</div>' + '</div>' + '<div class="calendar_weeksWrap">' + '</div>' + '<div class="calendar_list hide" id="calendar_list">' + '</div>'; //要記得用"+"連起來呦    
             this.$this.append(calendarHtml);
             return this;
+        }
+    }, {
+        key: "getAjax",
+        value: function getAjax() {
+            var self = this;
+            $.ajax({
+                dataType: "json",
+                method: 'GET',
+                url: './json/data1.json'
+            }).done(function (dataSource) {
+                //篩選日期重複的資料!!!!!!!!!!!!!!!//以及覆蓋新Key值!!!!!!!!!!
+                var lookup = {};
+                var items = dataSource;
+                var dataSource = [];
+                for (var item, i = 0; item = items[i++];) {
+                    var date = item.date;
+                    var statusChange = item.state || item.status;
+                    delete (item.state || item.status);
+                    item.status = statusChange;
+
+                    var availableChange = item.onsell || item.availableVancancy;
+                    delete (item.onsell || item.availableVancancy);
+                    item.availableVancancy = availableChange;
+
+                    var totalChange = item.totalVacnacy || item.total;
+                    delete (item.totalVacnacy || item.total);
+                    item.totalVacnacy = totalChange;
+
+                    if (!(date in lookup)) {
+                        lookup[date] = 1;
+                        dataSource.push(item);
+                    }
+                }
+
+                //篩選日期重複的資料!!!!!!!!!!!!!!!
+                dataSource = dataSource.sort(function (a, b) {
+                    return a.date > b.date ? 1 : -1;
+                }); //將dataSource按照日期排序,由前至後(2016年開始);
+
+                console.log(dataSource);
+                // console.log(concatArray);
+                // console.log(dataSource);
+
+                self.creatCalendar(dataSource);
+                self.creatCalendarDay(dataSource);
+                self.showMonthDate(dataSource);
+
+                self.onClickNext(dataSource);
+                self.onClickPrev(dataSource);
+                self.onClickDate(dataSource);
+
+                // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
+            });
         }
     }, {
         key: "resetData",
@@ -349,7 +390,7 @@ var Module = function () {
                     return a.date > b.date ? 1 : -1;
                 }); //將dataSource按照日期排序,由前至後(2016年開始);
 
-                console.log(dataSource);
+                // console.log(dataSource);
                 // console.log(concatArray);
                 // console.log(dataSource);
 
@@ -363,6 +404,7 @@ var Module = function () {
 
                 // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
             });
+            // location.reload();
         }
     }, {
         key: "inputData",
@@ -408,14 +450,9 @@ var Module = function () {
                 // console.log(concatArray);
                 // console.log(dataSource);
 
-                self.creatCalendar(dataSource);
-                self.creatCalendarDay(dataSource);
-                self.showMonthDate(dataSource);
-
                 self.onClickNext(dataSource);
                 self.onClickPrev(dataSource);
                 self.onClickDate(dataSource);
-
                 // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
             });
         }
