@@ -635,7 +635,7 @@ class Module {
     ////////////////////////////////////whenclick的callBackFunction區//////////////////////////////////////
 
     // 下一個有資料的月份
-    nextMonth(dataSource){
+    nextMonth(nextMethod ,dataSource){
         var self = this;
         var $this = this.$ele;
         // console.log(dataSource);
@@ -643,7 +643,7 @@ class Module {
     }
 
     // 上一個有資料的月份
-    prevMonth(dataSource){
+    prevMonth(prevMethod, dataSource){
         var self = this;
         var $this = this.$ele;
         // console.log(dataSource);

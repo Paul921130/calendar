@@ -806,7 +806,7 @@ var Module = function () {
         ////////////////////////////////////whenclick的callBackFunction區//////////////////////////////////////
 
         // 下一個有資料的月份
-        value: function nextMonth(dataSource) {
+        value: function nextMonth(nextMethod, dataSource) {
             var self = this;
             var $this = this.$ele;
             // console.log(dataSource);
@@ -817,7 +817,7 @@ var Module = function () {
 
     }, {
         key: "prevMonth",
-        value: function prevMonth(dataSource) {
+        value: function prevMonth(prevMethod, dataSource) {
             var self = this;
             var $this = this.$ele;
             // console.log(dataSource);
