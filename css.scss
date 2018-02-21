@@ -270,9 +270,9 @@ a{
 				    line-height: 26px;
 				    span{
 				    	font-size: 16px;
-					display: block;
-					text-align: center;
-				}
+						display: block;
+						text-align: center;
+					}
 				}
 			}
 			.li_middle{
@@ -299,7 +299,6 @@ a{
 		}
 	}
 	.listPage{
-		// display: inline-block;
 		position: absolute;
 		height: 20px;
 		width: 100%;
@@ -311,9 +310,34 @@ a{
 		.prevList{
 			float: left;
 		}
+		span{
+			font-size: 14px;
+			line-height: 1.5;
+			color: #666;
+		}
 	}
 	.prevList , .nextList{
 		cursor: pointer;
+	}
+	.arrow-gr{
+		display: inline-block;
+    	width: 0;
+    	height: 0;
+    	border-style: solid;
+    	vertical-align: middle;
+    	margin-top: -3px;
+    	border-width: 4.5px 0 4.5px 5px;
+    	border-color: transparent transparent transparent #24a07c;
+	}
+	.arrow-gl{
+		display: inline-block;
+    	width: 0;
+    	height: 0;
+    	border-style: solid;
+    	vertical-align: middle;
+    	margin-top: -3px;
+    	border-width: 4.5px 5px 4.5px 0;
+    	border-color: transparent #24a07c transparent transparent;
 	} 
 	.hideData{
 		display: none;

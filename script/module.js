@@ -402,9 +402,9 @@ class Module {
 
             //列表跳頁產出
             var listPage= '<div class="listPage">'+
-                          '<a class="prevList">上一頁</a>'+
+                          '<a class="prevList"><span class="arrow-gl m-r-xs"></span>上一頁</a>'+
                           '<span class="num"><span class="current_page">1</span><span style="padding:0 3px;">/</span><span class="total"></span></span>'+
-                          '<a class="nextList">下一頁</a>'+
+                          '<a class="nextList">下一頁<span class="arrow-gr m-lr-xs"></span></a>'+
                           '</div>';
             this.$this.find('#Body').append(listPage);
             //列表跳頁產出
