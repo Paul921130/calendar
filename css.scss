@@ -215,9 +215,12 @@ a{
 		border: 2px solid #66bb3c!important;
 	}
 	.calendar_list{
+		ul{
+			position: relative;
+			height: 460px;
+		}
 		.daysWithData{
 			box-sizing:border-box;
-		
 			height: 62px;
 			background: #fff!important;
 			border-style: solid;
@@ -295,7 +298,18 @@ a{
 			}
 		}
 	}
-	
+	.listPage{
+		// display: inline-block;
+		position: absolute;
+		height: 20px;
+		width: 116px;
+		left: 50%;
+		margin-left: -58px;
+		bottom: 0;
+	}
+	.prevList , .nextList{
+		cursor: pointer;
+	} 
 	.hideData{
 		display: none;
 	}

@@ -201,7 +201,7 @@ var ModuleDefaults = {
     }],
     // 輸入一開始要在哪一個月份 [string] YYYYMM，若輸入的年月沒有資料，
     // 就要找相近的年月，若前一個月後一個月都有資料，就顯示資料比數比較多的那一個月
-    initYearMonth: '201705',
+    initYearMonth: '2018-06',
     // 設定各資料的key
     dataKeySetting: {
         // 保證出團
@@ -255,6 +255,7 @@ var Module = function () {
             this.creatHtml();
 
             this.switch();
+
             console.log(self.formatNumber(11111111111112211));
             $('.switchMode').on('click', function () {
                 self.switch();
@@ -376,6 +377,9 @@ var Module = function () {
                 self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
 
+                self.onClickNext(dataSource);
+                self.onClickPrev(dataSource);
+                self.onClickDate(dataSource);
                 // self.nextMonth(dataSource);
                 // self.prevMonth(dataSource);
                 // self.bornCalendar(dataSource);
@@ -490,7 +494,6 @@ var Module = function () {
             var calendarDayHtml = '<tbody id="mainCalendar">' + '<tr class="days">' + '<td class="disabled">' + '<div class="day otherMonth" >' + '</div>' + //將Ajax抓的data(dataSource)作為參數傳入
             '</td>' + '<td class="disabled">' + '</td>' + '</tr>' + '</tbody>';
             $('.weekTable').append(calendarDayHtml);
-
             return this;
         }
     }, {
@@ -550,6 +553,11 @@ var Module = function () {
                 var dataDate = parseInt(dataYear + dataMonth + dataDay);
                 var calendarDays = parseInt($('.currentLists').attr('date'));
                 if ($('.currentLists').hasClass(dataDate)) {
+                    //可賣為零時會出現undifined...............................
+                    if (dataSource[i].availableVancancy == undefined) {
+                        dataSource[i].availableVancancy = 0;
+                    };
+                    //可賣為零時會出現undifined...............................
                     var li_right = "<div class='li_right'><span class='dataStatus'>" + dataSource[i].status + "</span><span class='price'>" + "$" + self.formatNumber(dataSource[i].price) + "起" + "</span></div>";
                     var li_left = "<div class='li_left'></div>";
                     var li_middle = "<div class='li_middle'><span>" + "可賣:" + dataSource[i].availableVancancy + "</span><span>" + "團位:" + dataSource[i].totalVacnacy + "</span><div class='lb_gpls'>行程一</div></div>";
@@ -574,6 +582,11 @@ var Module = function () {
                 $('.calendar_list .' + dataDate + ' .li_left .dayDate').append(weekdayHtml);
                 //日期對上星期幾!!!
             };
+
+            //列表跳頁產出
+            var listPage = '<div class="listPage">' + '<a class="prevList">上一頁</a>' + '<span class="num"><span class="current_page">1</span><span style="padding:0 3px;">/</span><span class="total"></span></span>' + '<a class="nextList">下一頁</a>' + '</div>';
+            $('#Body').append(listPage);
+            //列表跳頁產出
             ///日期選擇function
             $('.daysWithData').on('click', function () {
                 $('.daysWithData').removeClass('daySelected');
@@ -594,6 +607,10 @@ var Module = function () {
             $(".total").text(totalPage); //設置總頁數
             $(".current_page").text(currentPage); //設置當前頁數
             //實現下一頁
+            if (totalPage == 0) {
+                // remove(".listPage");
+                $('.listPage').remove();
+            };
             $(".nextList").click(function () {
                 if (currentPage == totalPage || currentPage == 0) {
                     //當前頁數==最後一頁，禁止下一頁
@@ -704,11 +721,11 @@ var Module = function () {
                 if ($('.currentDays').hasClass(dataDate)) {
                     // var self = this;
                     // var $this = this.$ele;
-                    //可賣為零時會出現bug...............................
+                    //可賣為零時會出現undifined...............................
                     if (dataSource[i].availableVancancy == undefined) {
                         dataSource[i].availableVancancy = 0;
                     };
-                    //可賣為零時會出現bug...............................
+                    //可賣為零時會出現undifined...............................
 
                     var dataPrice = "<p class='price'>" + "$" + self.formatNumber(dataSource[i].price) + "起" + "</p>";
                     var dataStatus = "<p class='dataStatus'>" + dataSource[i].status + "</p>";
@@ -722,6 +739,9 @@ var Module = function () {
                     if (dataSource[i].status === '報名' || dataSource[i].status === '預定') {
                         $('.' + dataDate + ' .dataStatus').addClass('dataStatus_Gr');
                     };
+                    //顯示當前這頁有多少data  
+                    console.log(dataSource[i]);
+                    //顯示當前這頁有多少data
                 }
             };
             ///日期選擇function
@@ -731,15 +751,65 @@ var Module = function () {
             });
         }
     }, {
+        key: "onClickNext",
+
+
+        ////////////////////////////////////whenclick的callBackFunction區//////////////////////////////////////
+        value: function onClickNext(dada) {
+            var self = this;
+            var $this = this.$ele;
+            var opts = this.option;
+            var $btn = $this.find(".next");
+            var data = dada;
+            var onClickNextCallBack = this.option.onClickNext;
+            $btn.click(function ($btn) {
+                //如果現在是12月份 單純+1會出錯誤 以下是判斷式
+                var $btn = this;
+                var module = $this;
+                var data = dada;
+                onClickNextCallBack($btn, data, module);
+            });
+        }
+    }, {
+        key: "onClickPrev",
+        value: function onClickPrev(dataSource) {
+            var self = this;
+            var $this = this.$ele;
+            var opts = this.option;
+            var $btn = $this.find(".prev");
+            var data = dataSource;
+            var onClickPrevCallBack = this.option.onClickPrev;
+            $btn.click(function ($btn) {
+                var $btn = this;
+                var module = $this;
+                var data = dataSource;
+                onClickPrevCallBack($btn, data, module);
+            });
+        }
+    }, {
+        key: "onClickDate",
+        value: function onClickDate(dataSource) {
+            var self = this;
+            var $this = this.$ele;
+            var opts = this.option;
+            var $dayData = $this.find('.daysWithData');
+            var onClickDateCallBack = this.option.onClickDate;
+            $dayData.click(function () {
+                var $date = $this.find('.daySelected').attr('date');
+                var data = dataSource;
+                onClickDateCallBack($date, data);
+            });
+        }
+    }, {
         key: "nextMonth",
 
+        ////////////////////////////////////whenclick的callBackFunction區//////////////////////////////////////
 
         // 下一個有資料的月份
         value: function nextMonth(dataSource) {
             var self = this;
             var $this = this.$ele;
-            console.log('nextMonth');
-            console.log(dataSource);
+            // console.log(dataSource);
             return this;
         }
 
@@ -750,8 +820,7 @@ var Module = function () {
         value: function prevMonth(dataSource) {
             var self = this;
             var $this = this.$ele;
-            console.log('prevMonth');
-            console.log(dataSource);
+            // console.log(dataSource);
             return this;
         }
 
@@ -767,7 +836,6 @@ var Module = function () {
             } else {
                 $(".switchMode").text("切換月曆模式");
             }
-
             $('.calendar_weeksWrap').toggleClass('hide');
             $('.calendar_list').toggleClass('hide');
             if ($('.calendar_list').hasClass('hide')) {
@@ -785,7 +853,7 @@ var Module = function () {
         value: function inputData(inputOpt) {
             var self = this;
             var $this = this.$ele;
-            var aaaa = inputOpt;
+            var inputOpt = inputOpt;
             console.log(inputOpt);
             // var dataSource;
             // var dataSource=dataSource;
@@ -793,7 +861,7 @@ var Module = function () {
             // console.log(inputOpt);
             // var dataSource=inputOpt.concat(dataSource);
             // console.log(dataSource);
-            return aaaa;
+            return inputOpt;
             // return this;
         }
 
