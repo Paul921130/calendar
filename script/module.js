@@ -60,11 +60,7 @@ class Module {
         console.log('moduleIn!!!!');
         this.getAjax();
         this.creatHtml();
-        
-        this.switch();
 
-
-        console.log(self.formatNumber(11111111111112211));
         $('.switchMode').on('click', function() {
             self.switch();
         });
@@ -72,7 +68,7 @@ class Module {
         console.log('initConsolez:'+this.inputData());//undefined
 
        
-
+        
         // var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
         // var nowMonth=parseInt($(".currentMonth").attr('data-label').substring(4, 10));//抓取currentMonth所代表的月份
         // console.log(nowYear);
@@ -190,9 +186,11 @@ class Module {
                 self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
 
+
                 self.onClickNext(dataSource);
                 self.onClickPrev(dataSource);
                 self.onClickDate(dataSource);
+
                 // self.nextMonth(dataSource);
                 // self.prevMonth(dataSource);
                 // self.bornCalendar(dataSource);
@@ -238,7 +236,10 @@ class Module {
         self.bornCalendar(dataSource);
         self.bornList(dataSource);
         // //小箭頭跳currentMonth
-        $('.next').on('click', function() {         
+        $('.next').on('click', function() {
+        // if($('.currentDays').hasClass('daysWithData')){
+        //     alert('Hey!這一頁有data!!!');
+        // }         
             if($(".tab:nth-child(3) a").hasClass('currentMonth')===false){
             $this.find('.currentMonth').parent().next().children().addClass('currentMonth');
             $this.find('.currentMonth').parent().prev().children().removeClass('currentMonth');
@@ -264,9 +265,9 @@ class Module {
                 self.bornCalendar(dataSource);
                 console.log(goMonth);
                 };
-               
                 console.log($('.currentMonth').attr('data-label'));
                 self.nextMonth(dataSource);
+                
         });//小箭頭跳currentMonth
 
         $('.prev').on('click', function() {
@@ -587,21 +588,34 @@ class Module {
                 $('.daysWithData').removeClass('daySelected');
                 $(this).addClass('daySelected');
             });     
+            
+
     };
 
+    monthWithoutData(){
+        var self = this;
+        var $this = this.$ele;//class="calendar"
+        if($('.currentDays').hasClass('daysWithData')==false){
+            var ddddd=$('.currentMonth').attr('data-label');
+            console.log(ddddd);
+            $('.'+ddddd+'').remove();
+            alert('ohoh!這頁沒有Data!!');
+        };
+    }
+
     ////////////////////////////////////whenclick的callBackFunction區//////////////////////////////////////
-    onClickNext(dada){
+    onClickNext(dataSource){
         var self = this;
         var $this = this.$ele;
         var opts = this.option;
         var $btn = $this.find(".next");
-        var data = dada;
+        var data = dataSource;
         var onClickNextCallBack=this.option.onClickNext;
         $btn.click( function($btn) {
             //如果現在是12月份 單純+1會出錯誤 以下是判斷式
             var $btn=this;
             var module= $this;
-            var data =dada;
+            var data =dataSource;
             onClickNextCallBack($btn, data, module);
         });
     };
@@ -635,7 +649,7 @@ class Module {
     ////////////////////////////////////whenclick的callBackFunction區//////////////////////////////////////
 
     // 下一個有資料的月份
-    nextMonth(nextMethod ,dataSource){
+    nextMonth(){
         var self = this;
         var $this = this.$ele;
         // console.log(dataSource);
@@ -643,7 +657,7 @@ class Module {
     }
 
     // 上一個有資料的月份
-    prevMonth(prevMethod, dataSource){
+    prevMonth(){
         var self = this;
         var $this = this.$ele;
         // console.log(dataSource);

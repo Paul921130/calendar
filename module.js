@@ -254,9 +254,6 @@ var Module = function () {
             this.getAjax();
             this.creatHtml();
 
-            this.switch();
-
-            console.log(self.formatNumber(11111111111112211));
             $('.switchMode').on('click', function () {
                 self.switch();
             });
@@ -380,6 +377,7 @@ var Module = function () {
                 self.onClickNext(dataSource);
                 self.onClickPrev(dataSource);
                 self.onClickDate(dataSource);
+
                 // self.nextMonth(dataSource);
                 // self.prevMonth(dataSource);
                 // self.bornCalendar(dataSource);
@@ -415,6 +413,9 @@ var Module = function () {
             self.bornList(dataSource);
             // //小箭頭跳currentMonth
             $('.next').on('click', function () {
+                // if($('.currentDays').hasClass('daysWithData')){
+                //     alert('Hey!這一頁有data!!!');
+                // }         
                 if ($(".tab:nth-child(3) a").hasClass('currentMonth') === false) {
                     $this.find('.currentMonth').parent().next().children().addClass('currentMonth');
                     $this.find('.currentMonth').parent().prev().children().removeClass('currentMonth');
@@ -438,7 +439,6 @@ var Module = function () {
                     self.bornCalendar(dataSource);
                     console.log(goMonth);
                 };
-
                 console.log($('.currentMonth').attr('data-label'));
                 self.nextMonth(dataSource);
             }); //小箭頭跳currentMonth
@@ -751,22 +751,34 @@ var Module = function () {
             });
         }
     }, {
-        key: "onClickNext",
-
+        key: "monthWithoutData",
+        value: function monthWithoutData() {
+            var self = this;
+            var $this = this.$ele; //class="calendar"
+            if ($('.currentDays').hasClass('daysWithData') == false) {
+                var ddddd = $('.currentMonth').attr('data-label');
+                console.log(ddddd);
+                $('.' + ddddd + '').remove();
+                alert('ohoh!這頁沒有Data!!');
+            };
+        }
 
         ////////////////////////////////////whenclick的callBackFunction區//////////////////////////////////////
-        value: function onClickNext(dada) {
+
+    }, {
+        key: "onClickNext",
+        value: function onClickNext(dataSource) {
             var self = this;
             var $this = this.$ele;
             var opts = this.option;
             var $btn = $this.find(".next");
-            var data = dada;
+            var data = dataSource;
             var onClickNextCallBack = this.option.onClickNext;
             $btn.click(function ($btn) {
                 //如果現在是12月份 單純+1會出錯誤 以下是判斷式
                 var $btn = this;
                 var module = $this;
-                var data = dada;
+                var data = dataSource;
                 onClickNextCallBack($btn, data, module);
             });
         }
@@ -806,7 +818,7 @@ var Module = function () {
         ////////////////////////////////////whenclick的callBackFunction區//////////////////////////////////////
 
         // 下一個有資料的月份
-        value: function nextMonth(nextMethod, dataSource) {
+        value: function nextMonth() {
             var self = this;
             var $this = this.$ele;
             // console.log(dataSource);
@@ -817,7 +829,7 @@ var Module = function () {
 
     }, {
         key: "prevMonth",
-        value: function prevMonth(prevMethod, dataSource) {
+        value: function prevMonth() {
             var self = this;
             var $this = this.$ele;
             // console.log(dataSource);
