@@ -250,9 +250,6 @@ var Module = function () {
         key: "init",
         value: function init() {
             var self = this;
-            // var $this = this.$ele;
-            // var opts = this.option;
-            // console.log(ModuleDefaults.dataSource);
             console.log('moduleIn!!!!');
             this.getAjax();
             this.creatHtml();
@@ -261,14 +258,7 @@ var Module = function () {
                 self.switch();
             });
 
-            console.log('initConsolez:' + this.inputData()); //undefined
-
-
-            // var nowYear=parseInt($(".currentMonth").attr('data-label').substring(0, 4));//抓取currentMonth所代表的年分
-            // var nowMonth=parseInt($(".currentMonth").attr('data-label').substring(4, 10));//抓取currentMonth所代表的月份
-            // console.log(nowYear);
-            // console.log(nowMonth);
-
+            // console.log('initConsolez:'+this.inputData());//undefineds  
             return this;
         }
         ///////////////////////////////////////////////////////////將數字轉為金額格式(每三位數一個",")
@@ -326,12 +316,15 @@ var Module = function () {
         key: "getAjax",
         value: function getAjax() {
             var self = this;
-            // var $this = this.$ele;//class="calendar"
-            var inputOpt = new Array();
+            var inputOpt = self.inputData();
+            console.log(inputOpt);
+            // self.inputData(inputOpt);
+            // console.log(inputOpt);
+
             $.ajax({
                 dataType: "json",
                 method: 'GET',
-                url: './json/data2.json'
+                url: './json/data1.json'
             }).done(function (dataSource) {
 
                 //篩選日期重複的資料!!!!!!!!!!!!!!!//以及覆蓋新Key值!!!!!!!!!!
@@ -368,8 +361,6 @@ var Module = function () {
 
                 console.log(dataSource);
 
-                self.inputData();
-
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
@@ -378,10 +369,7 @@ var Module = function () {
                 self.onClickPrev(dataSource);
                 self.onClickDate(dataSource);
 
-                // self.nextMonth(dataSource);
-                // self.prevMonth(dataSource);
-                // self.bornCalendar(dataSource);
-                // self.bornList(dataSource);
+                self.inputData();
             });
         }
     }, {
@@ -745,7 +733,7 @@ var Module = function () {
                         $('.' + dataDate + ' .dataStatus').addClass('dataStatus_Gr');
                     };
                     //顯示當前這頁有多少data  
-                    console.log(dataSource[i]);
+                    // console.log(dataSource[i]);
                     //顯示當前這頁有多少data
                 }
             };
@@ -863,8 +851,8 @@ var Module = function () {
         key: "inputData",
         value: function inputData(inputOpt) {
             var self = this;
-            var $this = this.$ele;
-            var inputOpt = inputOpt;
+            // var $this = this.$ele;
+            // var inputOpt= inputOpt;
             console.log(inputOpt);
             // var dataSource;
             // var dataSource=dataSource;
