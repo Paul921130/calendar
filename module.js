@@ -995,7 +995,7 @@ var Module = function () {
                     var listDay = new Date(dataYear + "," + dataMonth + "," + dataDay);
                     var weekdays = "星期日,星期一,星期二,星期三,星期四,星期五,星期六".split(",");
                     var weekdayHtml = "<span class='weekdays'>" + weekdays[listDay.getDay()] + "</span>";
-                    this.$this.find('.calendar_listmode .calendar_daysWrap .' + dataDate + '').append(weekdayHtml);
+                    this.$this.find('.calendar_daysWrap .' + dataDate + '').append(weekdayHtml);
                     //日期對上星期幾!!!  
 
                     // console.log(dataSource[i]);
