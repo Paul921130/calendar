@@ -522,7 +522,8 @@ class Module {
         console.log(totalSize);
 
         let totalPage=Math.ceil(totalSize / pageSize); //計算總頁數
-        $(".calendar_listmode .daysWithData:gt(7)").hide();//設置首頁顯示7條數據
+        this.$this.find('.daysWithData:gt(7)').hide();
+        // $(".calendar_listmode .daysWithData:gt(7)").hide();//設置首頁顯示7條數據
         
 
         this.$this.find(".total").text(totalPage);//設置總頁數
@@ -755,7 +756,7 @@ class Module {
                 html += '</li>';
                 numRow++;
             };
-            this.$this.find('#calendar_daysWrap').html(html);
+            this.$this.find('.calendar_daysWrap').html(html);
             // document.getElementById("mainCalendar").innerHTML = html;
             
             let NumOfJData = dataSource.length;
@@ -788,13 +789,13 @@ class Module {
                     let dataStatus="<span class='dataStatus'>"+(dataSource[i].status)+"</span>";
                     let dataAvailable="<span class='onsell'>"+"可賣:"+(dataSource[i].availableVancancy)+"</span>";
                     let dataTotal="<span class='totalSet'>"+"團位:"+(dataSource[i].totalVacnacy)+"</span>";
-                    $('.calendar_daysWrap .'+dataDate+'').addClass('daysWithData');
-                    $('.calendar_daysWrap .'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
+                    this.$this.find('.calendar_daysWrap .'+dataDate+'').addClass('daysWithData');
+                    this.$this.find('.calendar_daysWrap .'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                     if(dataSource[i].status==='額滿' ||dataSource[i].status==='截止' ||dataSource[i].status==='後補'){
-                        $('.'+dataDate+' .dataStatus').addClass('dataStatus_Or');
+                        this.$this.find('.'+dataDate+' .dataStatus').addClass('dataStatus_Or');
                     };
                     if(dataSource[i].status==='報名' ||dataSource[i].status==='預定'){
-                        $('.'+dataDate+' .dataStatus').addClass('dataStatus_Gr');
+                        this.$this.find('.'+dataDate+' .dataStatus').addClass('dataStatus_Gr');
                     };
                     //顯示當前這頁有多少data
 
@@ -802,7 +803,7 @@ class Module {
                     
                     if(dataSource[i].guaranteed==true){
                         let dataguarante= "<span class='tip js_tip' style='display: inline;'><span class='ic-ln productreferf'></span>保證出團</span>";
-                        $('.calendar_daysWrap .'+dataDate+'').append(dataguarante);
+                        this.$this.find('.calendar_daysWrap .'+dataDate+'').append(dataguarante);
                     }
                     //保證出團圖示
 
@@ -811,7 +812,7 @@ class Module {
                     let listDay= new Date(dataYear+","+dataMonth+","+dataDay);
                     let weekdays = "星期日,星期一,星期二,星期三,星期四,星期五,星期六".split(",");
                     let weekdayHtml="<span class='weekdays'>"+weekdays[listDay.getDay()]+"</span>";
-                    $('.calendar_listmode .calendar_daysWrap .'+dataDate+'').append(weekdayHtml);          
+                    this.$this.find('.calendar_listmode .calendar_daysWrap .'+dataDate+'').append(weekdayHtml);          
                     //日期對上星期幾!!!  
 
                     // console.log(dataSource[i]);
@@ -898,18 +899,11 @@ class Module {
     // 切換日曆或列表模式
     switch(){
         let self = this;
-        // let $this = this.$ele;
-        if(this.$this.find('.calendar_list').hasClass('hide')){
-            self.$this.find(".switchMode").text("切換列表模式");
-            }else{
-                self.$this.find(".switchMode").text("切換月曆模式");
-            }
-        this.$this.find('.calendar_weeksWrap').toggleClass('hide');
-        this.$this.find('.calendar_list').toggleClass('hide');
-        if(this.$this.find('.calendar_list').hasClass('hide')){
-            self.$this.find(".switchMode").text("切換列表模式");
+        var $this = this.$ele;
+        if($this.hasClass('calendar_listmode')){
+            $this.removeClass('calendar_listmode').addClass('calendar_daymode');
         }else{
-            self.$this.find(".switchMode").text("切換月曆模式");
+            $this.removeClass('calendar_daymode').addClass('calendar_listmode');
         }
     }
 
