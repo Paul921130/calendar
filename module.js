@@ -256,6 +256,7 @@ var Module = function () {
             this.$this.find('.switchMode').on('click', function () {
                 self.switch();
             });
+            this.monthWithoutData();
             return this;
         }
         ///////////////////////////////////////////////////////////將數字轉為金額格式(每三位數一個",")
@@ -866,8 +867,8 @@ var Module = function () {
             var self = this;
             // let $this = this.$ele;//class="calendar"
             if (this.$this.find('.currentDays').hasClass('daysWithData') == false) {
-                var ddddd = $('.currentMonth').attr('data-label');
-                self.$this.find('.' + ddddd + '').remove();
+                var noDataMonth = $('.currentMonth').attr('data-label');
+                // self.$this.find('.'+noDataMonth+'').remove();
                 alert('ohoh!這頁沒有Data!!');
             };
         }

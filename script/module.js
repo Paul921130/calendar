@@ -63,6 +63,7 @@ class Module {
         this.$this.find('.switchMode').on('click', function() {
             self.switch();
         });
+        this.monthWithoutData();
         return this;
     }
 ///////////////////////////////////////////////////////////將數字轉為金額格式(每三位數一個",")
@@ -699,8 +700,8 @@ class Module {
         let self = this;
         // let $this = this.$ele;//class="calendar"
         if(this.$this.find('.currentDays').hasClass('daysWithData')==false){
-            let ddddd=$('.currentMonth').attr('data-label');
-            self.$this.find('.'+ddddd+'').remove();
+            let noDataMonth=$('.currentMonth').attr('data-label');
+            // self.$this.find('.'+noDataMonth+'').remove();
             alert('ohoh!這頁沒有Data!!');
         };
     }
