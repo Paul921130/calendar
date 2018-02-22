@@ -674,7 +674,6 @@ $classname: 'calendar';
 				    color: #e10500;
 				    margin-bottom:0; 
 				}
-
 				width: (100%/7);
 				height: 85px;
 				border-left-width: 0;
@@ -731,10 +730,27 @@ $classname: 'calendar';
 					font-size: 16px;
 				}
 				.onsell{
+					top: 5px;
 					left: 70px;
 				}
-				.total{
-					left: 200px;
+				.totalSet{
+					top: 5px;
+					left: 130px;
+				}
+				.tip{
+					padding: 0 5px;
+					position: absolute;
+					bottom: 5px;
+					left: 70px;
+					height: 21px;
+					color: #fff;
+		    		text-align: center;
+		    		line-height: 20px;
+		    		background-color: #66bb3c;
+				}
+				.weekdays{
+					font-size: 16px;
+					bottom: 5px;
 				}
 				&.hasData {
 					display: block;

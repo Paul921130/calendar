@@ -919,20 +919,20 @@ var Module = function () {
                 //如果是今天则显示红色
                 if (j == day) {
                     html += '<li class="calendar_days currentDays ' + year + '0' + month + '0' + j + '" date="' + year + month + j + '">';
-                    html += j; //开始加日期
+                    html += '<span class="normalDate">' + j + '</span>'; //开始加日期
                 } else if (j !== day && j <= nDays) {
                     if (j < 10 && month < 10) {
                         html += '<li class="calendar_days currentDays ' + year + '0' + month + '0' + j + '" date="' + year + '0' + month + '0' + j + '">';
-                        html += j;
+                        html += '<span class="normalDate">' + j + '</span>';
                     } else if (j >= 10 && month < 10) {
                         html += '<li class="calendar_days currentDays ' + year + '0' + month + j + '" date="' + year + month + j + '">';
-                        html += j;
+                        html += '<span class="normalDate">' + j + '</span>';
                     } else if (j < 10 && month >= 10) {
                         html += '<li class="calendar_days currentDays ' + year + month + '0' + j + '" date="' + year + month + j + '">';
-                        html += j;
+                        html += '<span class="normalDate">' + j + '</span>';
                     } else {
                         html += '<li class="calendar_days currentDays ' + year + month + j + '" date="' + year + month + j + '">';
-                        html += j;
+                        html += '<span class="normalDate">' + j + '</span>';
                     } //开始加日期
                 } else {
                     html += '<li class="calendar_days disabled">';
@@ -970,7 +970,7 @@ var Module = function () {
                     var dataPrice = "<span class='price'>" + "$" + _self.formatNumber(dataSource[i].price) + "起" + "</span>";
                     var dataStatus = "<span class='dataStatus'>" + dataSource[i].status + "</span>";
                     var dataAvailable = "<span class='onsell'>" + "可賣:" + dataSource[i].availableVancancy + "</span>";
-                    var dataTotal = "<span class='total'>" + "團位:" + dataSource[i].totalVacnacy + "</span>";
+                    var dataTotal = "<span class='totalSet'>" + "團位:" + dataSource[i].totalVacnacy + "</span>";
                     $('.calendar_daysWrap .' + dataDate + '').addClass('daysWithData');
                     $('.calendar_daysWrap .' + dataDate + '').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                     if (dataSource[i].status === '額滿' || dataSource[i].status === '截止' || dataSource[i].status === '後補') {
