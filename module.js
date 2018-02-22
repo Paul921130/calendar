@@ -462,7 +462,10 @@ var Module = function () {
         value: function showMonthDate(dataSource) {
             var self = this;
             // var $this = this.$ele;//class="calendar"
-            var initYearMonth = this.option.initYearMonth; //抓到useAge所設定的初始月份
+
+            //抓到useAge所設定的初始月份
+            var initYearMonth = this.option.initYearMonth;
+            //抓到useAge所設定的初始月份
 
             var goMonth = 0;
             for (var i = 0; i <= 2; i++) {
@@ -820,7 +823,7 @@ var Module = function () {
     }, {
         key: "monthWithoutData",
 
-        //////////////////////////////////////////要刪去沒有資料的月份//////////////////////////////////////////////
+        //////////////////////////////////////////要刪去沒有資料的月份...//////////////////////////////////////////////
         value: function monthWithoutData() {
             var self = this;
             // let $this = this.$ele;//class="calendar"
@@ -830,7 +833,7 @@ var Module = function () {
                 alert('ohoh!這頁沒有Data!!');
             };
         }
-        /////////////////////////////////////////要刪去沒有資料的月份///////////////////////////////////////////////
+        /////////////////////////////////////////要刪去沒有資料的月份...///////////////////////////////////////////////
 
 
         ////////////////////////////////////whenclick的callBackFunction區//////////////////////////////////////
