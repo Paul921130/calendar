@@ -445,6 +445,10 @@ class Module {
                         {
                             dataSource[i].availableVancancy = 0;
                     };
+                    if(dataSource[i].totalVacnacy==undefined)
+                        {
+                            dataSource[i].totalVacnacy = 0;
+                    };
                     //可賣為零時會出現undifined...............................
                     let li_right="<div class='li_right'><span class='dataStatus'>"+(dataSource[i].status)+"</span><span class='price'>"+"$"+self.formatNumber(dataSource[i].price)+"起"+"</span></div>";
                     let li_left="<div class='li_left'></div>";
@@ -627,6 +631,12 @@ class Module {
                             dataSource[i].availableVancancy = 0;
                     };
                     //可賣為零時會出現undifined...............................
+                    if(dataSource[i].totalVacnacy==undefined)
+                        {
+                            dataSource[i].totalVacnacy = 0;
+                    };
+                    //可賣為零時會出現undifined...............................
+                    //可賣為零時會出現undifined...............................
 
                     let dataPrice="<p class='price'>"+"$"+self.formatNumber(dataSource[i].price)+"起"+"</p>";
                     let dataStatus="<p class='dataStatus'>"+(dataSource[i].status)+"</p>";
@@ -640,7 +650,15 @@ class Module {
                     if(dataSource[i].status==='報名' ||dataSource[i].status==='預定'){
                         $('.'+dataDate+' .dataStatus').addClass('dataStatus_Gr');
                     };
-                    //顯示當前這頁有多少data  
+                    //顯示當前這頁有多少data
+
+                    //保證出團圖示
+                    let dataguarante= "<span class='tip js_tip' style='display: inline;'>保證出團</span>";
+                    if(dataSource[i].guaranteed===true){
+                        $('.calendar_weeksWrap .'+dataDate+'').append(dataguarante);
+                    }
+                    //保證出團圖示
+
                     // console.log(dataSource[i]);
                     //顯示當前這頁有多少data
                 }

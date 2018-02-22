@@ -619,6 +619,9 @@ var Module = function () {
                     if (dataSource[i].availableVancancy == undefined) {
                         dataSource[i].availableVancancy = 0;
                     };
+                    if (dataSource[i].totalVacnacy == undefined) {
+                        dataSource[i].totalVacnacy = 0;
+                    };
                     //可賣為零時會出現undifined...............................
                     var li_right = "<div class='li_right'><span class='dataStatus'>" + dataSource[i].status + "</span><span class='price'>" + "$" + _self.formatNumber(dataSource[i].price) + "起" + "</span></div>";
                     var li_left = "<div class='li_left'></div>";
@@ -796,6 +799,11 @@ var Module = function () {
                         dataSource[i].availableVancancy = 0;
                     };
                     //可賣為零時會出現undifined...............................
+                    if (dataSource[i].totalVacnacy == undefined) {
+                        dataSource[i].totalVacnacy = 0;
+                    };
+                    //可賣為零時會出現undifined...............................
+                    //可賣為零時會出現undifined...............................
 
                     var dataPrice = "<p class='price'>" + "$" + _self2.formatNumber(dataSource[i].price) + "起" + "</p>";
                     var dataStatus = "<p class='dataStatus'>" + dataSource[i].status + "</p>";
@@ -809,7 +817,15 @@ var Module = function () {
                     if (dataSource[i].status === '報名' || dataSource[i].status === '預定') {
                         $('.' + dataDate + ' .dataStatus').addClass('dataStatus_Gr');
                     };
-                    //顯示當前這頁有多少data  
+                    //顯示當前這頁有多少data
+
+                    //保證出團圖示
+                    var dataguarante = "<span class='tip js_tip' style='display: inline;'>保證出團</span>";
+                    if (dataSource[i].guaranteed === true) {
+                        $('.calendar_weeksWrap .' + dataDate + '').append(dataguarante);
+                    }
+                    //保證出團圖示
+
                     // console.log(dataSource[i]);
                     //顯示當前這頁有多少data
                 }
