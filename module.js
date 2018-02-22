@@ -703,7 +703,9 @@ var Module = function () {
             console.log(totalSize);
 
             var totalPage = Math.ceil(totalSize / pageSize); //計算總頁數
-            this.$this.find(".calendar_listmode .daysWithData:gt(7)").hide(); //設置首頁顯示7條數據
+            $(".calendar_listmode .daysWithData:gt(7)").hide(); //設置首頁顯示7條數據
+
+
             this.$this.find(".total").text(totalPage); //設置總頁數
             this.$this.find('.current_page').text(currentPage); //設置當前頁數
             //實現下一頁
