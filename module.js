@@ -820,8 +820,9 @@ var Module = function () {
                     //顯示當前這頁有多少data
 
                     //保證出團圖示
-                    var dataguarante = "<span class='tip js_tip' style='display: inline;'>保證出團</span>";
-                    if (dataSource[i].guaranteed === true) {
+
+                    if (dataSource[i].guaranteed == true) {
+                        var dataguarante = "<span class='tip js_tip' style='display: inline;'>保證出團</span>";
                         $('.calendar_weeksWrap .' + dataDate + '').append(dataguarante);
                     }
                     //保證出團圖示
