@@ -285,10 +285,14 @@ var Module = function () {
 
     }, {
         key: "methods",
-        value: function methods() {}
+        value: function methods() {
+            return this;
+        }
     }, {
         key: "calendar",
-        value: function calendar() {}
+        value: function calendar() {
+            return this;
+        }
     }, {
         key: "creatHtml",
         value: function creatHtml() {

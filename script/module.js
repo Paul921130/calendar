@@ -87,11 +87,11 @@ class Module {
     }
 ///////////////////////////////////////////////////////////將數字轉為金額格式(每三位數一個",")    
     methods() {
-
+        return this;
     }
 
     calendar() {
-  
+        return this;
     }
     creatHtml(){
         let self = this;
