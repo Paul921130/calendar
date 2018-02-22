@@ -129,6 +129,9 @@ class Module {
                       delete(item.state||item.status);
                       item.status= statusChange;
 
+                      let statusGuaranteed=(item.guaranteed||item.certain);
+                      delete(item.guaranteed||item.certain);
+                      item.guaranteed= statusGuaranteed;
                       
                       let availableChange=(item.onsell||item.availableVancancy);
                       delete(item.onsell||item.availableVancancy);
@@ -177,6 +180,10 @@ class Module {
                       let statusChange=(item.state||item.status);
                       delete(item.state||item.status);
                       item.status= statusChange;
+
+                      let statusGuaranteed=(item.guaranteed||item.certain);
+                      delete(item.guaranteed||item.certain);
+                      item.guaranteed= statusGuaranteed;
                       
                       let availableChange=(item.onsell||item.availableVancancy);
                       delete(item.onsell||item.availableVancancy);
@@ -228,6 +235,10 @@ class Module {
                       let statusChange=(item.state||item.status);
                       delete(item.state||item.status);
                       item.status= statusChange;
+
+                      let statusGuaranteed=(item.guaranteed||item.certain);
+                      delete(item.guaranteed||item.certain);
+                      item.guaranteed= statusGuaranteed;
 
                       let availableChange=(item.onsell||item.availableVancancy);
                       delete(item.onsell||item.availableVancancy);
