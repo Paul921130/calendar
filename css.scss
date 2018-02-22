@@ -226,7 +226,121 @@ a{
 		box-sizing:border-box;
 		border: 2px solid #66bb3c!important;
 	}
-	.calendar_list{
+	
+	}
+	.listPage{
+		position: absolute;
+		height: 20px;
+		width: 100%;
+		bottom: 0;
+		text-align: center;
+		.nextList{
+			float: right;
+		}
+		.prevList{
+			float: left;
+		}
+		span{
+			font-size: 14px;
+			line-height: 1.5;
+			color: #666;
+		}
+	}
+	.prevList , .nextList{
+		cursor: pointer;
+	}
+	.arrow-gr{
+		display: inline-block;
+    	width: 0;
+    	height: 0;
+    	border-style: solid;
+    	vertical-align: middle;
+    	margin-top: -3px;
+    	border-width: 4.5px 0 4.5px 5px;
+    	border-color: transparent transparent transparent #24a07c;
+	}
+	.arrow-gl{
+		display: inline-block;
+    	width: 0;
+    	height: 0;
+    	border-style: solid;
+    	vertical-align: middle;
+    	margin-top: -3px;
+    	border-width: 4.5px 5px 4.5px 0;
+    	border-color: transparent #24a07c transparent transparent;
+	} 
+	
+	.hideData{
+		display: none;
+	}
+	// style on phone device
+	@media screen and (min-width: $screen-tablet) {
+		
+		// style on tablet device
+	}
+	@media screen and (min-width: $screen-desktop) {
+		.currentLists {
+			display: flex;
+			.li_right, .li_left, .li_middle{
+				padding: 5px;
+				float: left;
+			}
+			.li_left{
+				flex:1;
+				.dayDate{
+					// padding-bottom: 5px;
+					color: #666;
+				    text-align: center;
+				    font-size: 24px;
+				    line-height: 26px;
+				    span{
+				    	font-size: 16px;
+						display: block;
+						text-align: center;
+					}
+				}
+			}
+			.li_middle{
+				position: relative;
+				flex:5;
+				span{
+					margin-right: 30px;
+					color: #666;
+				}
+				.lb_gpls{
+					max-width: 50px;
+					min-width: auto;
+    				line-height: 20px;
+					margin-top: 5px;
+					text-align: center;
+    				font-weight: 400;
+					color: #24a07d;
+					background-color: #cee5df;		
+				}
+				.listTip{
+					position: absolute;
+					bottom: 10px;
+					left: 5px;
+					background: #66bb3c;
+					color: #fff;
+    				padding: 0 5px;
+    				text-align: center;
+    				.productreferf{
+    					color: #fff;
+    					margin-right: 1px;
+    				}
+				}
+			}
+			.li_right{
+				flex:3;
+				text-align: right;
+			}
+		}
+		
+		// style on desktop device
+	}
+	@media screen and (min-width: $screen-lg-desktop) {
+		.calendar_list{
 		ul{
 			position: relative;
 			height: 510px;
@@ -323,62 +437,6 @@ a{
 				text-align: right;
 			}
 		}
-	}
-	.listPage{
-		position: absolute;
-		height: 20px;
-		width: 100%;
-		bottom: 0;
-		text-align: center;
-		.nextList{
-			float: right;
-		}
-		.prevList{
-			float: left;
-		}
-		span{
-			font-size: 14px;
-			line-height: 1.5;
-			color: #666;
-		}
-	}
-	.prevList , .nextList{
-		cursor: pointer;
-	}
-	.arrow-gr{
-		display: inline-block;
-    	width: 0;
-    	height: 0;
-    	border-style: solid;
-    	vertical-align: middle;
-    	margin-top: -3px;
-    	border-width: 4.5px 0 4.5px 5px;
-    	border-color: transparent transparent transparent #24a07c;
-	}
-	.arrow-gl{
-		display: inline-block;
-    	width: 0;
-    	height: 0;
-    	border-style: solid;
-    	vertical-align: middle;
-    	margin-top: -3px;
-    	border-width: 4.5px 5px 4.5px 0;
-    	border-color: transparent #24a07c transparent transparent;
-	} 
-	
-	.hideData{
-		display: none;
-	}
-	// style on phone device
-	@media screen and (min-width: $screen-tablet) {
-	
-		// style on tablet device
-	}
-	@media screen and (min-width: $screen-desktop) {
-		// style on desktop device
-	}
-	@media screen and (min-width: $screen-lg-desktop) {
-
 		// style on desktop device
 	}
 	&.#{$classname}_modifier {
