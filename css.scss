@@ -655,6 +655,9 @@ $classname: 'calendar';
 		    		line-height: 20px;
 		    		background-color: #66bb3c;
 				}
+				.productreferf{
+					display: none;
+				}
 				span{
 					display: block;
 					margin:0;
@@ -675,7 +678,7 @@ $classname: 'calendar';
 				    margin-bottom:0; 
 				}
 				width: (100%/7);
-				height: 85px;
+				height: 87px;
 				border-left-width: 0;
 				border-top-width: 0;
 				position: relative;
@@ -709,35 +712,47 @@ $classname: 'calendar';
 			display: none;
 		}
 		& > .#{$classname}_daysWrap {
+			.daySelected{
+				box-sizing:border-box;
+				border: 1px solid #66bb3c!important;
+				background-color: #fff9e3!important;
+			}
 			& > .#{$classname}_days {
 				display: none;
 				width: 100%;
 				height: 62px;
 				position: relative;
+				cursor: pointer;
+			
 				span{
-					position: absolute;
+					color: #666;
 				}
 				.price{
-			
+					position: absolute;
 					right: 5px;
 					bottom: 5px;
 					font-size: 16px;
 					color:#e10500; 
 				}
 				.dataStatus{
+					position: absolute;
 					top: 5px;
 					right: 5px;
 					font-size: 16px;
 				}
 				.onsell{
+					position: absolute;
 					top: 5px;
 					left: 70px;
 				}
 				.totalSet{
+					position: absolute;
 					top: 5px;
 					left: 130px;
 				}
 				.tip{
+					position: absolute;
+					display: block;
 					padding: 0 5px;
 					position: absolute;
 					bottom: 5px;
@@ -748,9 +763,21 @@ $classname: 'calendar';
 		    		line-height: 20px;
 		    		background-color: #66bb3c;
 				}
+				.productreferf{
+					color: #fff;
+				}
 				.weekdays{
+					position: absolute;
 					font-size: 16px;
+					left: 5px;
 					bottom: 5px;
+				}
+				.normalDate{
+					position: absolute;
+					font-size: 24px;
+					left: 5px;
+					text-align: center;
+					width: 48px;
 				}
 				&.hasData {
 					display: block;

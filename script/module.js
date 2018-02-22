@@ -801,7 +801,7 @@ class Module {
                     //保證出團圖示
                     
                     if(dataSource[i].guaranteed==true){
-                        let dataguarante= "<span class='tip js_tip' style='display: inline;'>保證出團</span>";
+                        let dataguarante= "<span class='tip js_tip' style='display: inline;'><span class='ic-ln productreferf'></span>保證出團</span>";
                         $('.calendar_daysWrap .'+dataDate+'').append(dataguarante);
                     }
                     //保證出團圖示
