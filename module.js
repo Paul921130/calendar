@@ -320,6 +320,10 @@ var Module = function () {
                     delete (item.state || item.status);
                     item.status = statusChange;
 
+                    var statusGuaranteed = item.guaranteed || item.certain;
+                    delete (item.guaranteed || item.certain);
+                    item.guaranteed = statusGuaranteed;
+
                     var availableChange = item.onsell || item.availableVancancy;
                     delete (item.onsell || item.availableVancancy);
                     item.availableVancancy = availableChange;
@@ -373,6 +377,10 @@ var Module = function () {
                     delete (item.onsell || item.availableVancancy);
                     item.availableVancancy = availableChange;
 
+                    var statusGuaranteed = item.guaranteed || item.certain;
+                    delete (item.guaranteed || item.certain);
+                    item.guaranteed = statusGuaranteed;
+
                     var totalChange = item.totalVacnacy || item.total;
                     delete (item.totalVacnacy || item.total);
                     item.totalVacnacy = totalChange;
@@ -421,6 +429,10 @@ var Module = function () {
                     var statusChange = item.state || item.status;
                     delete (item.state || item.status);
                     item.status = statusChange;
+
+                    var statusGuaranteed = item.guaranteed || item.certain;
+                    delete (item.guaranteed || item.certain);
+                    item.guaranteed = statusGuaranteed;
 
                     var availableChange = item.onsell || item.availableVancancy;
                     delete (item.onsell || item.availableVancancy);
