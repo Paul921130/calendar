@@ -288,6 +288,7 @@ a{
 				}
 			}
 			.li_middle{
+				position: relative;
 				flex:6;
 				span{
 					margin-right: 30px;
@@ -302,6 +303,14 @@ a{
     				font-weight: 400;
 					color: #24a07d;
 					background-color: #cee5df;		
+				}
+				.listTip{
+					position: absolute;
+					bottom: 10px;
+					background: #66bb3c;
+					color: #fff;
+    				padding: 0 5px;
+    				text-align: center;
 				}
 			}
 			.li_right{

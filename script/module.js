@@ -468,6 +468,15 @@ class Module {
                     if(dataSource[i].status==='報名' ||dataSource[i].status==='預定'){
                         $('.calendar_list .'+dataDate+' .dataStatus').addClass('dataStatus_Gr');
                     };
+
+
+                      //保證出團圖示
+                    
+                    if(dataSource[i].guaranteed==true){
+                        let dataguarante= "<span class='listTip js_tip' style='display: inline;'>保證出團</span>";
+                        $('.calendar_list .'+dataDate+' .li_middle').append(dataguarante);
+                    }
+                    //保證出團圖示
                 };
                 //日期對上星期幾!!!!
                 let listDay= new Date(dataYear+","+dataMonth+","+dataDay);
