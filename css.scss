@@ -464,6 +464,9 @@ $classname: 'calendar';
 
 //修改html結構後的CSS///////////////////////////////////////////////////////////
 .#{$classname} {
+	a{
+		cursor: pointer;
+	}
 	// style on phone device
 	@media screen and (min-width: $screen-tablet) {
 		// style on tablet device
@@ -476,15 +479,112 @@ $classname: 'calendar';
 	}
 	
 	& > .#{$classname}_tabWrap {
-		& > .ntb_tab {
-			& > li {
-
+		overflow: hidden;
+		background-color: #ede9dd;
+		.ntb_gpbt>a {
+			    width: 20px;
+			    float: left;
+			    position: relative;
+			    height: 40px;
+			    color: transparent;
+			    background-color: #bbb;
 			}
+		.ntb_gpbt.yellow .prev,.ntb_gpbt.yellow .next{
+			background-color: #ede9dd;
+			height:50px;
+		}
+		.ntb_gpbt>.ntb_tab {
+		    padding: 0;
+		    float: left;
+		    width: calc(100% - 40px);
+		    margin-bottom: 0;
+		    white-space: nowrap;
+		    font-size: 0;
+		    overflow: hidden;
+		}
+		.ntb_tab>li {
+	    	background-color: #ede9dd;	
+	    	float: left;
+	    	height: 50px;
+	    	font-size: 16px;
+	    	a{
+	    		display: block;
+	    		height: 50px;
+	    		border-top: 6px solid #ede9dd;
+	    		text-decoration: none;
+	    		margin: 0 3px;
+	    		padding-top: 6px;
+	    		// background: #fff;
+	    		span{
+	    			    display: block;
+					    font-size: 16px;
+					    color: #666;
+					    line-height: 1.25;
+	    		}
+	    	}
+		}
+		.currentMonth{
+			background: #fff;
+			span{
+				color: #e10500!important;
+			}
+		}
+		.ntb_gpbt>.ntb_tab>li, .ntb_gpbt>.ntb_tab>li.tab {
+	    	width: 33.3333%;
+	    	display: inline-block;
+	    	list-style-type: none;
+	    	position: relative;
+	    	text-align: center;
+	    	background-color: #ede9dd;
+	    	vertical-align: top;
+		}
+		.ntb_gpbt.yellow .prev.on:before {
+	    	border-color: transparent #e10500 transparent transparent;
+		}
+		.ntb_gpbt.yellow .prev:before {
+			    left: -1px;
+			    border-width: 7px 7px 7px 0;
+			    border-color: transparent #e10500 transparent transparent;
+		}
+
+		.ntb_gpbt .prev:before {
+			    left: -1px;
+			    border-width: 7px 7px 7px 0;
+			    border-color: transparent #f4f4f4 transparent transparent;
+		}
+		.ntb_gpbt>a:before {
+			    content: "";
+			    position: absolute;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			    right: 0;
+			    margin: auto;
+			    display: inline-block;
+			    width: 0;
+			    height: 0;
+			    border-style: solid;
+		}
+		.ntb_gpbt.yellow .next.on:before {
+		    border-color: transparent transparent transparent #e10500;
+		}
+
+		.ntb_gpbt.yellow .next:before {
+		    right: -1px;
+		    border-width: 7px 0 7px 7px;
+		    border-color: transparent transparent transparent #e10500;
+		}
+
+		.ntb_gpbt .next:before {
+		    right: -1px;
+		    border-width: 7px 0 7px 7px;
+		    border-color: transparent transparent transparent #f4f4f4;
 		}
 	}
 	& > .#{$classname}_weeksWrap {
 		display: flex;
 		& > span {
+			text-align: center;
 			flex: 1;
 		}
 	}
@@ -498,7 +598,7 @@ $classname: 'calendar';
 			border: 1px solid #eee;
 			@include clearfix;
 			&.disabled {
-
+			
 			}
 			&.hasData {
 
@@ -524,16 +624,67 @@ $classname: 'calendar';
 		}
 	}
 	&.#{$classname}_daymode {
+		
 		& > .#{$classname}_daysWrap {
 			display: flex;
 			flex-wrap: wrap;
+			background-color:#f8f8f8;
+			
+			& >.disabled{
+				background-color:#f8f8f8!important;
+				border-right: transparent;
+			}
+			& >.daySelected{
+					box-sizing:border-box;
+					border: 1px solid #66bb3c!important;
+					background-color: #fff9e3!important;
+			}
+			& > .#{$classname}_days:hover{
+			background-color: #fff9e3;
+			cursor: pointer;
+			}
 			& > .#{$classname}_days {
+				.tip{
+					position: absolute;
+					top: 0;
+					right: 0;
+					width: 48px;
+					height: 20px;
+					color: #fff;
+		    		text-align: center;
+		    		line-height: 20px;
+		    		background-color: #66bb3c;
+				}
+				span{
+					display: block;
+					margin:0;
+					padding: 0;
+					line-height: 17px; 
+				}
+				.dataStatus_Or{
+					color: #ff7800;
+				}
+				.dataStatus_Re{
+					color: #e10500;
+				}
+				.dataStatus_Gr{
+					color: #24a07c;
+				}
+				.price {
+				    color: #e10500;
+				    margin-bottom:0; 
+				}
+
 				width: (100%/7);
-				min-height: 85px;
+				height: 85px;
 				border-left-width: 0;
 				border-top-width: 0;
+				position: relative;
+				font-size: 12px;
+				background-color: #fff;
 				// border-right-color: transparent;
 				// border-top-color: transparent;
+
 				&:last-child {
 					border-right-width: 1px;
 				}
@@ -562,7 +713,29 @@ $classname: 'calendar';
 			& > .#{$classname}_days {
 				display: none;
 				width: 100%;
-				min-height: auto;
+				height: 62px;
+				position: relative;
+				span{
+					position: absolute;
+				}
+				.price{
+			
+					right: 5px;
+					bottom: 5px;
+					font-size: 16px;
+					color:#e10500; 
+				}
+				.dataStatus{
+					top: 5px;
+					right: 5px;
+					font-size: 16px;
+				}
+				.onsell{
+					left: 70px;
+				}
+				.total{
+					left: 200px;
+				}
 				&.hasData {
 					display: block;
 				}

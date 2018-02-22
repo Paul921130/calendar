@@ -136,7 +136,6 @@ class Module {
                       delete(item.guaranteed||item.certain);
                       item.guaranteed= statusGuaranteed;
 
-                      
                       let availableChange=(item.onsell||item.availableVancancy);
                       delete(item.onsell||item.availableVancancy);
                       item.availableVancancy= availableChange;
@@ -512,6 +511,7 @@ class Module {
     //         $( ".hideData" ).remove();
     //         self.listChange();       
     // };
+    /////////////////////////////未修改html前的bornList/////////////////////////////////
     /////////////////////////////////////////////////////////////
     listChange(){
         let self = this;
@@ -784,10 +784,10 @@ class Module {
                     //為零時會出現undifined...............................
                    
 
-                    let dataPrice="<p class='price'>"+"$"+self.formatNumber(dataSource[i].price)+"起"+"</p>";
-                    let dataStatus="<p class='dataStatus'>"+(dataSource[i].status)+"</p>";
-                    let dataAvailable="<p>"+"可賣:"+(dataSource[i].availableVancancy)+"</p>";
-                    let dataTotal="<p>"+"團位:"+(dataSource[i].totalVacnacy)+"</p>";
+                    let dataPrice="<span class='price'>"+"$"+self.formatNumber(dataSource[i].price)+"起"+"</span>";
+                    let dataStatus="<span class='dataStatus'>"+(dataSource[i].status)+"</span>";
+                    let dataAvailable="<span class='onsell'>"+"可賣:"+(dataSource[i].availableVancancy)+"</span>";
+                    let dataTotal="<span class='total'>"+"團位:"+(dataSource[i].totalVacnacy)+"</span>";
                     $('.calendar_daysWrap .'+dataDate+'').addClass('daysWithData');
                     $('.calendar_daysWrap .'+dataDate+'').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                     if(dataSource[i].status==='額滿' ||dataSource[i].status==='截止' ||dataSource[i].status==='後補'){
@@ -802,9 +802,17 @@ class Module {
                     
                     if(dataSource[i].guaranteed==true){
                         let dataguarante= "<span class='tip js_tip' style='display: inline;'>保證出團</span>";
-                        $('.calendar_weeksWrap .'+dataDate+'').append(dataguarante);
+                        $('.calendar_daysWrap .'+dataDate+'').append(dataguarante);
                     }
                     //保證出團圖示
+
+
+                    //日期對上星期幾!!!!
+                    let listDay= new Date(dataYear+","+dataMonth+","+dataDay);
+                    let weekdays = "星期日,星期一,星期二,星期三,星期四,星期五,星期六".split(",");
+                    let weekdayHtml="<span class='weekdays'>"+weekdays[listDay.getDay()]+"</span>";
+                    $('.calendar_listmode .calendar_daysWrap .'+dataDate+'').append(weekdayHtml);          
+                    //日期對上星期幾!!!  
 
                     // console.log(dataSource[i]);
                     //顯示當前這頁有多少data
@@ -814,7 +822,8 @@ class Module {
              this.$this.find('.daysWithData').on('click', function() { 
                 self.$this.find('.daysWithData').removeClass('daySelected');
                 $(this).addClass('daySelected');
-            });     
+            });
+
             self.listChange();
     };
 /////////////////////////////////////修改html結構後的bornCalendar/////////////////////////////////////

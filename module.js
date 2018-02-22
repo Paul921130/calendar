@@ -693,6 +693,7 @@ var Module = function () {
         //         $( ".hideData" ).remove();
         //         self.listChange();       
         // };
+        /////////////////////////////未修改html前的bornList/////////////////////////////////
         /////////////////////////////////////////////////////////////
         value: function listChange() {
             var self = this;
@@ -966,10 +967,10 @@ var Module = function () {
                     //為零時會出現undifined...............................
 
 
-                    var dataPrice = "<p class='price'>" + "$" + _self.formatNumber(dataSource[i].price) + "起" + "</p>";
-                    var dataStatus = "<p class='dataStatus'>" + dataSource[i].status + "</p>";
-                    var dataAvailable = "<p>" + "可賣:" + dataSource[i].availableVancancy + "</p>";
-                    var dataTotal = "<p>" + "團位:" + dataSource[i].totalVacnacy + "</p>";
+                    var dataPrice = "<span class='price'>" + "$" + _self.formatNumber(dataSource[i].price) + "起" + "</span>";
+                    var dataStatus = "<span class='dataStatus'>" + dataSource[i].status + "</span>";
+                    var dataAvailable = "<span class='onsell'>" + "可賣:" + dataSource[i].availableVancancy + "</span>";
+                    var dataTotal = "<span class='total'>" + "團位:" + dataSource[i].totalVacnacy + "</span>";
                     $('.calendar_daysWrap .' + dataDate + '').addClass('daysWithData');
                     $('.calendar_daysWrap .' + dataDate + '').append(dataStatus, dataAvailable, dataTotal, dataPrice);
                     if (dataSource[i].status === '額滿' || dataSource[i].status === '截止' || dataSource[i].status === '後補') {
@@ -984,9 +985,17 @@ var Module = function () {
 
                     if (dataSource[i].guaranteed == true) {
                         var dataguarante = "<span class='tip js_tip' style='display: inline;'>保證出團</span>";
-                        $('.calendar_weeksWrap .' + dataDate + '').append(dataguarante);
+                        $('.calendar_daysWrap .' + dataDate + '').append(dataguarante);
                     }
                     //保證出團圖示
+
+
+                    //日期對上星期幾!!!!
+                    var listDay = new Date(dataYear + "," + dataMonth + "," + dataDay);
+                    var weekdays = "星期日,星期一,星期二,星期三,星期四,星期五,星期六".split(",");
+                    var weekdayHtml = "<span class='weekdays'>" + weekdays[listDay.getDay()] + "</span>";
+                    $('.calendar_listmode .calendar_daysWrap .' + dataDate + '').append(weekdayHtml);
+                    //日期對上星期幾!!!  
 
                     // console.log(dataSource[i]);
                     //顯示當前這頁有多少data
@@ -997,6 +1006,7 @@ var Module = function () {
                 self.$this.find('.daysWithData').removeClass('daySelected');
                 $(this).addClass('daySelected');
             });
+
             self.listChange();
         }
     }, {
