@@ -297,7 +297,7 @@ var Module = function () {
         key: "creatHtml",
         value: function creatHtml() {
             var self = this;
-            var calendarHtml = '<div class="calendar_tabWrap">' + '<div class="ntb_gpbt yellow">' + '<a href="#" class="prev on">' + '</a>' + '<ul class="ntb_tab">' + '</ul>' + '<a href="#" class="next on">' + '</a>' + '</div>' + '</div>' + '<div class="calendar_weeksWrap">' + '</div>' + '<div class="calendar_list hide" id="calendar_list">' + '</div>'; //要記得用"+"連起來呦    
+            var calendarHtml = '<div class="calendar_tabWrap">' + '<div class="ntb_gpbt yellow">' + '<a class="prev on">' + '</a>' + '<ul class="ntb_tab">' + '</ul>' + '<a class="next on">' + '</a>' + '</div>' + '</div>' + '<div class="calendar_weeksWrap">' + '</div>' + '<div class="calendar_list hide" id="calendar_list">' + '</div>'; //要記得用"+"連起來呦    
             this.$this.append(calendarHtml);
             return this;
         }
@@ -482,7 +482,7 @@ var Module = function () {
             for (var i = 0; i <= 2; i++) {
                 var nextMonthMo = moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
-                var monthsTitle = '<li class="tab">' + '<a href="#" class="' + moment(initYearMonth).add(i, 'months').format("YYYYMM") + '" id="" data-label="' + moment(initYearMonth).add(i, 'months').format("YYYYMM") + '">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
+                var monthsTitle = '<li class="tab">' + '<a class="' + moment(initYearMonth).add(i, 'months').format("YYYYMM") + '" id="" data-label="' + moment(initYearMonth).add(i, 'months').format("YYYYMM") + '">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
                 self.$this.find('.ntb_tab').append(monthsTitle);
                 self.$this.find(".tab:nth-child(1) a").addClass('currentMonth');
             };
@@ -507,7 +507,7 @@ var Module = function () {
                     for (var _i = goMonth; _i <= goMonth + 2; _i++) {
                         var _nextMonthMo = moment(initYearMonth).add(_i, 'months').format("YYYY MMM");
                         console.log(_nextMonthMo);
-                        var _monthsTitle = '<li class="tab">' + '<a href="#" class="' + moment(initYearMonth).add(_i, 'months').format("YYYYMM") + '" id="" data-label="' + moment(initYearMonth).add(_i, 'months').format("YYYYMM") + '">' + '<span>' + _nextMonthMo + '</span>' + '</a>' + '</li>';
+                        var _monthsTitle = '<li class="tab">' + '<a class="' + moment(initYearMonth).add(_i, 'months').format("YYYYMM") + '" id="" data-label="' + moment(initYearMonth).add(_i, 'months').format("YYYYMM") + '">' + '<span>' + _nextMonthMo + '</span>' + '</a>' + '</li>';
                         self.$this.find('.ntb_tab').append(_monthsTitle);
                         self.$this.find(".tab a").attr('id', '');
                         self.$this.find(".tab:nth-child(1) a").addClass('currentMonth');
@@ -532,7 +532,7 @@ var Module = function () {
                     self.$this.find(".tab a").removeClass('currentMonth');
                     for (var _i2 = goMonth; _i2 <= goMonth + 2; _i2++) {
                         var _nextMonthMo2 = moment(initYearMonth).add(_i2, 'months').format("YYYY MMM");
-                        var _monthsTitle2 = '<li class="tab">' + '<a href="#" class="' + moment(initYearMonth).add(_i2, 'months').format("YYYYMM") + '" id="" data-label="' + moment(initYearMonth).add(_i2, 'months').format("YYYYMM") + '">' + '<span>' + _nextMonthMo2 + '</span>' + '</a>' + '</li>';
+                        var _monthsTitle2 = '<li class="tab">' + '<a class="' + moment(initYearMonth).add(_i2, 'months').format("YYYYMM") + '" id="" data-label="' + moment(initYearMonth).add(_i2, 'months').format("YYYYMM") + '">' + '<span>' + _nextMonthMo2 + '</span>' + '</a>' + '</li>';
                         self.$this.find('.ntb_tab').append(_monthsTitle2);
                         self.$this.find(".tab a").attr('id', '');
                         self.$this.find(".tab:nth-child(3) a").addClass('currentMonth');

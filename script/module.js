@@ -97,10 +97,10 @@ class Module {
         let self = this;
         let calendarHtml='<div class="calendar_tabWrap">'+
                             '<div class="ntb_gpbt yellow">'+
-                                '<a href="#" class="prev on">'+'</a>'+
+                                '<a class="prev on">'+'</a>'+
                                 '<ul class="ntb_tab">'+                                            
                                 '</ul>'+
-                                '<a href="#" class="next on">'+'</a>'+
+                                '<a class="next on">'+'</a>'+
                             '</div>'+
                         '</div>'+
                         '<div class="calendar_weeksWrap">'+
@@ -298,7 +298,7 @@ class Module {
                 let nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
                 let monthsTitle= '<li class="tab">'+
-                                   '<a href="#" class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                   '<a class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                  '</li>';              
                 self.$this.find('.ntb_tab').append(monthsTitle);
                 self.$this.find(".tab:nth-child(1) a").addClass('currentMonth');
@@ -325,7 +325,7 @@ class Module {
                     let nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                     console.log(nextMonthMo);
                     let monthsTitle= '<li class="tab">'+
-                                       '<a href="#" class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                       '<a class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                      '</li>';
                     self.$this.find('.ntb_tab').append(monthsTitle);
                     self.$this.find(".tab a").attr('id','');
@@ -353,7 +353,7 @@ class Module {
                 for (let i = goMonth;i <= goMonth+2 ; i++ ){
                     let nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                     let monthsTitle='<li class="tab">'+
-                                       '<a href="#" class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                       '<a class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                     '</li>';
                      self.$this.find('.ntb_tab').append(monthsTitle);
                      self.$this.find(".tab a").attr('id','');
