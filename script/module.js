@@ -63,6 +63,7 @@ class Module {
         this.$this.find('.switchMode').on('click', function() {
             self.switch();
         });
+        this.monthWithoutData();
         return this;
     }
 ///////////////////////////////////////////////////////////將數字轉為金額格式(每三位數一個",")
@@ -97,10 +98,10 @@ class Module {
         let self = this;
         let calendarHtml='<div class="calendar_tabWrap">'+
                             '<div class="ntb_gpbt yellow">'+
-                                '<a href="#" class="prev on">'+'</a>'+
+                                '<a class="prev on">'+'</a>'+
                                 '<ul class="ntb_tab">'+                                            
                                 '</ul>'+
-                                '<a href="#" class="next on">'+'</a>'+
+                                '<a class="next on">'+'</a>'+
                             '</div>'+
                         '</div>'+
                         '<div class="calendar_weeksWrap">'+
@@ -129,6 +130,10 @@ class Module {
                       delete(item.state||item.status);
                       item.status= statusChange;
 
+                      let statusGuaranteed=(item.guaranteed||item.certain);
+                      delete(item.guaranteed||item.certain);
+                      item.guaranteed= statusGuaranteed;
+
                       
                       let availableChange=(item.onsell||item.availableVancancy);
                       delete(item.onsell||item.availableVancancy);
@@ -143,7 +148,6 @@ class Module {
                         dataSource.push(item);
                     }
                 }
-
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1;
@@ -181,6 +185,10 @@ class Module {
                       let availableChange=(item.onsell||item.availableVancancy);
                       delete(item.onsell||item.availableVancancy);
                       item.availableVancancy= availableChange;
+
+                      let statusGuaranteed=(item.guaranteed||item.certain);
+                      delete(item.guaranteed||item.certain);
+                      item.guaranteed= statusGuaranteed;
 
                       let totalChange=(item.totalVacnacy||item.total);
                       delete(item.totalVacnacy||item.total);
@@ -228,6 +236,10 @@ class Module {
                       let statusChange=(item.state||item.status);
                       delete(item.state||item.status);
                       item.status= statusChange;
+                      
+                      let statusGuaranteed=(item.guaranteed||item.certain);
+                      delete(item.guaranteed||item.certain);
+                      item.guaranteed= statusGuaranteed;
 
                       let availableChange=(item.onsell||item.availableVancancy);
                       delete(item.onsell||item.availableVancancy);
@@ -287,7 +299,7 @@ class Module {
                 let nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                 console.log(nextMonthMo);
                 let monthsTitle= '<li class="tab">'+
-                                   '<a href="#" class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                   '<a class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                  '</li>';              
                 self.$this.find('.ntb_tab').append(monthsTitle);
                 self.$this.find(".tab:nth-child(1) a").addClass('currentMonth');
@@ -314,7 +326,7 @@ class Module {
                     let nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                     console.log(nextMonthMo);
                     let monthsTitle= '<li class="tab">'+
-                                       '<a href="#" class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                       '<a class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                      '</li>';
                     self.$this.find('.ntb_tab').append(monthsTitle);
                     self.$this.find(".tab a").attr('id','');
@@ -342,7 +354,7 @@ class Module {
                 for (let i = goMonth;i <= goMonth+2 ; i++ ){
                     let nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
                     let monthsTitle='<li class="tab">'+
-                                       '<a href="#" class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
+                                       '<a class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                     '</li>';
                      self.$this.find('.ntb_tab').append(monthsTitle);
                      self.$this.find(".tab a").attr('id','');
@@ -440,16 +452,17 @@ class Module {
                 let dataDate=parseInt(dataYear + dataMonth + dataDay);
                 let calendarDays=parseInt($('.currentLists').attr('date'));
                 if(self.$this.find('.currentLists').hasClass(dataDate)){
-                    //可賣為零時會出現undifined...............................
+                    //為零時會出現undifined...............................
                     if(dataSource[i].availableVancancy==undefined)
                         {
                             dataSource[i].availableVancancy = 0;
                     };
+
                     if(dataSource[i].totalVacnacy==undefined)
                         {
                             dataSource[i].totalVacnacy = 0;
                     };
-                    //可賣為零時會出現undifined...............................
+                    //為零時會出現undifined...............................
                     let li_right="<div class='li_right'><span class='dataStatus'>"+(dataSource[i].status)+"</span><span class='price'>"+"$"+self.formatNumber(dataSource[i].price)+"起"+"</span></div>";
                     let li_left="<div class='li_left'></div>";
                     let li_middle="<div class='li_middle'><span>"+
@@ -506,11 +519,11 @@ class Module {
     listChange(){
         let self = this;
         //實現分頁思路:
-        let pageSize=7;      //每頁顯示數據條數
+        let pageSize=8;      //每頁顯示數據條數
         let currentPage=1;   //當前頁數
         let totalSize=this.$this.find(".calendar_list ul li").length; //獲取總數據
         let totalPage=Math.ceil(totalSize / pageSize); //計算總頁數
-        this.$this.find(".calendar_list ul li:gt(6)").hide();//設置首頁顯示7條數據
+        this.$this.find(".calendar_list ul li:gt(7)").hide();//設置首頁顯示7條數據
         this.$this.find(".total").text(totalPage);//設置總頁數
         this.$this.find('.current_page').text(currentPage);//設置當前頁數
         //實現下一頁
@@ -634,18 +647,18 @@ class Module {
                 if(this.$this.find('.currentDays').hasClass(dataDate)){
                     // let self = this;
                     // let $this = this.$ele;
-                    //可賣為零時會出現undifined...............................
+                    //為零時會出現undifined...............................
                     if(dataSource[i].availableVancancy==undefined)
                         {
                             dataSource[i].availableVancancy = 0;
                     };
-                    //可賣為零時會出現undifined...............................
+                    //為零時會出現undifined...............................
                     if(dataSource[i].totalVacnacy==undefined)
                         {
                             dataSource[i].totalVacnacy = 0;
                     };
-                    //可賣為零時會出現undifined...............................
-                    //可賣為零時會出現undifined...............................
+                    //為零時會出現undifined...............................
+                   
 
                     let dataPrice="<p class='price'>"+"$"+self.formatNumber(dataSource[i].price)+"起"+"</p>";
                     let dataStatus="<p class='dataStatus'>"+(dataSource[i].status)+"</p>";
@@ -687,8 +700,8 @@ class Module {
         let self = this;
         // let $this = this.$ele;//class="calendar"
         if(this.$this.find('.currentDays').hasClass('daysWithData')==false){
-            let ddddd=$('.currentMonth').attr('data-label');
-            self.$this.find('.'+ddddd+'').remove();
+            let noDataMonth=$('.currentMonth').attr('data-label');
+            // self.$this.find('.'+noDataMonth+'').remove();
             alert('ohoh!這頁沒有Data!!');
         };
     }

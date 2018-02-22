@@ -24,11 +24,14 @@ $classname: 'calendar';
 .p_0{
 	padding: 0!important;
 }
-a{
-	text-decoration: none!important;
-}
 .#{$classname} {
-
+	a{
+		text-decoration: none!important;
+		cursor: pointer;
+	}
+	.switchMode{
+		cursor: pointer;
+	}
 	ul{
 		padding:0;
 		margin:0;
@@ -343,7 +346,7 @@ a{
 		.calendar_list{
 		ul{
 			position: relative;
-			height: 510px;
+			height: 520px;
 		}
 		.daysWithData{
 			box-sizing:border-box;
