@@ -147,7 +147,6 @@ class Module {
                         dataSource.push(item);
                     }
                 }
-
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1;
@@ -452,16 +451,17 @@ class Module {
                 let dataDate=parseInt(dataYear + dataMonth + dataDay);
                 let calendarDays=parseInt($('.currentLists').attr('date'));
                 if(self.$this.find('.currentLists').hasClass(dataDate)){
-                    //可賣為零時會出現undifined...............................
+                    //為零時會出現undifined...............................
                     if(dataSource[i].availableVancancy==undefined)
                         {
                             dataSource[i].availableVancancy = 0;
                     };
+
                     if(dataSource[i].totalVacnacy==undefined)
                         {
                             dataSource[i].totalVacnacy = 0;
                     };
-                    //可賣為零時會出現undifined...............................
+                    //為零時會出現undifined...............................
                     let li_right="<div class='li_right'><span class='dataStatus'>"+(dataSource[i].status)+"</span><span class='price'>"+"$"+self.formatNumber(dataSource[i].price)+"起"+"</span></div>";
                     let li_left="<div class='li_left'></div>";
                     let li_middle="<div class='li_middle'><span>"+
@@ -518,11 +518,11 @@ class Module {
     listChange(){
         let self = this;
         //實現分頁思路:
-        let pageSize=7;      //每頁顯示數據條數
+        let pageSize=8;      //每頁顯示數據條數
         let currentPage=1;   //當前頁數
         let totalSize=this.$this.find(".calendar_list ul li").length; //獲取總數據
         let totalPage=Math.ceil(totalSize / pageSize); //計算總頁數
-        this.$this.find(".calendar_list ul li:gt(6)").hide();//設置首頁顯示7條數據
+        this.$this.find(".calendar_list ul li:gt(7)").hide();//設置首頁顯示7條數據
         this.$this.find(".total").text(totalPage);//設置總頁數
         this.$this.find('.current_page').text(currentPage);//設置當前頁數
         //實現下一頁
@@ -646,18 +646,18 @@ class Module {
                 if(this.$this.find('.currentDays').hasClass(dataDate)){
                     // let self = this;
                     // let $this = this.$ele;
-                    //可賣為零時會出現undifined...............................
+                    //為零時會出現undifined...............................
                     if(dataSource[i].availableVancancy==undefined)
                         {
                             dataSource[i].availableVancancy = 0;
                     };
-                    //可賣為零時會出現undifined...............................
+                    //為零時會出現undifined...............................
                     if(dataSource[i].totalVacnacy==undefined)
                         {
                             dataSource[i].totalVacnacy = 0;
                     };
-                    //可賣為零時會出現undifined...............................
-                    //可賣為零時會出現undifined...............................
+                    //為零時會出現undifined...............................
+                   
 
                     let dataPrice="<p class='price'>"+"$"+self.formatNumber(dataSource[i].price)+"起"+"</p>";
                     let dataStatus="<p class='dataStatus'>"+(dataSource[i].status)+"</p>";
