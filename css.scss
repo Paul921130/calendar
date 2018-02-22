@@ -307,10 +307,15 @@ a{
 				.listTip{
 					position: absolute;
 					bottom: 10px;
+					left: 5px;
 					background: #66bb3c;
 					color: #fff;
     				padding: 0 5px;
     				text-align: center;
+    				.productreferf{
+    					color: #fff;
+    					margin-right: 1px;
+    				}
 				}
 			}
 			.li_right{

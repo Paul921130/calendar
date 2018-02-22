@@ -625,7 +625,8 @@ var Module = function () {
                     //可賣為零時會出現undifined...............................
                     var li_right = "<div class='li_right'><span class='dataStatus'>" + dataSource[i].status + "</span><span class='price'>" + "$" + _self.formatNumber(dataSource[i].price) + "起" + "</span></div>";
                     var li_left = "<div class='li_left'></div>";
-                    var li_middle = "<div class='li_middle'><span>" + "可賣:" + dataSource[i].availableVancancy + "</span><span>" + "團位:" + dataSource[i].totalVacnacy + "</span><div class='lb_gpls'>行程一</div></div>";
+                    var li_middle = "<div class='li_middle'><span>" + "可賣:" + dataSource[i].availableVancancy + "</span><span>" + "團位:" + dataSource[i].totalVacnacy;
+                    // +"</span><div class='lb_gpls'>行程一</div></div>"
                     // let dataAvailable="<span>"+"可賣:"+dataSource[i].availableVancancy+"</span>";
                     // let dataTotal="<span>"+"團位:"+dataSource[i].totalVacnacy+"</span>";
 
@@ -642,7 +643,7 @@ var Module = function () {
                     //保證出團圖示
 
                     if (dataSource[i].guaranteed == true) {
-                        var dataguarante = "<span class='listTip js_tip' style='display: inline;'>保證出團</span>";
+                        var dataguarante = "<span class='listTip js_tip' style='display: inline;'><span class='ic-ln productreferf'></span>保證出團</span>";
                         $('.calendar_list .' + dataDate + ' .li_middle').append(dataguarante);
                     }
                     //保證出團圖示
