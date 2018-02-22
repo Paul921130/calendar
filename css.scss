@@ -21,425 +21,427 @@ $classname: 'calendar';
 // 您的CSS Code
 // -------------------------------------
 //以下範例可以刪除，改為您自已的CSS Code
-.p_0{
-	padding: 0!important;
-}
+//未改html結構前的css///////////////////////////////////////////////////////////
+// .p_0{
+// 	padding: 0!important;
+// }
+//未改html結構前的css///////////////////////////////////////////////////////////
 .#{$classname} {
-	a{
-		text-decoration: none!important;
-		cursor: pointer;
-	}
-	.switchMode{
-		cursor: pointer;
-	}
-	ul{
-		padding:0;
-		margin:0;
-	}
-	.hide{
-		display:none;
-	}
-	li{
-		list-style: none;
-	}
+	// a{
+	// 	text-decoration: none!important;
+	// 	cursor: pointer;
+	// }
+	// .switchMode{
+	// 	cursor: pointer;
+	// }
+	// ul{
+	// 	padding:0;
+	// 	margin:0;
+	// }
+	// .hide{
+	// 	display:none;
+	// }
+	// li{
+	// 	list-style: none;
+	// }
 
-	.calendar_tabWrap{
-			overflow: hidden;
-			background-color: #ede9dd;
-			.ntb_gpbt>a {
-			    width: 20px;
-			    float: left;
-			    position: relative;
-			    height: 40px;
-			    color: transparent;
-			    background-color: #bbb;
-			}
-		.ntb_gpbt.yellow .prev,.ntb_gpbt.yellow .next{
-			background-color: #ede9dd;
-			height:50px;
-		}
-		.ntb_gpbt>.ntb_tab {
-		    padding: 0;
-		    float: left;
-		    width: calc(100% - 40px);
-		    margin-bottom: 0;
-		    white-space: nowrap;
-		    font-size: 0;
-		    overflow: hidden;
-		}
-		.ntb_tab>li {
-	    	background-color: #ede9dd;	
-	    	float: left;
-	    	height: 50px;
-	    	font-size: 16px;
-	    	a{
-	    		display: block;
-	    		height: 50px;
-	    		border-top: 6px solid #ede9dd;
-	    		text-decoration: none;
-	    		margin: 0 3px;
-	    		padding-top: 6px;
-	    		// background: #fff;
-	    		span{
-	    			    display: block;
-					    font-size: 16px;
-					    color: #666;
-					    line-height: 1.25;
-	    		}
-	    	}
-		}
-		.currentMonth{
-			background: #fff;
-			span{
-				color: #e10500!important;
-			}
-		}
-		.ntb_gpbt>.ntb_tab>li, .ntb_gpbt>.ntb_tab>li.tab {
-	    	width: 33.3333%;
-	    	display: inline-block;
-	    	list-style-type: none;
-	    	position: relative;
-	    	text-align: center;
-	    	background-color: #ede9dd;
-	    	vertical-align: top;
-		}
-		.ntb_gpbt.yellow .prev.on:before {
-	    	border-color: transparent #e10500 transparent transparent;
-		}
-		.ntb_gpbt.yellow .prev:before {
-			    left: -1px;
-			    border-width: 7px 7px 7px 0;
-			    border-color: transparent #e10500 transparent transparent;
-		}
+	// .calendar_tabWrap{
+	// 		overflow: hidden;
+	// 		background-color: #ede9dd;
+	// 		.ntb_gpbt>a {
+	// 		    width: 20px;
+	// 		    float: left;
+	// 		    position: relative;
+	// 		    height: 40px;
+	// 		    color: transparent;
+	// 		    background-color: #bbb;
+	// 		}
+	// 	.ntb_gpbt.yellow .prev,.ntb_gpbt.yellow .next{
+	// 		background-color: #ede9dd;
+	// 		height:50px;
+	// 	}
+	// 	.ntb_gpbt>.ntb_tab {
+	// 	    padding: 0;
+	// 	    float: left;
+	// 	    width: calc(100% - 40px);
+	// 	    margin-bottom: 0;
+	// 	    white-space: nowrap;
+	// 	    font-size: 0;
+	// 	    overflow: hidden;
+	// 	}
+	// 	.ntb_tab>li {
+	//     	background-color: #ede9dd;	
+	//     	float: left;
+	//     	height: 50px;
+	//     	font-size: 16px;
+	//     	a{
+	//     		display: block;
+	//     		height: 50px;
+	//     		border-top: 6px solid #ede9dd;
+	//     		text-decoration: none;
+	//     		margin: 0 3px;
+	//     		padding-top: 6px;
+	//     		// background: #fff;
+	//     		span{
+	//     			    display: block;
+	// 				    font-size: 16px;
+	// 				    color: #666;
+	// 				    line-height: 1.25;
+	//     		}
+	//     	}
+	// 	}
+	// 	.currentMonth{
+	// 		background: #fff;
+	// 		span{
+	// 			color: #e10500!important;
+	// 		}
+	// 	}
+	// 	.ntb_gpbt>.ntb_tab>li, .ntb_gpbt>.ntb_tab>li.tab {
+	//     	width: 33.3333%;
+	//     	display: inline-block;
+	//     	list-style-type: none;
+	//     	position: relative;
+	//     	text-align: center;
+	//     	background-color: #ede9dd;
+	//     	vertical-align: top;
+	// 	}
+	// 	.ntb_gpbt.yellow .prev.on:before {
+	//     	border-color: transparent #e10500 transparent transparent;
+	// 	}
+	// 	.ntb_gpbt.yellow .prev:before {
+	// 		    left: -1px;
+	// 		    border-width: 7px 7px 7px 0;
+	// 		    border-color: transparent #e10500 transparent transparent;
+	// 	}
 
-		.ntb_gpbt .prev:before {
-			    left: -1px;
-			    border-width: 7px 7px 7px 0;
-			    border-color: transparent #f4f4f4 transparent transparent;
-		}
-		.ntb_gpbt>a:before {
-			    content: "";
-			    position: absolute;
-			    top: 0;
-			    bottom: 0;
-			    left: 0;
-			    right: 0;
-			    margin: auto;
-			    display: inline-block;
-			    width: 0;
-			    height: 0;
-			    border-style: solid;
-		}
-		.ntb_gpbt.yellow .next.on:before {
-		    border-color: transparent transparent transparent #e10500;
-		}
+	// 	.ntb_gpbt .prev:before {
+	// 		    left: -1px;
+	// 		    border-width: 7px 7px 7px 0;
+	// 		    border-color: transparent #f4f4f4 transparent transparent;
+	// 	}
+	// 	.ntb_gpbt>a:before {
+	// 		    content: "";
+	// 		    position: absolute;
+	// 		    top: 0;
+	// 		    bottom: 0;
+	// 		    left: 0;
+	// 		    right: 0;
+	// 		    margin: auto;
+	// 		    display: inline-block;
+	// 		    width: 0;
+	// 		    height: 0;
+	// 		    border-style: solid;
+	// 	}
+	// 	.ntb_gpbt.yellow .next.on:before {
+	// 	    border-color: transparent transparent transparent #e10500;
+	// 	}
 
-		.ntb_gpbt.yellow .next:before {
-		    right: -1px;
-		    border-width: 7px 0 7px 7px;
-		    border-color: transparent transparent transparent #e10500;
-		}
+	// 	.ntb_gpbt.yellow .next:before {
+	// 	    right: -1px;
+	// 	    border-width: 7px 0 7px 7px;
+	// 	    border-color: transparent transparent transparent #e10500;
+	// 	}
 
-		.ntb_gpbt .next:before {
-		    right: -1px;
-		    border-width: 7px 0 7px 7px;
-		    border-color: transparent transparent transparent #f4f4f4;
-		}
-	}
-	.calendar_weeksWrap{
-		border: 1px solid #eee;
-	}
-	.calendar_weeksWrap>table{
-		width: 100%;
-		thead> tr{
-			display: flex;
-			th{
-				flex:1;
-				line-height: 30px;
-		    	color: #666;
-		    	background-color: #fff;
-		    	border-top: 1px solid #f4f4f4;
-		    	border-bottom: 1px solid #f4f4f4;
-	    	}
-	    }
-	    tbody>tr{
-	    	display: flex;
-	    	td{
-	    		box-sizing:border-box;
-	    		flex:1;
-	    		padding: 0 3px;
-    			font-size: 12px;
-    			line-height: 16px;
-    			border: 1px solid #eee;
-    			border-top: 1px solid transparent;
-    			border-left: 1px solid transparent;
-    			height: 85px;
-	    	}
-	    }
-	}
-	.currentDays:hover{
-		background-color: #fff9e3;
-		cursor: pointer;
-	}
-	.currentDays{
-		position: relative;
-		font-size: 12px;
-		background-color: #fff;
-		.tip{
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: 48px;
-			height: 20px;
-			color: #fff;
-    		text-align: center;
-    		line-height: 20px;
-    		background-color: #66bb3c;
-		}
-		p{
-			margin:0;
-			padding: 0;
-			line-height: 17px; 
-		}
-		.dataStatus_Or{
-			color: #ff7800;
-		}
-		.dataStatus_Re{
-			color: #e10500;
-		}
-		.dataStatus_Gr{
-			color: #24a07c;
-		}
-	}
-	.daysWithData{
-		background-color: #fff9e3!important;
-	}
-	.disabled {
-    	// border: 1px solid #f8f8f8!important;
-    	border-right: 1px solid transparent!important;
-    	border-bottom: 1px solid transparent!important;
-    	background-color: #f8f8f8;
-    	cursor: default;
-	}
-	.price {
-	    color: #e10500;
-	    margin-bottom:0; 
-	}
-	.daySelected{
-		box-sizing:border-box;
-		border: 2px solid #66bb3c!important;
-	}
+	// 	.ntb_gpbt .next:before {
+	// 	    right: -1px;
+	// 	    border-width: 7px 0 7px 7px;
+	// 	    border-color: transparent transparent transparent #f4f4f4;
+	// 	}
+	// }
+	// .calendar_weeksWrap{
+	// 	border: 1px solid #eee;
+	// }
+	// .calendar_weeksWrap>table{
+	// 	width: 100%;
+	// 	thead> tr{
+	// 		display: flex;
+	// 		th{
+	// 			flex:1;
+	// 			line-height: 30px;
+	// 	    	color: #666;
+	// 	    	background-color: #fff;
+	// 	    	border-top: 1px solid #f4f4f4;
+	// 	    	border-bottom: 1px solid #f4f4f4;
+	//     	}
+	//     }
+	//     tbody>tr{
+	//     	display: flex;
+	//     	td{
+	//     		box-sizing:border-box;
+	//     		flex:1;
+	//     		padding: 0 3px;
+ //    			font-size: 12px;
+ //    			line-height: 16px;
+ //    			border: 1px solid #eee;
+ //    			border-top: 1px solid transparent;
+ //    			border-left: 1px solid transparent;
+ //    			height: 85px;
+	//     	}
+	//     }
+	// }
+	// .currentDays:hover{
+	// 	background-color: #fff9e3;
+	// 	cursor: pointer;
+	// }
+	// .currentDays{
+	// 	position: relative;
+	// 	font-size: 12px;
+	// 	background-color: #fff;
+	// 	.tip{
+	// 		position: absolute;
+	// 		top: 0;
+	// 		right: 0;
+	// 		width: 48px;
+	// 		height: 20px;
+	// 		color: #fff;
+ //    		text-align: center;
+ //    		line-height: 20px;
+ //    		background-color: #66bb3c;
+	// 	}
+	// 	p{
+	// 		margin:0;
+	// 		padding: 0;
+	// 		line-height: 17px; 
+	// 	}
+	// 	.dataStatus_Or{
+	// 		color: #ff7800;
+	// 	}
+	// 	.dataStatus_Re{
+	// 		color: #e10500;
+	// 	}
+	// 	.dataStatus_Gr{
+	// 		color: #24a07c;
+	// 	}
+	// }
+	// .daysWithData{
+	// 	background-color: #fff9e3!important;
+	// }
+	// .disabled {
+ //    	// border: 1px solid #f8f8f8!important;
+ //    	border-right: 1px solid transparent!important;
+ //    	border-bottom: 1px solid transparent!important;
+ //    	background-color: #f8f8f8;
+ //    	cursor: default;
+	// }
+	// .price {
+	//     color: #e10500;
+	//     margin-bottom:0; 
+	// }
+	// .daySelected{
+	// 	box-sizing:border-box;
+	// 	border: 2px solid #66bb3c!important;
+	// }
 	
-	}
-	.listPage{
-		position: absolute;
-		height: 20px;
-		width: 100%;
-		bottom: 0;
-		text-align: center;
-		.nextList{
-			float: right;
-		}
-		.prevList{
-			float: left;
-		}
-		span{
-			font-size: 14px;
-			line-height: 1.5;
-			color: #666;
-		}
-	}
-	.prevList , .nextList{
-		cursor: pointer;
-	}
-	.arrow-gr{
-		display: inline-block;
-    	width: 0;
-    	height: 0;
-    	border-style: solid;
-    	vertical-align: middle;
-    	margin-top: -3px;
-    	border-width: 4.5px 0 4.5px 5px;
-    	border-color: transparent transparent transparent #24a07c;
-	}
-	.arrow-gl{
-		display: inline-block;
-    	width: 0;
-    	height: 0;
-    	border-style: solid;
-    	vertical-align: middle;
-    	margin-top: -3px;
-    	border-width: 4.5px 5px 4.5px 0;
-    	border-color: transparent #24a07c transparent transparent;
-	} 
+	// }
+	// .listPage{
+	// 	position: absolute;
+	// 	height: 20px;
+	// 	width: 100%;
+	// 	bottom: 0;
+	// 	text-align: center;
+	// 	.nextList{
+	// 		float: right;
+	// 	}
+	// 	.prevList{
+	// 		float: left;
+	// 	}
+	// 	span{
+	// 		font-size: 14px;
+	// 		line-height: 1.5;
+	// 		color: #666;
+	// 	}
+	// }
+	// .prevList , .nextList{
+	// 	cursor: pointer;
+	// }
+	// .arrow-gr{
+	// 	display: inline-block;
+ //    	width: 0;
+ //    	height: 0;
+ //    	border-style: solid;
+ //    	vertical-align: middle;
+ //    	margin-top: -3px;
+ //    	border-width: 4.5px 0 4.5px 5px;
+ //    	border-color: transparent transparent transparent #24a07c;
+	// }
+	// .arrow-gl{
+	// 	display: inline-block;
+ //    	width: 0;
+ //    	height: 0;
+ //    	border-style: solid;
+ //    	vertical-align: middle;
+ //    	margin-top: -3px;
+ //    	border-width: 4.5px 5px 4.5px 0;
+ //    	border-color: transparent #24a07c transparent transparent;
+	// } 
 	
-	.hideData{
-		display: none;
-	}
+	// .hideData{
+	// 	display: none;
+	// }
 	// style on phone device
 	@media screen and (min-width: $screen-tablet) {
 		
 		// style on tablet device
 	}
 	@media screen and (min-width: $screen-desktop) {
-		.currentLists {
-			display: flex;
-			.li_right, .li_left, .li_middle{
-				padding: 5px;
-				float: left;
-			}
-			.li_left{
-				flex:1;
-				.dayDate{
-					// padding-bottom: 5px;
-					color: #666;
-				    text-align: center;
-				    font-size: 24px;
-				    line-height: 26px;
-				    span{
-				    	font-size: 16px;
-						display: block;
-						text-align: center;
-					}
-				}
-			}
-			.li_middle{
-				position: relative;
-				flex:5;
-				span{
-					margin-right: 30px;
-					color: #666;
-				}
-				.lb_gpls{
-					max-width: 50px;
-					min-width: auto;
-    				line-height: 20px;
-					margin-top: 5px;
-					text-align: center;
-    				font-weight: 400;
-					color: #24a07d;
-					background-color: #cee5df;		
-				}
-				.listTip{
-					position: absolute;
-					bottom: 10px;
-					left: 5px;
-					background: #66bb3c;
-					color: #fff;
-    				padding: 0 5px;
-    				text-align: center;
-    				.productreferf{
-    					color: #fff;
-    					margin-right: 1px;
-    				}
-				}
-			}
-			.li_right{
-				flex:3;
-				text-align: right;
-			}
-		}
+		// .currentLists {
+		// 	display: flex;
+		// 	.li_right, .li_left, .li_middle{
+		// 		padding: 5px;
+		// 		float: left;
+		// 	}
+		// 	.li_left{
+		// 		flex:1;
+		// 		.dayDate{
+		// 			// padding-bottom: 5px;
+		// 			color: #666;
+		// 		    text-align: center;
+		// 		    font-size: 24px;
+		// 		    line-height: 26px;
+		// 		    span{
+		// 		    	font-size: 16px;
+		// 				display: block;
+		// 				text-align: center;
+		// 			}
+		// 		}
+		// 	}
+		// 	.li_middle{
+		// 		position: relative;
+		// 		flex:5;
+		// 		span{
+		// 			margin-right: 30px;
+		// 			color: #666;
+		// 		}
+		// 		.lb_gpls{
+		// 			max-width: 50px;
+		// 			min-width: auto;
+  //   				line-height: 20px;
+		// 			margin-top: 5px;
+		// 			text-align: center;
+  //   				font-weight: 400;
+		// 			color: #24a07d;
+		// 			background-color: #cee5df;		
+		// 		}
+		// 		.listTip{
+		// 			position: absolute;
+		// 			bottom: 10px;
+		// 			left: 5px;
+		// 			background: #66bb3c;
+		// 			color: #fff;
+  //   				padding: 0 5px;
+  //   				text-align: center;
+  //   				.productreferf{
+  //   					color: #fff;
+  //   					margin-right: 1px;
+  //   				}
+		// 		}
+		// 	}
+		// 	.li_right{
+		// 		flex:3;
+		// 		text-align: right;
+		// 	}
+		// }
 		
 		// style on desktop device
 	}
 	@media screen and (min-width: $screen-lg-desktop) {
-		.calendar_list{
-		ul{
-			position: relative;
-			height: 520px;
-		}
-		.daysWithData{
-			box-sizing:border-box;
-			height: 62px;
-			background: #fff!important;
-			border-style: solid;
-    		border-color: transparent #e3e3e3 #e3e3e3;
-    		border-width: 1px;
-		}
-		.daySelected{
-			box-sizing:border-box;
-			border: 1px solid #66bb3c!important;
-			background-color: #fff9e3!important;
-		}
-		.daysWithData:hover{
-			background-color: #fff9e3!important;
-			cursor: pointer;
-		}
-		.dataStatus {
-			display: block;
-			font-size: 16px;
-		}
-		.dataStatus_Or{
-			color: #ff7800;
-		}
-		.dataStatus_Re{
-			color: #e10500;
-		}
-		.dataStatus_Gr{
-			color: #24a07c;
-		}
-		.price {
-	    color: #e10500;
-	    margin-bottom:0; 
-	    font-size: 16px;
-		}
-		.currentLists {
-			display: flex;
-			.li_right, .li_left, .li_middle{
-				padding: 5px;
-				float: left;
-			}
-			.li_left{
-				flex:1;
-				.dayDate{
-					// padding-bottom: 5px;
-					color: #666;
-				    text-align: center;
-				    font-size: 24px;
-				    line-height: 26px;
-				    span{
-				    	font-size: 16px;
-						display: block;
-						text-align: center;
-					}
-				}
-			}
-			.li_middle{
-				position: relative;
-				flex:6;
-				span{
-					margin-right: 30px;
-					color: #666;
-				}
-				.lb_gpls{
-					max-width: 50px;
-					min-width: auto;
-    				line-height: 20px;
-					margin-top: 5px;
-					text-align: center;
-    				font-weight: 400;
-					color: #24a07d;
-					background-color: #cee5df;		
-				}
-				.listTip{
-					position: absolute;
-					bottom: 10px;
-					left: 5px;
-					background: #66bb3c;
-					color: #fff;
-    				padding: 0 5px;
-    				text-align: center;
-    				.productreferf{
-    					color: #fff;
-    					margin-right: 1px;
-    				}
-				}
-			}
-			.li_right{
-				flex:3;
-				text-align: right;
-			}
-		}
+		// .calendar_list{
+		// ul{
+		// 	position: relative;
+		// 	height: 520px;
+		// }
+		// .daysWithData{
+		// 	box-sizing:border-box;
+		// 	height: 62px;
+		// 	background: #fff!important;
+		// 	border-style: solid;
+  //   		border-color: transparent #e3e3e3 #e3e3e3;
+  //   		border-width: 1px;
+		// }
+		// .daySelected{
+		// 	box-sizing:border-box;
+		// 	border: 1px solid #66bb3c!important;
+		// 	background-color: #fff9e3!important;
+		// }
+		// .daysWithData:hover{
+		// 	background-color: #fff9e3!important;
+		// 	cursor: pointer;
+		// }
+		// .dataStatus {
+		// 	display: block;
+		// 	font-size: 16px;
+		// }
+		// .dataStatus_Or{
+		// 	color: #ff7800;
+		// }
+		// .dataStatus_Re{
+		// 	color: #e10500;
+		// }
+		// .dataStatus_Gr{
+		// 	color: #24a07c;
+		// }
+		// .price {
+	 //    color: #e10500;
+	 //    margin-bottom:0; 
+	 //    font-size: 16px;
+		// }
+		// .currentLists {
+		// 	display: flex;
+		// 	.li_right, .li_left, .li_middle{
+		// 		padding: 5px;
+		// 		float: left;
+		// 	}
+		// 	.li_left{
+		// 		flex:1;
+		// 		.dayDate{
+		// 			// padding-bottom: 5px;
+		// 			color: #666;
+		// 		    text-align: center;
+		// 		    font-size: 24px;
+		// 		    line-height: 26px;
+		// 		    span{
+		// 		    	font-size: 16px;
+		// 				display: block;
+		// 				text-align: center;
+		// 			}
+		// 		}
+		// 	}
+		// 	.li_middle{
+		// 		position: relative;
+		// 		flex:6;
+		// 		span{
+		// 			margin-right: 30px;
+		// 			color: #666;
+		// 		}
+		// 		.lb_gpls{
+		// 			max-width: 50px;
+		// 			min-width: auto;
+  //   				line-height: 20px;
+		// 			margin-top: 5px;
+		// 			text-align: center;
+  //   				font-weight: 400;
+		// 			color: #24a07d;
+		// 			background-color: #cee5df;		
+		// 		}
+		// 		.listTip{
+		// 			position: absolute;
+		// 			bottom: 10px;
+		// 			left: 5px;
+		// 			background: #66bb3c;
+		// 			color: #fff;
+  //   				padding: 0 5px;
+  //   				text-align: center;
+  //   				.productreferf{
+  //   					color: #fff;
+  //   					margin-right: 1px;
+  //   				}
+		// 		}
+		// 	}
+		// 	.li_right{
+		// 		flex:3;
+		// 		text-align: right;
+		// 	}
+		// }
 		// style on desktop device
 	}
 	&.#{$classname}_modifier {
@@ -456,3 +458,4 @@ $classname: 'calendar';
 
 	}
 }
+//未改html結構前的css///////////////////////////////////////////////////////////
