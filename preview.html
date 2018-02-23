@@ -19,10 +19,10 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 hidden-xs hidden-sm p_0">
                 <div class="calendar calendar_daymode" >
-                     <a class="switchMode">切換列表模式</a>
+                     <a class="switchMode"></a>
                 </div>
                 <div class="calendar calendar_daymode" >
-                     <a class="switchMode">切換列表模式</a>
+                     <a class="switchMode"></a>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                 ],
                 // 輸入一開始要在哪一個月份 [string] YYYYMM，若輸入的年月沒有資料，
                 // 就要找相近的年月，若前一個月後一個月都有資料，就顯示資料比數比較多的那一個月
-                initYearMonth: '2018-06',
+                initYearMonth: '2017-12',
                 // 設定各資料的key
                 dataKeySetting: {
                     // 保證出團
@@ -80,13 +80,13 @@
                 console.log(data, module);
             });
             // 上一個有資料的月份
-            $('.calendars').calendar('prevMonth ', function( data, module ) {
+            $('.calendars').calendar('prevMonth', function( data, module ) {
                 console.log(data, module);
             });
             // 切換日曆或列表模式
-            $('.calendar').calendar('switch');//ok
+            // $('.calendar').calendar('switch');//ok
             // 加資料時如果有相同日期的資料，以後輸入為主，輸入時如果輸入沒有的月份，模組會加上該月份
-            $('.calendars').calendar('inputData', [
+            $('.calendar').calendar('inputData', [
                 {
                     "certain": true, // {boolean}
                     "date": "2017/06/15", // {string} YYYY/MM/DD
