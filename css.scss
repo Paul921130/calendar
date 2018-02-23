@@ -239,11 +239,16 @@ $classname: 'calendar';
 	}
 	&.#{$classname}_daymode {
 	
-		border: 1px solid #eee;
+		// border: 1px solid #eee;
 		.hideLis{
 			display: block!important;
 		}
+		& > .#{$classname}_weeksWrap {
+			border-right:1px solid #eee;
+			border-left:1px solid #eee; 
+		}
 		& > .#{$classname}_daysWrap {
+			border: 1px solid #eee;
 			display: flex;
 			flex-wrap: wrap;
 			background-color:#f8f8f8;

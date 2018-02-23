@@ -355,10 +355,6 @@ var Module = function () {
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
-
-                self.onClickNext(dataSource);
-                self.onClickPrev(dataSource);
-                self.onClickDate(dataSource);
             });
         }
     }, {
@@ -409,10 +405,6 @@ var Module = function () {
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
-
-                self.onClickNext(dataSource);
-                self.onClickPrev(dataSource);
-                self.onClickDate(dataSource);
             });
             // location.reload();
         }
@@ -464,9 +456,6 @@ var Module = function () {
                 self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
 
-                self.onClickNext(dataSource);
-                self.onClickPrev(dataSource);
-                self.onClickDate(dataSource);
                 // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
             });
         }
@@ -490,7 +479,7 @@ var Module = function () {
             var goMonth = 0;
             for (var i = 0; i <= 2; i++) {
                 var nextMonthMo = moment(initYearMonth).add(i, 'months').format("YYYY MMM");
-                console.log(nextMonthMo);
+                // console.log(nextMonthMo);
                 var monthsTitle = '<li class="tab">' + '<a class="' + moment(initYearMonth).add(i, 'months').format("YYYYMM") + '" id="" data-label="' + moment(initYearMonth).add(i, 'months').format("YYYYMM") + '">' + '<span>' + nextMonthMo + '</span>' + '</a>' + '</li>';
                 self.$this.find('.ntb_tab').append(monthsTitle);
                 self.$this.find(".tab:nth-child(1) a").addClass('currentMonth');
@@ -502,8 +491,6 @@ var Module = function () {
                 if (self.$this.find(".tab:nth-child(3) a").hasClass('currentMonth') === false) {
                     self.$this.find('.currentMonth').parent().next().children().addClass('currentMonth');
                     self.$this.find('.currentMonth').parent().prev().children().removeClass('currentMonth');
-                    self.monthSelect(dataSource);
-                    // self.bornList(dataSource);
                     self.bornCalendar(dataSource);
                 } else {
                     goMonth = goMonth + 3;
@@ -527,7 +514,6 @@ var Module = function () {
                 if (self.$this.find(".tab:nth-child(1) a").hasClass('currentMonth') !== true) {
                     self.$this.find('.currentMonth').parent().prev().children().addClass('currentMonth');
                     self.$this.find('.currentMonth').parent().next().children().removeClass('currentMonth');
-                    self.monthSelect(dataSource);
                     self.bornCalendar(dataSource);
                 } else {
                     goMonth = goMonth - 3;
@@ -667,8 +653,6 @@ var Module = function () {
                 ///////////////////////////////////////////////////////////////////////////////////////////    
             });
         }
-        // addDataLis(){
-        // }
         /////////////////////////////////////修改html結構後的bornCalendar/////////////////////////////////////
 
     }, {
@@ -733,21 +717,16 @@ var Module = function () {
             var NumOfJData = dataSource.length;
             for (i = 0; i < NumOfJData; i++) {
                 var _self = this;
-                // let $this = this.$ele;
-                // let $smallBox = $this.find(".content_box2");
                 var dataYear = dataSource[i].date.substring(0, 4);
                 var dataMonth = dataSource[i].date.substring(5, 7);
                 var dataDay = dataSource[i].date.substring(8, 10);
                 var dataDate = parseInt(dataYear + dataMonth + dataDay);
                 var calendarDays = parseInt(this.$this.find('.currentDays').attr('date'));
                 if (this.$this.find('.currentDays').hasClass(dataDate)) {
-                    // let self = this;
-                    // let $this = this.$ele;
                     //為零時會出現undifined...............................
                     if (dataSource[i].availableVancancy == undefined) {
                         dataSource[i].availableVancancy = 0;
                     };
-                    //為零時會出現undifined...............................
                     if (dataSource[i].totalVacnacy == undefined) {
                         dataSource[i].totalVacnacy = 0;
                     };
@@ -784,7 +763,6 @@ var Module = function () {
                     this.$this.find('.calendar_daysWrap .' + dataDate + '').append(weekdayHtml);
                     //日期對上星期幾!!!  
 
-                    // console.log(dataSource[i]);
                     //顯示當前這頁有多少data
                 }
             };
@@ -802,6 +780,12 @@ var Module = function () {
             this.$this.find('.calendar_daysWrap').append(listPage);
             self.listChange();
             ///////////////////////////////////列表跳頁產出/////////////////////////////////////////// 
+
+            /////////////////////////////whenclick////////////////////////////////////////////////////
+            self.onClickNext(dataSource);
+            self.onClickPrev(dataSource);
+            self.onClickDate(dataSource);
+            ////////////////////////////////////////////////////////////////////////////////////////
         }
     }, {
         key: "monthWithoutData",

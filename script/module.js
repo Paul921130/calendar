@@ -166,10 +166,6 @@ class Module {
                 self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
 
-
-                self.onClickNext(dataSource);
-                self.onClickPrev(dataSource);
-                self.onClickDate(dataSource);
             });
     }
     resetData(resetOpt){
@@ -219,10 +215,6 @@ class Module {
                 self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
 
-                self.onClickNext(dataSource);
-                self.onClickPrev(dataSource);
-                self.onClickDate(dataSource);
-
             });
             // location.reload();
     };
@@ -271,10 +263,7 @@ class Module {
                 self.creatCalendar(dataSource);
                 self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
-                
-                self.onClickNext(dataSource);
-                self.onClickPrev(dataSource);
-                self.onClickDate(dataSource);
+
                 // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
             });
     };
@@ -300,7 +289,7 @@ class Module {
         let goMonth =0;
         for (let i = 0 ;i <= 2 ; i++ ){
                 let nextMonthMo=moment(initYearMonth).add(i, 'months').format("YYYY MMM");
-                console.log(nextMonthMo);
+                // console.log(nextMonthMo);
                 let monthsTitle= '<li class="tab">'+
                                    '<a class="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'" id="" data-label="'+moment(initYearMonth).add(i, 'months').format("YYYYMM")+'">'+'<span>'+nextMonthMo+'</span>'+'</a>'+
                                  '</li>';              
@@ -314,8 +303,6 @@ class Module {
             if(self.$this.find(".tab:nth-child(3) a").hasClass('currentMonth')===false){
             self.$this.find('.currentMonth').parent().next().children().addClass('currentMonth');
             self.$this.find('.currentMonth').parent().prev().children().removeClass('currentMonth');
-                self.monthSelect(dataSource);
-                // self.bornList(dataSource);
                 self.bornCalendar(dataSource);
                 }else {
                 goMonth=goMonth + 3;
@@ -342,7 +329,6 @@ class Module {
             if(self.$this.find(".tab:nth-child(1) a").hasClass('currentMonth')!==true){
                 self.$this.find('.currentMonth').parent().prev().children().addClass('currentMonth');
                 self.$this.find('.currentMonth').parent().next().children().removeClass('currentMonth');
-                self.monthSelect(dataSource); 
                 self.bornCalendar(dataSource);
             }else{
                 goMonth= goMonth - 3;
@@ -484,8 +470,6 @@ class Module {
              ///////////////////////////////////////////////////////////////////////////////////////////    
             });
     }
-    // addDataLis(){
-    // }
 /////////////////////////////////////修改html結構後的bornCalendar/////////////////////////////////////
     bornCalendar(dataSource){                 
             let self = this;
@@ -548,22 +532,17 @@ class Module {
             let NumOfJData = dataSource.length;
             for (i=0; i<NumOfJData; i++){
                 let self = this;
-                // let $this = this.$ele;
-                // let $smallBox = $this.find(".content_box2");
                 let dataYear= dataSource[i].date.substring(0,4);
                 let dataMonth= dataSource[i].date.substring(5,7);
                 let dataDay= dataSource[i].date.substring(8,10);
                 let dataDate=parseInt(dataYear + dataMonth + dataDay);
                 let calendarDays=parseInt(this.$this.find('.currentDays').attr('date'));
                 if(this.$this.find('.currentDays').hasClass(dataDate)){
-                    // let self = this;
-                    // let $this = this.$ele;
                     //為零時會出現undifined...............................
                     if(dataSource[i].availableVancancy==undefined)
                         {
                             dataSource[i].availableVancancy = 0;
                     };
-                    //為零時會出現undifined...............................
                     if(dataSource[i].totalVacnacy==undefined)
                         {
                             dataSource[i].totalVacnacy = 0;
@@ -601,7 +580,6 @@ class Module {
                     this.$this.find('.calendar_daysWrap .'+dataDate+'').append(weekdayHtml);          
                     //日期對上星期幾!!!  
 
-                    // console.log(dataSource[i]);
                     //顯示當前這頁有多少data
                 }
             };
@@ -623,6 +601,12 @@ class Module {
             this.$this.find('.calendar_daysWrap').append(listPage);
             self.listChange();
             ///////////////////////////////////列表跳頁產出/////////////////////////////////////////// 
+
+            /////////////////////////////whenclick////////////////////////////////////////////////////
+            self.onClickNext(dataSource);
+            self.onClickPrev(dataSource);
+            self.onClickDate(dataSource);
+            ////////////////////////////////////////////////////////////////////////////////////////
     };
 /////////////////////////////////////修改html結構後的bornCalendar/////////////////////////////////////
 
