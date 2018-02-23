@@ -59,13 +59,21 @@ class Module {
     init() {
         let self = this;
         console.log('moduleIn!!!!');
-        this.getAjax();
+        // this.getAjax();
         this.creatHtml();
         this.$this.find('.switchMode').on('click', function() {
             self.switch();
             self.addDataLis();
         });
 
+
+        ////////////////////////////////切換模式文字////////////////////////////////////////
+        if(self.$this.hasClass('calendar_listmode')){
+            self.$this.find(".switchMode").text("切換月曆模式");
+            }else{
+            self.$this.find(".switchMode").text("切換列表模式");
+        }
+        //////////////////////////////////////////////////////////////////////////////////
         // this.monthWithoutData();
         return this;
     }
@@ -260,6 +268,10 @@ class Module {
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1;
                 });//將dataSource按照日期排序,由前至後(2016年開始);
+
+                self.creatCalendar(dataSource);
+                self.creatCalendarDay(dataSource);
+                self.showMonthDate(dataSource);
                 
                 self.onClickNext(dataSource);
                 self.onClickPrev(dataSource);
@@ -642,7 +654,6 @@ class Module {
         var data = dataSource;
         let onClickNextCallBack=this.option.onClickNext;
         $btn.click( function($btn) {
-            //如果現在是12月份 單純+1會出錯誤 以下是判斷式
             var $btn=this;
             let module= self.$this;
             let data =dataSource;
