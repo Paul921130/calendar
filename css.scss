@@ -429,6 +429,7 @@ $classname: 'calendar';
 				}
 				&.daysWithData{
 					display: block;
+					border-top:1px solid transparent; 
 				}
 				& > .date, & > .status, & > .sell,& > .group,& > .tip,& > .price {
 					display: inline-block;
