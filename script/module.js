@@ -49,6 +49,7 @@ class Module {
     constructor(ele, options, options2) {
         this.ele = ele;
         this.$ele = $(ele);
+
         this.option = options;
         this.option2= options2;
         this.self = this;
@@ -494,15 +495,6 @@ class Module {
     //             self.$this.find('.calendar_list .'+dataDate+' .li_left .dayDate').append(weekdayHtml);          
     //             //日期對上星期幾!!!
     //         };
-
-    //         //列表跳頁產出
-    //         let listPage= '<div class="listPage">'+
-    //                       '<a class="prevList"><span class="arrow-gl m-r-xs"></span>上一頁</a>'+
-    //                       '<span class="num"><span class="current_page">1</span><span style="padding:0 3px;">/</span><span class="total"></span></span>'+
-    //                       '<a class="nextList">下一頁<span class="arrow-gr m-lr-xs"></span></a>'+
-    //                       '</div>';
-    //         this.$this.find('#Body').append(listPage);
-    //         //列表跳頁產出
     //         ///日期選擇function
     //          this.$this.find('.daysWithData').on('click', function() { 
     //          self.$this.find('.daysWithData').removeClass('daySelected');
@@ -518,16 +510,18 @@ class Module {
         //實現分頁思路:
         let pageSize=8;      //每頁顯示數據條數
         let currentPage=1;   //當前頁數
-        let totalSize=$(".calendar_listmode .daysWithData").length; //獲取總數據
-        console.log(totalSize);
+        let totalSize=this.$this.find(".daysWithData").length; //獲取總數據
+        console.log('totalSize:'+ totalSize);
 
         let totalPage=Math.ceil(totalSize / pageSize); //計算總頁數
         this.$this.find('.daysWithData:gt(7)').hide();
         // $(".calendar_listmode .daysWithData:gt(7)").hide();//設置首頁顯示7條數據
-        
+        console.log('totalPage:'+totalPage);
 
-        this.$this.find(".total").text(totalPage);//設置總頁數
-        this.$this.find('.current_page').text(currentPage);//設置當前頁數
+        // this.$this.find(".calendar_daysWrap .total_page").text(totalPage);//設置總頁數
+        // this.$this.find('.calendar_daysWrap .current_page').text(currentPage);//設置當前頁數
+        this.$this.find('.total_page').text(totalPage);
+        this.$this.find('.current_page').text(currentPage)
         //實現下一頁
         //如果列表沒有data,則刪去跳頁的連接
         if(totalPage==0){
@@ -542,7 +536,8 @@ class Module {
                     self.$this.find(".current_page").text(++currentPage);  //當前頁數先+1
                     let start=pageSize*(currentPage-1);
                     let end=pageSize*currentPage;
-                    $.each(self.$this.find('.calendar_list ul li'),function(index,item){
+                    $.each(self.$this.find('.calendar_daysWrap .daysWithData'),function(index,item){
+                    // $.each(self.$this.find('.calendar_list ul li'),function(index,item){
                             if(index >=start && index < end){
                                 $(this).show();
                                 }
@@ -561,7 +556,8 @@ class Module {
                      self.$this.find(".current_page").text(--currentPage);  //當前頁數先-1
                      let start=pageSize*(currentPage-1);
                      let end=pageSize*currentPage;
-                     $.each(self.$this.find('.calendar_list ul li'),function(index,item){
+                      $.each(self.$this.find('.calendar_daysWrap .daysWithData'),function(index,item){
+                     // $.each(self.$this.find('.calendar_list ul li'),function(index,item){
                            if(index >=start && index < end){
                                 $(this).show();
                                 }
@@ -819,13 +815,25 @@ class Module {
                     //顯示當前這頁有多少data
                 }
             };
+
             ///日期選擇function
              this.$this.find('.daysWithData').on('click', function() { 
                 self.$this.find('.daysWithData').removeClass('daySelected');
                 $(this).addClass('daySelected');
             });
+            
+
+            ///////////////////////////////////列表跳頁產出///////////////////////////////////////////            
+            
+            let listPage= '<div class="listPage">'+
+                          '<a class="prevList"><span class="arrow-gl m-r-xs"></span>上一頁</a>'+
+                          '<span class="num"><span class="current_page"></span><span style="padding:0 3px;">/</span><span class="total_page"></span></span>'+
+                          '<a class="nextList">下一頁<span class="arrow-gr m-lr-xs"></span></a>'+
+                          '</div>';
+            this.$this.find('.calendar_daysWrap').append(listPage);
 
             self.listChange();
+            ///////////////////////////////////列表跳頁產出/////////////////////////////////////////// 
     };
 /////////////////////////////////////修改html結構後的bornCalendar/////////////////////////////////////
 
