@@ -256,7 +256,6 @@ var Module = function () {
             this.creatHtml();
             this.$this.find('.switchMode').on('click', function () {
                 self.switch();
-                self.addDataLis();
             });
 
             ////////////////////////////////切換模式文字////////////////////////////////////////
@@ -587,6 +586,9 @@ var Module = function () {
             ////////////////////////////////當前頁數為1時,隱藏上一頁按鈕///////////////////////////////////////////
             if (currentPage == 1) {
                 self.$this.find('.prevList').addClass('hide');
+            }
+            if (currentPage == totalPage) {
+                self.$this.find('.nextList').addClass('hide');
             }
             ////////////////////////////////////////////////////////////////////////////////////////////////////
 
