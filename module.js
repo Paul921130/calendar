@@ -353,7 +353,6 @@ var Module = function () {
                 }); //將dataSource按照日期排序,由前至後(2016年開始);
 
                 self.creatCalendar(dataSource);
-                self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
             });
         }
@@ -400,10 +399,7 @@ var Module = function () {
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1;
                 }); //將dataSource按照日期排序,由前至後(2016年開始);
-
-
                 self.creatCalendar(dataSource);
-                self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
             });
             // location.reload();
@@ -453,7 +449,6 @@ var Module = function () {
                 }); //將dataSource按照日期排序,由前至後(2016年開始);
 
                 self.creatCalendar(dataSource);
-                self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
 
                 // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
@@ -547,19 +542,10 @@ var Module = function () {
             });
             return this;
         }
-    }, {
-        key: "creatCalendarDay",
-        value: function creatCalendarDay(dataSource) {
-            var self = this;
-            var calendarDayHtml = '<tbody id="mainCalendar">' + '<tr class="days">' + '<td class="disabled">' + '<div class="day otherMonth" >' + '</div>' + //將Ajax抓的data(dataSource)作為參數傳入
-            '</td>' + '<td class="disabled">' + '</td>' + '</tr>' + '</tbody>';
-            this.$this.find('.weekTable').append(calendarDayHtml);
-            return this;
-        }
+        /////////////////////////////////////////////////////////////
+
     }, {
         key: "listChange",
-
-        /////////////////////////////////////////////////////////////
         value: function listChange() {
             var self = this;
             //實現分頁思路:

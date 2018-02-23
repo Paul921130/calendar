@@ -163,7 +163,6 @@ class Module {
                 });//將dataSource按照日期排序,由前至後(2016年開始);
                 
                 self.creatCalendar(dataSource);
-                self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
 
             });
@@ -203,16 +202,13 @@ class Module {
                     }
                 }
 
-                var dataSource = resetOpt.concat(dataSource);//將inputData的陣列與dataSource
+                var dataSource=resetOpt.concat(dataSource);//將inputData的陣列與dataSource
 
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
                 dataSource = dataSource.sort(function (a, b) {
                     return a.date > b.date ? 1 : -1;
                 });//將dataSource按照日期排序,由前至後(2016年開始);
-
-
                 self.creatCalendar(dataSource);
-                self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
 
             });
@@ -261,7 +257,6 @@ class Module {
                 });//將dataSource按照日期排序,由前至後(2016年開始);
 
                 self.creatCalendar(dataSource);
-                self.creatCalendarDay(dataSource);
                 self.showMonthDate(dataSource);
 
                 // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
@@ -363,20 +358,6 @@ class Module {
         });
         return this; 
     }
-    creatCalendarDay(dataSource){
-        let self = this;
-        let calendarDayHtml= '<tbody id="mainCalendar">'+
-                                    '<tr class="days">'+
-                                        '<td class="disabled">'+
-                                        '<div class="day otherMonth" >'+'</div>'+//將Ajax抓的data(dataSource)作為參數傳入
-                                        '</td>'+
-                                        '<td class="disabled">'+
-                                        '</td>'+
-                                    '</tr>'+          
-                                '</tbody>';
-        this.$this.find('.weekTable').append(calendarDayHtml);     
-        return this;
-    };
     /////////////////////////////////////////////////////////////
     listChange(){
         let self = this;
