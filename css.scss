@@ -24,6 +24,9 @@ $classname: 'calendar';
 
 //修改html結構後的CSS///////////////////////////////////////////////////////////
 .#{$classname} {
+	.border_lef{
+		border-left: 1px solid #eee!important;
+	}
 	a{
 		cursor: pointer;
 	}
@@ -228,8 +231,11 @@ $classname: 'calendar';
 				background: #fff9e3;
 			}
 		}
+
 	}
 	&.#{$classname}_daymode {
+	
+		border: 1px solid #eee;
 		.hideLis{
 			display: block!important;
 		}
@@ -237,10 +243,10 @@ $classname: 'calendar';
 			display: flex;
 			flex-wrap: wrap;
 			background-color:#f8f8f8;
-			
+			box-sizing:border-box;
 			& >.disabled{
 				background-color:#f8f8f8!important;
-				border-right: transparent;
+				border: transparent;
 			}
 			& >.daySelected{
 					box-sizing:border-box;
@@ -254,6 +260,7 @@ $classname: 'calendar';
 			background-color: #fff9e3;
 			cursor: pointer;
 			}
+			
 			& > .#{$classname}_days {
 				.tip{
 					position: absolute;
@@ -297,10 +304,18 @@ $classname: 'calendar';
 				}
 				&:nth-child(-n + 7) {
 					border-top-width: 1px;
+					border-bottom-width:0px; 
+				}
+				&:nth-child(n+7):nth-child(-n+14) {
+					border-top-width: 1px;
+				}
+				&:nth-child(7n+7){
+					border-right-width:0px;
 				}
 				&:nth-child(7n+1) {
-					border-left-width: 1px;
+					border-left-width: 0px;
 				}
+
 				& > .date {
 					& > .weekday {
 						display: none;

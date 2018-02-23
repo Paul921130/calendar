@@ -65,6 +65,7 @@ class Module {
             self.switch();
             self.addDataLis();
         });
+
         // this.monthWithoutData();
         return this;
     }
@@ -162,8 +163,6 @@ class Module {
                 self.onClickNext(dataSource);
                 self.onClickPrev(dataSource);
                 self.onClickDate(dataSource);
-
-                // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
             });
     }
     resetData(resetOpt){
@@ -217,7 +216,6 @@ class Module {
                 self.onClickPrev(dataSource);
                 self.onClickDate(dataSource);
 
-                // self.inputData();//[{certain: true, date: "2018/06/15", price: 234567, onsell: 0, totalVacnacy: 20, …}]
             });
             // location.reload();
     };
@@ -283,7 +281,6 @@ class Module {
     }
     showMonthDate(dataSource){
         let self = this;
-        // var $this = this.$ele;//class="calendar"
 
         //抓到useAge所設定的初始月份
         let initYearMonth=this.option.initYearMonth;
@@ -301,12 +298,8 @@ class Module {
         };
         self.monthSelect(dataSource);
         self.bornCalendar(dataSource);
-        // self.bornList(dataSource);
         // //小箭頭跳currentMonth
         this.$this.find('.next').on('click', function() {
-        // if($('.currentDays').hasClass('daysWithData')){
-        //     alert('Hey!這一頁有data!!!');
-        // }         
             if(self.$this.find(".tab:nth-child(3) a").hasClass('currentMonth')===false){
             self.$this.find('.currentMonth').parent().next().children().addClass('currentMonth');
             self.$this.find('.currentMonth').parent().prev().children().removeClass('currentMonth');
@@ -328,7 +321,6 @@ class Module {
                     self.$this.find(".tab:nth-child(1) a").addClass('currentMonth');              
                 };
                 self.monthSelect(dataSource);
-                // self.bornList(dataSource);
                 self.bornCalendar(dataSource);
                 };
                 self.nextMonth(dataSource);
@@ -339,8 +331,7 @@ class Module {
             if(self.$this.find(".tab:nth-child(1) a").hasClass('currentMonth')!==true){
                 self.$this.find('.currentMonth').parent().prev().children().addClass('currentMonth');
                 self.$this.find('.currentMonth').parent().next().children().removeClass('currentMonth');
-                self.monthSelect(dataSource);
-                // self.bornList(dataSource); 
+                self.monthSelect(dataSource); 
                 self.bornCalendar(dataSource);
             }else{
                 goMonth= goMonth - 3;
@@ -355,8 +346,7 @@ class Module {
                      self.$this.find(".tab a").attr('id','');
                      self.$this.find(".tab:nth-child(3) a").addClass('currentMonth');                 
                 };             
-                self.monthSelect(dataSource);
-                // self.bornList(dataSource); 
+                self.monthSelect(dataSource); 
                 self.bornCalendar(dataSource);
             };
             console.log(self.$this.find('.currentMonth').attr('data-label'));
@@ -373,7 +363,6 @@ class Module {
             $(this).addClass('currentMonth');
             let nowMonth=self.$this.find(".currentMonth").textContent;
             self.bornCalendar(dataSource);
-            // self.bornList(dataSource);
         });
         return this; 
     }
@@ -401,16 +390,13 @@ class Module {
         console.log('totalSize:'+ totalSize);
         let totalPage=Math.ceil(totalSize / pageSize); //計算總頁數
 
-        //用addClass來做!
+        /////////用addClass來做!///////////////////////////////////////////////////////////////////////////////
         this.$this.find('.daysWithData:gt(7)').addClass('hideLis');
         // this.$this.find('.daysWithData:gt(7)').hide();
         /////////////////////////////////用addClass來做,針對兩種模式下不同的css//////////////////////////////////
         
-        // $(".calendar_listmode .daysWithData:gt(7)").hide();//設置首頁顯示7條數據
         console.log('totalPage:'+totalPage);
 
-        // this.$this.find(".calendar_daysWrap .total_page").text(totalPage);//設置總頁數
-        // this.$this.find('.calendar_daysWrap .current_page').text(currentPage);//設置當前頁數
         this.$this.find('.total_page').text(totalPage);
         this.$this.find('.current_page').text(currentPage)
         //實現下一頁
@@ -496,7 +482,7 @@ class Module {
             // html += '<tr>';
             for (i = 0; i < startDay; i++) {
                 html += '<li class="calendar_days disabled"></li>';
-                numRow++;
+                // numRow++;
             };     
             for (let j = 1; j < 37 ; j++) {
                 //為什麼是37啊!!!!!!!!!!!!!!!!!
@@ -523,7 +509,7 @@ class Module {
                     html += '<li class="calendar_days disabled">';
                 }
                 html += '</li>';
-                numRow++;
+                // numRow++;
             };
             this.$this.find('.calendar_daysWrap').html(html);
             // document.getElementById("mainCalendar").innerHTML = html;
@@ -588,15 +574,15 @@ class Module {
                     //顯示當前這頁有多少data
                 }
             };
-
+            //為第一個currentDay加上左邊的border///
+            $(".currentDays:eq(0)").addClass("border_lef");
+            //使用eq(),從0開始算//
             
             ///日期選擇function
              this.$this.find('.daysWithData').on('click', function() { 
                 self.$this.find('.daysWithData').removeClass('daySelected');
                 $(this).addClass('daySelected');
             });
-            
-
             ///////////////////////////////////列表跳頁產出///////////////////////////////////////////     
             self.addDataLis();
             let listPage= '<div class="listPage">'+
