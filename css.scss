@@ -320,11 +320,19 @@ $classname: 'calendar';
 				&:nth-child(n+7):nth-child(-n+14) {
 					border-top-width: 1px;
 				}
+
 				&:nth-child(7n+7){
 					border-right-width:0px;
 				}
 				&:nth-child(7n+1) {
 					border-left-width: 0px;
+				}
+
+				&:nth-child(n+0):nth-child(-n+7) {
+					border-top-width: 0px;
+				}
+				&:nth-child(n+36):nth-child(-n+43) {
+					border-bottom-width: 0px;
 				}
 
 				& > .date {
