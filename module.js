@@ -897,6 +897,13 @@ var Module = function () {
             } else {
                 $this.removeClass('calendar_daymode').addClass('calendar_listmode');
             }
+            ////////////////////////////////切換模式文字////////////////////////////////////////
+            if ($this.hasClass('calendar_listmode')) {
+                self.$this.find(".switchMode").text("切換月曆模式");
+            } else {
+                self.$this.find(".switchMode").text("切換列表模式");
+            }
+            ////////////////////////////////////////////////////////////////////////
         }
 
         // 加資料時如果有相同日期的資料，以後輸入為主，輸入時如果輸入沒有的月份，模組會加上該月份
