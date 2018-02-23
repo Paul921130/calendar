@@ -27,6 +27,15 @@ $classname: 'calendar';
 	a{
 		cursor: pointer;
 	}
+	.dataStatus_Or{
+		color: #ff7800!important;
+	}
+	.dataStatus_Re{
+		color: #e10500!important;
+	}
+	.dataStatus_Gr{
+		color: #24a07c!important;
+	}
 	.listPage{
 		position: absolute;
 		width: 100%;
@@ -38,6 +47,7 @@ $classname: 'calendar';
 		}
 		.prevList{
 			flex:1;
+			text-align: left;
 		}
 		.num{
 			flex:8;
@@ -265,15 +275,6 @@ $classname: 'calendar';
 					margin:0;
 					padding: 0;
 					line-height: 17px; 
-				}
-				.dataStatus_Or{
-					color: #ff7800;
-				}
-				.dataStatus_Re{
-					color: #e10500;
-				}
-				.dataStatus_Gr{
-					color: #24a07c;
 				}
 				.price {
 				    color: #e10500;
