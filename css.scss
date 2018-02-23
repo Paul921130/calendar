@@ -230,7 +230,9 @@ $classname: 'calendar';
 		}
 	}
 	&.#{$classname}_daymode {
-		
+		.hideLis{
+			display: block!important;
+		}
 		& > .#{$classname}_daysWrap {
 			display: flex;
 			flex-wrap: wrap;
@@ -311,6 +313,9 @@ $classname: 'calendar';
 		}
 	}
 	&.#{$classname}_listmode {
+		.hideLis{
+			display: none!important;
+		}
 		& > .#{$classname}_weeksWrap {
 			display: none;
 		}

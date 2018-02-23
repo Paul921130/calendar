@@ -585,11 +585,10 @@ var Module = function () {
             console.log('totalSize:' + totalSize);
             var totalPage = Math.ceil(totalSize / pageSize); //計算總頁數
 
-            //這裡有問題!!!因為選取到的是兩種模式的daysWithData
-            //所以daymode的日期也會被刪除//////////////////////////////////
-            this.$this.find('.daysWithData:gt(7)').hide();
+            //用addClass來做!
+            this.$this.find('.daysWithData:gt(7)').addClass('hideLis');
             // this.$this.find('.daysWithData:gt(7)').hide();
-            /////////////////////////////////要如何選取到calendarListMode//////////////////////////////////
+            /////////////////////////////////用addClass來做,針對兩種模式下不同的css//////////////////////////////////
 
             // $(".calendar_listmode .daysWithData:gt(7)").hide();//設置首頁顯示7條數據
             console.log('totalPage:' + totalPage);
@@ -617,9 +616,9 @@ var Module = function () {
                     $.each(self.$this.find('.calendar_daysWrap .daysWithData'), function (index, item) {
                         // $.each(self.$this.find('.calendar_list ul li'),function(index,item){
                         if (index >= start && index < end) {
-                            $(this).show();
+                            $(this).removeClass('hideLis');
                         } else {
-                            $(this).hide();
+                            $(this).addClass('hideLis');
                         }
                     });
                 }
@@ -637,9 +636,9 @@ var Module = function () {
                     $.each(self.$this.find('.calendar_daysWrap .daysWithData'), function (index, item) {
                         // $.each(self.$this.find('.calendar_list ul li'),function(index,item){
                         if (index >= start && index < end) {
-                            $(this).show();
+                            $(this).removeClass('hideLis');
                         } else {
-                            $(this).hide();
+                            $(this).addClass('hideLis');
                         }
                     });
                 }
