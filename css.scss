@@ -57,7 +57,7 @@ $classname: 'calendar';
 			text-align: left;
 		}
 		.num{
-			flex:8;
+			flex:6;
 			text-align: center;
 			font-size: 14px;
     		line-height: 1.5;
@@ -262,9 +262,11 @@ $classname: 'calendar';
 			}
 			& > .#{$classname}_days:hover{
 			background-color: #fff9e3;
-			cursor: pointer;
+			// cursor: pointer;
 			}
-			
+			.daysWithData{
+				cursor: pointer;
+			}
 			& > .#{$classname}_days {
 				.tip{
 					position: absolute;

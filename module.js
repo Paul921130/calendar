@@ -665,18 +665,8 @@ var Module = function () {
                 ///////////////////////////////////////////////////////////////////////////////////////////    
             });
         }
-    }, {
-        key: "addDataLis",
-        value: function addDataLis() {}
-        // let self = this;
-        //   // ////list的dayWithData添加class///////////////////////////////////////
-        //     if(this.$this.hasClass('calendar_listmode')==true){
-        //         $('.daysWithData').addClass('daysWithDataLis');
-        //     }else if(this.$this.hasClass('calendar_listmode')==false){
-        //         $('.daysWithData').removeClass('daysWithDataLis');
-        //     }
-        //   //   ///list的dayWithData添加class/////////////////////////////////////  
-
+        // addDataLis(){
+        // }
         /////////////////////////////////////修改html結構後的bornCalendar/////////////////////////////////////
 
     }, {
@@ -806,7 +796,6 @@ var Module = function () {
                 $(this).addClass('daySelected');
             });
             ///////////////////////////////////列表跳頁產出///////////////////////////////////////////     
-            self.addDataLis();
             var listPage = '<div class="listPage">' + '<span class="listChangeBox"><a class="prevList"><span class="arrow-gl m-r-xs"></span>上一頁</a></span>' + '<span class="num"><span class="current_page"></span><span style="padding:0 3px;">/</span><span class="total_page"></span></span>' + '<span class="listChangeBox"><a class="nextList">下一頁<span class="arrow-gr m-lr-xs"></span></a></span>' + '</div>';
             this.$this.find('.calendar_daysWrap').append(listPage);
             self.listChange();

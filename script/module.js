@@ -482,16 +482,8 @@ class Module {
              ///////////////////////////////////////////////////////////////////////////////////////////    
             });
     }
-    addDataLis(){
-        // let self = this;
-        //   // ////list的dayWithData添加class///////////////////////////////////////
-        //     if(this.$this.hasClass('calendar_listmode')==true){
-        //         $('.daysWithData').addClass('daysWithDataLis');
-        //     }else if(this.$this.hasClass('calendar_listmode')==false){
-        //         $('.daysWithData').removeClass('daysWithDataLis');
-        //     }
-        //   //   ///list的dayWithData添加class/////////////////////////////////////  
-    }
+    // addDataLis(){
+    // }
 /////////////////////////////////////修改html結構後的bornCalendar/////////////////////////////////////
     bornCalendar(dataSource){                 
             let self = this;
@@ -621,7 +613,6 @@ class Module {
                 $(this).addClass('daySelected');
             });
             ///////////////////////////////////列表跳頁產出///////////////////////////////////////////     
-            self.addDataLis();
             let listPage= '<div class="listPage">'+
                           '<span class="listChangeBox"><a class="prevList"><span class="arrow-gl m-r-xs"></span>上一頁</a></span>'+
                           '<span class="num"><span class="current_page"></span><span style="padding:0 3px;">/</span><span class="total_page"></span></span>'+
