@@ -390,6 +390,13 @@ class Module {
         console.log('totalSize:'+ totalSize);
         let totalPage=Math.ceil(totalSize / pageSize); //計算總頁數
 
+        ////////////////////////////////當前頁數為1時,隱藏上一頁按鈕///////////////////////////////////////////
+        if(currentPage ==1){
+                    self.$this.find('.prevList').addClass('hide');
+        } 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+
         /////////用addClass來做!///////////////////////////////////////////////////////////////////////////////
         this.$this.find('.daysWithData:gt(7)').addClass('hideLis');
         // this.$this.find('.daysWithData:gt(7)').hide();
@@ -407,6 +414,7 @@ class Module {
         //如果列表沒有data,則刪去跳頁的連接
 
         this.$this.find(".nextList").click(function(){
+          
             if(currentPage == totalPage||currentPage == 0){ //當前頁數==最後一頁，禁止下一頁
                    return false;
                 }else{//不是最後一頁，顯示應該顯示的數據.
@@ -423,6 +431,14 @@ class Module {
                                     }
                         });
                     }
+                ///////////////////////判斷當前頁數來決定是否顯示下一頁or上一頁///////////////////////////////    
+                if(currentPage == totalPage){
+                    self.$this.find(".nextList").addClass('hide');
+                }
+                if(currentPage!==1){
+                    self.$this.find('.prevList').removeClass('hide');
+                }
+                ///////////////////////////////////////////////////////////////////////////////////////////  
             });    
             //實現上一頁
 
@@ -443,6 +459,15 @@ class Module {
                                     }
                          });
                     }
+
+              ///////////////////////判斷當前頁數來決定是否顯示下一頁or上一頁///////////////////////////////         
+                if(currentPage !== totalPage){
+                    self.$this.find(".nextList").removeClass('hide');
+                }
+                if(currentPage ==1){
+                    self.$this.find('.prevList').addClass('hide');
+                }
+             ///////////////////////////////////////////////////////////////////////////////////////////    
             });
     }
     addDataLis(){
@@ -586,9 +611,9 @@ class Module {
             ///////////////////////////////////列表跳頁產出///////////////////////////////////////////     
             self.addDataLis();
             let listPage= '<div class="listPage">'+
-                          '<a class="prevList"><span class="arrow-gl m-r-xs"></span>上一頁</a>'+
+                          '<span class="listChangeBox"><a class="prevList"><span class="arrow-gl m-r-xs"></span>上一頁</a></span>'+
                           '<span class="num"><span class="current_page"></span><span style="padding:0 3px;">/</span><span class="total_page"></span></span>'+
-                          '<a class="nextList">下一頁<span class="arrow-gr m-lr-xs"></span></a>'+
+                          '<span class="listChangeBox"><a class="nextList">下一頁<span class="arrow-gr m-lr-xs"></span></a></span>'+
                           '</div>';
             this.$this.find('.calendar_daysWrap').append(listPage);
             self.listChange();

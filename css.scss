@@ -24,6 +24,9 @@ $classname: 'calendar';
 
 //修改html結構後的CSS///////////////////////////////////////////////////////////
 .#{$classname} {
+	.hide{
+		display:none!important;
+	}
 	.border_lef{
 		border-left: 1px solid #eee!important;
 	}
@@ -44,12 +47,13 @@ $classname: 'calendar';
 		width: 100%;
 		bottom: 0;
 		display: flex;
-		.nextList{
+		.listChangeBox{
 			flex:1;
+		}
+		.nextList{
 			text-align: right;
 		}
 		.prevList{
-			flex:1;
 			text-align: left;
 		}
 		.num{

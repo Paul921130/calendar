@@ -573,6 +573,13 @@ var Module = function () {
             console.log('totalSize:' + totalSize);
             var totalPage = Math.ceil(totalSize / pageSize); //計算總頁數
 
+            ////////////////////////////////當前頁數為1時,隱藏上一頁按鈕///////////////////////////////////////////
+            if (currentPage == 1) {
+                self.$this.find('.prevList').addClass('hide');
+            }
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
             /////////用addClass來做!///////////////////////////////////////////////////////////////////////////////
             this.$this.find('.daysWithData:gt(7)').addClass('hideLis');
             // this.$this.find('.daysWithData:gt(7)').hide();
@@ -590,6 +597,7 @@ var Module = function () {
             //如果列表沒有data,則刪去跳頁的連接
 
             this.$this.find(".nextList").click(function () {
+
                 if (currentPage == totalPage || currentPage == 0) {
                     //當前頁數==最後一頁，禁止下一頁
                     return false;
@@ -607,6 +615,14 @@ var Module = function () {
                         }
                     });
                 }
+                ///////////////////////判斷當前頁數來決定是否顯示下一頁or上一頁///////////////////////////////    
+                if (currentPage == totalPage) {
+                    self.$this.find(".nextList").addClass('hide');
+                }
+                if (currentPage !== 1) {
+                    self.$this.find('.prevList').removeClass('hide');
+                }
+                ///////////////////////////////////////////////////////////////////////////////////////////  
             });
             //實現上一頁
 
@@ -627,6 +643,15 @@ var Module = function () {
                         }
                     });
                 }
+
+                ///////////////////////判斷當前頁數來決定是否顯示下一頁or上一頁///////////////////////////////         
+                if (currentPage !== totalPage) {
+                    self.$this.find(".nextList").removeClass('hide');
+                }
+                if (currentPage == 1) {
+                    self.$this.find('.prevList').addClass('hide');
+                }
+                ///////////////////////////////////////////////////////////////////////////////////////////    
             });
         }
     }, {
@@ -771,7 +796,7 @@ var Module = function () {
             });
             ///////////////////////////////////列表跳頁產出///////////////////////////////////////////     
             self.addDataLis();
-            var listPage = '<div class="listPage">' + '<a class="prevList"><span class="arrow-gl m-r-xs"></span>上一頁</a>' + '<span class="num"><span class="current_page"></span><span style="padding:0 3px;">/</span><span class="total_page"></span></span>' + '<a class="nextList">下一頁<span class="arrow-gr m-lr-xs"></span></a>' + '</div>';
+            var listPage = '<div class="listPage">' + '<span class="listChangeBox"><a class="prevList"><span class="arrow-gl m-r-xs"></span>上一頁</a></span>' + '<span class="num"><span class="current_page"></span><span style="padding:0 3px;">/</span><span class="total_page"></span></span>' + '<span class="listChangeBox"><a class="nextList">下一頁<span class="arrow-gr m-lr-xs"></span></a></span>' + '</div>';
             this.$this.find('.calendar_daysWrap').append(listPage);
             self.listChange();
             ///////////////////////////////////列表跳頁產出/////////////////////////////////////////// 
