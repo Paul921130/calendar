@@ -27,6 +27,42 @@ $classname: 'calendar';
 	a{
 		cursor: pointer;
 	}
+	.listPage{
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+		display: flex;
+		.nextList{
+			flex:1;
+			text-align: right;
+		}
+		.prevList{
+			flex:1;
+		}
+		.num{
+			flex:8;
+			text-align: center;
+			font-size: 14px;
+    		line-height: 1.5;
+    		color: #444;
+		}
+		.arrow-gl, .arrow-gr{
+			display: inline-block;
+    		width: 0;
+    		height: 0;
+    		border-style: solid;
+    		vertical-align: middle;
+    		margin-top: -3px;
+		}
+		.arrow-gr {
+    		border-width: 4.5px 0 4.5px 5px;
+    		border-color: transparent transparent transparent #24a07c;
+		}
+		.arrow-gl{
+			border-width:4.5px 5px 4.5px 0;
+			border-color: transparent #24a07c transparent transparent; 
+		}
+	}
 	// style on phone device
 	@media screen and (min-width: $screen-tablet) {
 		// style on tablet device
@@ -278,10 +314,13 @@ $classname: 'calendar';
 			display: none;
 		}
 		& > .#{$classname}_daysWrap {
+			position: relative;
+			height: 520px;
 			.daySelected{
 				box-sizing:border-box;
 				border: 1px solid #66bb3c!important;
 				background-color: #fff9e3!important;
+			
 			}
 			& > .#{$classname}_days {
 				display: none;
@@ -289,7 +328,6 @@ $classname: 'calendar';
 				height: 62px;
 				position: relative;
 				cursor: pointer;
-			
 				span{
 					color: #666;
 				}
