@@ -145,25 +145,14 @@ $classname: 'calendar';
 		.ntb_gpbt>.ntb_tab>li, .ntb_gpbt>.ntb_tab>li.tab {
 	    	width: 33.3333%;
 	    	display: inline-block;
-	    	list-style-type: none;
 	    	position: relative;
 	    	text-align: center;
-	    	background-color: #ede9dd;
-	    	vertical-align: top;
-		}
-		.ntb_gpbt.yellow .prev.on:before {
-	    	border-color: transparent #e10500 transparent transparent;
-		}
-		.ntb_gpbt.yellow .prev:before {
-			    left: -1px;
-			    border-width: 7px 7px 7px 0;
-			    border-color: transparent #e10500 transparent transparent;
 		}
 
 		.ntb_gpbt .prev:before {
 			    left: -1px;
 			    border-width: 7px 7px 7px 0;
-			    border-color: transparent #f4f4f4 transparent transparent;
+			     border-color: transparent #e10500 transparent transparent;
 		}
 		.ntb_gpbt>a:before {
 			    content: "";
@@ -178,20 +167,11 @@ $classname: 'calendar';
 			    height: 0;
 			    border-style: solid;
 		}
-		.ntb_gpbt.yellow .next.on:before {
-		    border-color: transparent transparent transparent #e10500;
-		}
-
-		.ntb_gpbt.yellow .next:before {
-		    right: -1px;
-		    border-width: 7px 0 7px 7px;
-		    border-color: transparent transparent transparent #e10500;
-		}
 
 		.ntb_gpbt .next:before {
 		    right: -1px;
 		    border-width: 7px 0 7px 7px;
-		    border-color: transparent transparent transparent #f4f4f4;
+		    border-color: transparent transparent transparent #e10500;
 		}
 	}
 	& > .#{$classname}_weeksWrap {
@@ -238,11 +218,6 @@ $classname: 'calendar';
 
 	}
 	&.#{$classname}_daymode {
-	
-		// border: 1px solid #eee;
-		.hideLis{
-			display: block!important;
-		}
 		& > .#{$classname}_weeksWrap {
 			border-right:1px solid #eee;
 			border-left:1px solid #eee; 
@@ -320,11 +295,19 @@ $classname: 'calendar';
 				&:nth-child(n+7):nth-child(-n+14) {
 					border-top-width: 1px;
 				}
+
 				&:nth-child(7n+7){
 					border-right-width:0px;
 				}
 				&:nth-child(7n+1) {
 					border-left-width: 0px;
+				}
+
+				&:nth-child(n+0):nth-child(-n+7) {
+					border-top-width: 0px;
+				}
+				&:nth-child(n+36):nth-child(-n+43) {
+					border-bottom-width: 0px;
 				}
 
 				& > .date {
@@ -421,6 +404,7 @@ $classname: 'calendar';
 				}
 				&.daysWithData{
 					display: block;
+					border-top:1px solid transparent; 
 				}
 				& > .date, & > .status, & > .sell,& > .group,& > .tip,& > .price {
 					display: inline-block;
