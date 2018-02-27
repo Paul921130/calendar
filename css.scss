@@ -237,14 +237,10 @@ $classname: 'calendar';
 					border: 1px solid #66bb3c!important;
 					background-color: #fff9e3!important;
 			}
-			& >.listPage{
-				display: none;
-			}
 			& > .#{$classname}_days:hover{
 			background-color: #fff9e3;
-			// cursor: pointer;
 			}
-			.daysWithData{
+			& > .daysWithData{
 				cursor: pointer;
 			}
 			& > .#{$classname}_days {
@@ -259,10 +255,7 @@ $classname: 'calendar';
 		    		line-height: 20px;
 		    		background-color: #66bb3c;
 				}
-				.weekdays{
-					display: none;
-				}
-				.productreferf{
+				.weekdays, .productreferf{
 					display: none;
 				}
 				span{
