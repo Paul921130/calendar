@@ -174,6 +174,9 @@ class Module {
                 method: 'GET',
                 url: './json/data1.json',
             }).done(function(dataSource) {
+
+                var dataSource=resetOpt.concat(dataSource);//將inputData的陣列與dataSource
+
                 //篩選日期重複的資料!!!!!!!!!!!!!!!//以及覆蓋新Key值!!!!!!!!!!
                 let lookup = {};
                 let items = dataSource;
@@ -202,7 +205,7 @@ class Module {
                     }
                 }
 
-                var dataSource=resetOpt.concat(dataSource);//將inputData的陣列與dataSource
+                
 
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
                 dataSource = dataSource.sort(function (a, b) {
@@ -221,6 +224,9 @@ class Module {
                 method: 'GET',
                 url: './json/data1.json',
             }).done(function(dataSource) {
+
+                var dataSource=inputOpt.concat(dataSource);//將inputData的陣列與dataSource合併
+
                 //篩選日期重複的資料!!!!!!!!!!!!!!!//以及覆蓋新Key值!!!!!!!!!!
                 let lookup = {};
                 let items = dataSource;
@@ -249,7 +255,7 @@ class Module {
                     }
                 }
 
-                var dataSource=inputOpt.concat(dataSource);//將inputData的陣列與dataSource
+                
 
                 //篩選日期重複的資料!!!!!!!!!!!!!!!
                 dataSource = dataSource.sort(function (a, b) {

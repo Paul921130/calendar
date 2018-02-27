@@ -190,27 +190,6 @@ $classname: 'calendar';
 			display: block;
 			border: 1px solid #eee;
 			@include clearfix;
-			&.disabled {
-			
-			}
-			&.hasData {
-
-			}
-			& > .status, & > .sell,& > .group,& > .tip,& > .price {
-				display: none;
-			}
-
-			& > .date {
-				& > .num {}
-				& > .weekday {
-					display: none;
-				}
-			}
-			& > .status {}
-			& > .sell {}
-			& > .group {}
-			& > .tip {}
-			& > .price {}
 			&:hover {
 				background: #fff9e3;
 			}
@@ -242,11 +221,19 @@ $classname: 'calendar';
 			}
 			& > .#{$classname}_days:hover{
 			background-color: #fff9e3;
+			// cursor: pointer;
 			}
 			&> .daysWithData{
 				cursor: pointer;
 			}
 			& > .#{$classname}_days {
+				width: (100%/7);
+				height: 87px;
+				border-left-width: 0;
+				border-top-width: 0;
+				position: relative;
+				font-size: 12px;
+				background-color: #fff;
 				.tip{
 					position: absolute;
 					top: 0;
@@ -274,15 +261,7 @@ $classname: 'calendar';
 				    color: #e10500;
 				    margin-bottom:0; 
 				}
-				width: (100%/7);
-				height: 87px;
-				border-left-width: 0;
-				border-top-width: 0;
-				position: relative;
-				font-size: 12px;
-				background-color: #fff;
-				// border-right-color: transparent;
-				// border-top-color: transparent;
+				
 
 				&:last-child {
 					border-right-width: 1px;
@@ -307,15 +286,6 @@ $classname: 'calendar';
 				}
 				&:nth-child(n+36):nth-child(-n+43) {
 					border-bottom-width: 0px;
-				}
-
-				& > .date {
-					& > .weekday {
-						display: none;
-					}
-				}
-				& > .status, & > .sell,& > .group,& > .tip,& > .price {
-					display: block;
 				}
 			}
 		}
@@ -407,26 +377,6 @@ $classname: 'calendar';
 				}
 				& > .date, & > .status, & > .sell,& > .group,& > .tip,& > .price {
 					display: inline-block;
-				}
-				& > .status,& > .price {
-					float: right;
-				}
-				& > .date {
-					float: left;
-					& > .num {}
-					& > .weekday {
-						display: block;
-					}
-				}
-				& > .status {}
-				& > .sell {}
-				& > .group {}
-				& > .tip {
-					float: left;
-					clear: right;
-				}
-				& > .price {
-					clear: right;
 				}
 			}
 		}
