@@ -237,21 +237,16 @@ $classname: 'calendar';
 					border: 1px solid #66bb3c!important;
 					background-color: #fff9e3!important;
 			}
+			& >.listPage{
+				display: none;
+			}
 			& > .#{$classname}_days:hover{
 			background-color: #fff9e3;
 			}
-			& > .daysWithData{
+			&> .daysWithData{
 				cursor: pointer;
 			}
 			& > .#{$classname}_days {
-				width: (100%/7);
-				height: 87px;
-				border-left-width: 0;
-				border-top-width: 0;
-				position: relative;
-				font-size: 12px;
-				background-color: #fff;
-				
 				.tip{
 					position: absolute;
 					top: 0;
@@ -263,7 +258,10 @@ $classname: 'calendar';
 		    		line-height: 20px;
 		    		background-color: #66bb3c;
 				}
-				.weekdays, .productreferf{
+				.weekdays{
+					display: none;
+				}
+				.productreferf{
 					display: none;
 				}
 				span{
@@ -276,7 +274,15 @@ $classname: 'calendar';
 				    color: #e10500;
 				    margin-bottom:0; 
 				}
-				
+				width: (100%/7);
+				height: 87px;
+				border-left-width: 0;
+				border-top-width: 0;
+				position: relative;
+				font-size: 12px;
+				background-color: #fff;
+				// border-right-color: transparent;
+				// border-top-color: transparent;
 
 				&:last-child {
 					border-right-width: 1px;
